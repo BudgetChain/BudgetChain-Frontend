@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { z } from 'zod';
 import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -92,7 +91,6 @@ const LoginPage: React.FC = () => {
         </div>
       </main>
       
-      <Footer />
     </div>
   );
 };
