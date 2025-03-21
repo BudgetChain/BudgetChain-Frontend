@@ -46,7 +46,7 @@ const LoginPage: React.FC = () => {
           <div className="gap-12 flex lg:justify-end">
             <form onSubmit={handleSubmit} className="lg:w-[60%] w-full text-center">
               <div className="mb-4">
-                <label htmlFor="email" className="block text-sm text-left text-[#848484] mb-2">Your Email Address</label>
+                <label htmlFor="email" className="block text-sm text-left text-[#848484] mb-2">Enter Email Address</label>
                 <input
                   id="email"
                   type="email"
@@ -59,7 +59,7 @@ const LoginPage: React.FC = () => {
               </div>
               
               <div className="mb-4">
-                <label htmlFor="password" className="block text-sm text-left text-[#848484] mb-2">Your Password</label>
+                <label htmlFor="password" className="block text-sm text-left text-[#848484] mb-2">Enter Password</label>
                 <input
                   id="password"
                   type="password"
