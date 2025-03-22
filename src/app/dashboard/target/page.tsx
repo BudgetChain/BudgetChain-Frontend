@@ -1,24 +1,12 @@
 'use client';
 import { useState } from 'react';
-import type { NextPage } from 'next';
+import { NextPage } from 'next';
 import Sidebar from '../components/sideBar';
 import NavBar from '../components/navBar';
 import ProgressCard from '../components/progressCard';
 import Records from '../records/page';
 
-interface TargetProps {
-  projects: {
-    name: string;
-    lead: string;
-    timeline: string;
-    timeLeft: string;
-    percentage: number;
-    color: string;
-    border: string;
-  }[];
-}
-
-const Target: NextPage<TargetProps> = ({ projects }) => {
+const Target: NextPage = () => {
   const [showRecords, setShowRecords] = useState(false);
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
 
@@ -62,7 +50,7 @@ const Target: NextPage<TargetProps> = ({ projects }) => {
     },
   ];
 
-  const projectsToRender = projects || defaultProjects;
+  const projectsToRender = defaultProjects;
 
   return (
     <main className="flex bg-[#171720]">
