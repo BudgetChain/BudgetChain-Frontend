@@ -24,7 +24,7 @@ export default function RootLayout({
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
       </head>
-      <body className="mt-10 bg-[#050512]">
+      <body className="bg-[#050512]">
         <Providers>{children}</Providers>
       </body>
     </html>
