@@ -7,7 +7,7 @@ interface MetricCardProps {
 
 export default function MetricCard({title, value}: MetricCardProps) {
   return (
-    <div className="w-[352px] h-[160px] rounded-[16px] bg-gradient-to-b from-[#894DBD] px-5 to-[#5E5EFF] flex flex-col  justify-center">
+    <div className="max-w-[320px] h-[160px] col-span-12 sm:col-span-6 lg:col-span-4 rounded-[16px] bg-gradient-to-b from-[#894DBD] px-5 to-[#5E5EFF] flex flex-col  justify-center">
      
       <div className="flex justify-between w-full font-light">
         <h5>{title}</h5>

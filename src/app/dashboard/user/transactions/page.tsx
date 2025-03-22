@@ -1,5 +1,4 @@
-"use client"
-
+'use client';
 
 import MetricCard from '@/components/transaction/metricCard';
 import NewTransfer from '@/components/transaction/newTransfer';
@@ -25,34 +24,42 @@ export default function Transactions() {
   ];
 
   return (
-    <section className="p-8 bg-[#171720] h-full">
+    <section className="  bg-[#171720] overflow-x-hidden h-full pl-3">
       {/* Metric Cards */}
-      <div className="flex justify-between gap-[22px]">
+      <div className="grid grid-cols-12 gap-[30px] pl-3 sm:px-10 md:px-0 w-full">
         {matricCard.map((card, index) => (
           <MetricCard key={index} title={card.title} value={card.value} />
         ))}
       </div>
 
       {/* Tabbed Navigation */}
-      <div className="flex justify-start gap-[18px] py-[7px] px-[16px] border-b border-[#EBEBEB] mt-10 mb-5 w-1/3 text-[#848484] text-[14px]">
-        <button
-          className={`${activeTab === 'Records' ? 'text-white' : ''}`}
-          onClick={() => setActiveTab('Records')}
-        >
-          Records
-        </button>
-        <button
-          className={`${activeTab === 'New Transfer' ? 'text-white' : ''}`}
-          onClick={() => setActiveTab('New Transfer')}
-        >
-          New Transfer
-        </button>
+      <div>
+        <div className="flex justify-start gap-[18px] pt-[7px] px-[16px]  mt-10 mb-5 w-full sm:w-2/3 md:w-1/3 text-[#848484] text-[14px]">
+          <button
+            className={`${activeTab === 'Records' ? 'text-white' : ''}`}
+            onClick={() => setActiveTab('Records')}
+          >
+            Records
+          </button>
+          <button
+            className={`${activeTab === 'New Transfer' ? 'text-white' : ''} `}
+            onClick={() => setActiveTab('New Transfer')}
+          >
+            New Transfer
+          </button>
+        </div>
+        <div className='flex justify-start  w-full sm:w-2/3 md:w-1/3 bg-[#848484] p-[0.5px] relative'>
+        <div className={` ${activeTab === 'Records' ? "bg-[#4F4AE6]" : ""}  h-[1px] w-[80px]`}> </div>
+        <div className={` ${activeTab === 'New Transfer' ? "bg-[#4F4AE6]" : ""}  h-[1px] w-[85px]`}> </div>
+        </div>
       </div>
 
       {/* Content Based on Active Tab */}
-      <div className="">
+      <div className=" w-full">
         {activeTab === 'Records' && <Records />}
-        {activeTab === 'New Transfer' && <NewTransfer />}
+        {activeTab === 'New Transfer' && (
+          <NewTransfer onBack={() => setActiveTab('Records')} />
+        )}
       </div>
     </section>
   );
