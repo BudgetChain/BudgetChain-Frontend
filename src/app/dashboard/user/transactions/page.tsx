@@ -6,6 +6,8 @@ import Records from '@/components/transaction/records';
 import React, { useState } from 'react';
 
 export default function Transactions() {
+
+  const walletAddress = "0x1234567890";
   const [activeTab, setActiveTab] = useState('Records');
 
   const matricCard = [
@@ -58,7 +60,7 @@ export default function Transactions() {
       <div className=" w-full">
         {activeTab === 'Records' && <Records />}
         {activeTab === 'New Transfer' && (
-          <NewTransfer onBack={() => setActiveTab('Records')} />
+          <NewTransfer onBack={() => setActiveTab('Records')} walletAddress={walletAddress} />
         )}
       </div>
     </section>

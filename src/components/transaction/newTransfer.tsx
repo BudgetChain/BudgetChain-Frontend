@@ -131,7 +131,7 @@ export default function NewTransfer({
                   className="w-full py-[10px] text-center rounded-[5px] outline-none border-none bg-[#28283A] text-[#848484]"
                   dateFormat="dd/MM/yyyy"
                   placeholderText={new Date().toLocaleDateString()}
-                  readonly
+                  readOnly={true}
                 />
                 <span>*Fixed</span>
               </div>
@@ -142,16 +142,18 @@ export default function NewTransfer({
               name="time"
               value={formData.time}
               fixed={true}
-              readOnly
+              readOnly={true}
               placeholder={`${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} UTC`}
+              onChange={() => {}}
             />
             <Input
               label="Wallet Address"
               type="text"
               name="walletAddress"
               value={formData.walletAddress}
-              readOnly
+              readOnly={true}
               fixed={true}
+              onChange={() => {}}
               placeholder="0x4f4ae6...58jekrek"
             />
 

@@ -9,7 +9,7 @@ interface InputProps {
   placeholder?: string;
   fixed?: boolean;
   error?: string;
-  readonly?: boolean;
+  readOnly?: boolean;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -21,6 +21,7 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   fixed,
   error,
+  readOnly,
 }) => {
   return (
     <div>
@@ -37,6 +38,7 @@ const Input: React.FC<InputProps> = ({
             value={value}
             onChange={onChange}
             placeholder={placeholder}
+            readOnly={readOnly}
           />
           {fixed && <span>*Fixed</span>}
         </div>
