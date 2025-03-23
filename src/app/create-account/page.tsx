@@ -2,16 +2,16 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Navbar from '@/components/navbar';
+import Navbar from './components/Navbar'
 import Sidebar from './components/Sidebar';
-import Step1Form from './components/Step1Form';
+import Step1Form, { Step1FormData } from './components/Step1Form';
 import { useFormContext } from './utils/formContext';
 
 export default function CreateAccount() {
   const router = useRouter();
   const { updateFormData, setCurrentStep } = useFormContext();
   
-  const handleStep1Submit = (data: any) => {
+  const handleStep1Submit = (data: Step1FormData) => {
     updateFormData('step1', data);
     setCurrentStep(2);
     router.push('/create-account/step2');

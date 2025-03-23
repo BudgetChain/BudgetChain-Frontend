@@ -6,6 +6,7 @@ import { Step1FormData } from '../components/Step1Form';
 import { Step2FormData } from '../components/Step2Form';
 import { Step3FormData } from '../components/Step3Form';
 
+
 interface FormContextType {
   formData: {
     step1: Step1FormData | null;
@@ -20,7 +21,7 @@ interface FormContextType {
 const FormContext = createContext<FormContextType | undefined>(undefined);
 
 export function FormProvider({ children }: { children: ReactNode }) {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormContextType["formData"]>({
     step1: null,
     step2: null,
     step3: null

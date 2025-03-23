@@ -1,4 +1,3 @@
-// app/create-account/components/Step1Form.tsx
 'use client';
 
 import { useState } from 'react';
@@ -37,8 +36,8 @@ export default function Step1Form({ onNext }: Step1FormProps) {
   };
 
   return (
-    <div className="w-full max-w-3xl mt-16 ml-14">
-      <form onSubmit={handleSubmit} className="space-y-6">
+    <div className="w-full max-w-3xl lg:ml-20 mx-auto px-4 sm:px-6 md:ml-14 mt-8 sm:mt-16">
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
         <div>
           <label htmlFor="companyName" className="block text-gray-200 mb-2">
             Name of Company/Project
@@ -49,7 +48,7 @@ export default function Step1Form({ onNext }: Step1FormProps) {
             name="companyName"
             value={formData.companyName}
             onChange={handleChange}
-            className="w-full bg-gray-900 border border-gray-700 rounded-md p-3 text-white"
+            className="w-full bg-gray-900 border border-gray-700 rounded-md p-2 sm:p-3 text-white"
             required
           />
         </div>
@@ -64,7 +63,7 @@ export default function Step1Form({ onNext }: Step1FormProps) {
             name="companyEmail"
             value={formData.companyEmail}
             onChange={handleChange}
-            className="w-full bg-gray-900 border border-gray-700 rounded-md p-3 text-white"
+            className="w-full bg-gray-900 border border-gray-700 rounded-md p-2 sm:p-3 text-white"
             required
           />
         </div>
@@ -81,15 +80,15 @@ export default function Step1Form({ onNext }: Step1FormProps) {
             name="projectDescription"
             value={formData.projectDescription}
             onChange={handleChange}
-            rows={8}
-            className="w-full bg-gray-900 border border-gray-700 rounded-md p-3 text-white"
+            rows={6}
+            className="w-full bg-gray-900 border border-gray-700 rounded-md p-2 sm:p-3 text-white"
             required
           />
         </div>
 
-        <div className="flex flex-col items-end mt-8 space-y-4">
+        <div className="flex flex-col items-center sm:items-end mt-6 sm:mt-8 space-y-4">
           {/* Navigation Buttons */}
-          <div className="flex items-center space-x-10">
+          <div className="flex items-center space-x-4 sm:space-x-10 w-full sm:w-auto">
             {/* Previous Button */}
             <button className="text-gray-400 opacity-30 text-sm font-medium">
               &lt; Prev
@@ -98,14 +97,14 @@ export default function Step1Form({ onNext }: Step1FormProps) {
             {/* Next Button */}
             <button
               type="submit"
-              className="bg-[#4F4AE6] hover:bg-indigo-700 text-white font-medium py-4 px-28 rounded-lg"
+              className="bg-[#4F4AE6] hover:bg-indigo-700 text-white font-medium py-3 px-6 sm:py-4 sm:px-28 rounded-lg ml-auto"
             >
               NEXT
             </button>
           </div>
 
-          {/* Login Section (Below Next Button) */}
-          <div className="text-right">
+          {/* Login Section */}
+          <div className="text-center sm:text-right w-full">
             <span className="text-white text-sm">Already have an Account? </span>
             <Link
               href="/login"
