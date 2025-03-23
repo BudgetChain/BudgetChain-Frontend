@@ -77,7 +77,7 @@ const Sidebar: FC = () => {
       case '/projects':
         setActivePath('/projects');
         break;
-      case '/transactions':
+      case '/dashboard/user/transactions':
         setActivePath('/transactions');
         break;
       case '/target':
