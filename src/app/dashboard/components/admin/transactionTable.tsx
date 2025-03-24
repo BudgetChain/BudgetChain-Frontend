@@ -12,38 +12,38 @@ export default function TransactionTable() {
 
   // Sample transaction data
   const transactions = [
-    { id: 1, project: "Fragma", currency: "STRK", amount: "20,000 STRK", usdAmount: "$10,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
-    { id: 2, project: "Fragma", currency: "STRK", amount: "20,000 STRK", usdAmount: "$10,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "CANCELED" },
-    { id: 3, project: "Ndida", currency: "STRK", amount: "2,000 STRK", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
-    { id: 4, project: "Fragma", currency: "USDC", amount: "", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
-    { id: 5, project: "Ndida", currency: "Fiat", amount: "", usdAmount: "$1,200", address: "01124*****", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
-    { id: 6, project: "Steloz", currency: "STRK", amount: "2,000 STRK", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "CANCELED" },
-    { id: 7, project: "Ndida", currency: "Fiat", amount: "", usdAmount: "$1,200", address: "03465*****", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
-    { id: 8, project: "Fragma", currency: "USDC", amount: "", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
-    { id: 9, project: "Fragma", currency: "STRK", amount: "", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
-    { id: 10, project: "Ndida", currency: "STRK", amount: "2,000 STRK", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
-    { id: 11, project: "Ndida", currency: "USDC", amount: "", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
-    { id: 12, project: "Ndida", currency: "USDC", amount: "", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "CANCELED" },
-    { id: 13, project: "Ndida", currency: "STRK", amount: "", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
+    { id: 1, project: "Fragma", dropdown:'One’s Project ', currency: "STRK", amount: "20,000 STRK", usdAmount: "$10,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
+    { id: 2, project: "Fragma",dropdown:'One’s Project ', currency: "STRK", amount: "20,000 STRK", usdAmount: "$10,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "CANCELED" },
+    { id: 3, project: "Ndida",dropdown:' Colab’s Project', currency: "STRK", amount: "2,000 STRK", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
+    { id: 4, project: "Fragma",dropdown:'BlueBridge’s Project ', currency: "USDC", amount: "", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
+    { id: 5, project: "Ndida",dropdown:'Colab’s Project ', currency: "Fiat", amount: "", usdAmount: "$1,200", address: "01124*****", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
+    { id: 6, project: "Steloz",dropdown:'Scar’s Project ', currency: "STRK", amount: "2,000 STRK", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "CANCELED" },
+    { id: 7, project: "Ndida",dropdown:'Colab’s Project ', currency: "Fiat", amount: "", usdAmount: "$1,200", address: "03465*****", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
+    { id: 8, project: "Fragma",dropdown:'One’s Project  ', currency: "USDC", amount: "", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
+    { id: 9, project: "Fragma",dropdown:'One’s Project  ', currency: "STRK", amount: "", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
+    { id: 10, project: "Ndida",dropdown:'Colab’s Project ', currency: "STRK", amount: "2,000 STRK", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
+    { id: 11, project: "Ndida",dropdown:'Colab’s Project ', currency: "USDC", amount: "", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
+    { id: 12, project: "Ndida",dropdown:'Colab’s Project ', currency: "USDC", amount: "", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "CANCELED" },
+    { id: 13, project: "Ndida",dropdown:'Colab’s Project ', currency: "STRK", amount: "", usdAmount: "$1,200", address: "OxcK4R...7G4F", note: "Gorem ipsum dolor sit amet, consectetur...", date: "18/02/2025", time: "8:00 PM UTC", status: "SUCCESSFUL" },
   ];
 
   // Filter transactions based on selected project and date
   const filteredTransactions = transactions.filter((tx) => {
     const matchesProject =
-      selectedProject === 'All Projects' || tx.project === selectedProject;
+      selectedProject === 'All Projects' || tx.dropdown.trim() === selectedProject;
     const matchesDate =
       selectedDate === 'All Dates' || tx.date === selectedDate;
     return matchesProject && matchesDate;
   });
 
   // Unique projects and dates for dropdown options
-  const projects = ['All Projects', ...new Set(transactions.map((tx) => tx.project))];
+  const projects = ['All Projects', ...new Set(transactions.map((tx) => tx.dropdown.trim()))];
   const dates = ['Added Dates', ...new Set(transactions.map((tx) => tx.date))];
 
   return (
     <div>
       <div className="text-gray-400 mt-6 rounded-lg p-4 border-gray-800">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between gap-6 md:flex-row flex-col md:items-center mb-4">
           <div className="flex items-center space-x-5">
             <h2 className="font-bold">All Transactions</h2>
             {/* Project Filter Dropdown */}
@@ -56,16 +56,16 @@ export default function TransactionTable() {
               </button>
               {isProjectDropdownOpen && (
                 <div className="absolute mt-2 w-40 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
-                  {projects.map((project) => (
+                  {projects.map((dropdown) => (
                     <button
-                      key={project}
+                      key={dropdown}
                       className="block w-full text-left px-4 py-2 text-sm hover:bg-gray-700"
                       onClick={() => {
-                        setSelectedProject(project);
+                        setSelectedProject(dropdown);
                         setIsProjectDropdownOpen(false);
                       }}
                     >
-                      {project}
+                      {dropdown}
                     </button>
                   ))}
                 </div>
@@ -84,7 +84,7 @@ export default function TransactionTable() {
                 {selectedDate} <ChevronDown size={14} className="ml-1" />
               </button>
               {isDateDropdownOpen && (
-                <div className="absolute mt-2 w-40 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
+                <div className="absolute mt-2 w-32 bg-gray-800 border border-gray-700 rounded-lg shadow-lg">
                   {dates.map((date) => (
                     <button
                       key={date}

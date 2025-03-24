@@ -1,6 +1,6 @@
 'use client'
 
-import AdminSummary from '../summary';
+import AdminSummary from './summary';
 import AIChat from './chartSection';
 import TransactionTable from './transactionTable';
 
