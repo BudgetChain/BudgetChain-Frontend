@@ -1,7 +1,8 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Download } from 'lucide-react';
+// import Sidebar from '';
 
 
 interface FormData {
@@ -114,11 +115,44 @@ export default function Project() {
   };
 
   return (
-    <div className="bg-[#0a0a0f] min-h-screen text-white w-full ">
+    <div className="bg-[#171720] text-white w-full p-7 ">
       {/* Add the Header component here */}
-      
-      {/* <Sidebar /> */}
 
+      {/* <Sidebar /> */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 rounded-xl shadow-[0px_0px_4px_0px_rgba(235,235,235,0.25)] ">
+        <div className="col-span-1 lg:col-span-3 bg-[linear-gradient(to_right,_#171720_80%,_#894DBD_140%,_#5E5EFF_110%)] border-[#2A2D3A] p-6 rounded-xl">
+          <div className="flex justify-between items-start">
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="text-xl font-medium text-[#E6E6E6]">
+                  Total Transactions
+                </h2>
+                <div className="relative">
+                  <div className="flex items-center gap-2">
+                    <select className="bg-transparent text-[16px] text-gray-400 border-none outline-none">
+                      <option className="text-[16px] mr-2 text-[#848484]">
+                        STRK
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div className="text-4xl font-bold mt-2 text-[#EBEBEB]">75</div>
+              <button className="mt-6 text-sm flex items-center gap-2 text-[#EBEBEB] px-3 py-4 rounded-xl bg-transparent border border-[#4F4AE6]">
+                Download Records
+                <Download className="h-4 w-4 text-[#EBEBEB]" />
+              </button>
+            </div>
+            <div className="h-24 w-24">
+              <img
+                src="/currency.svg"
+                alt="Currency"
+                className="h-full w-full"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
       {/* Navigation tabs */}
       <div className="flex border-b border-gray-800">
         <Link
