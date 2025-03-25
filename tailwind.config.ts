@@ -15,9 +15,16 @@ export default {
         secondary: "#171720",
        
       },
+
       backgroundImage: {
         'custom-gradient': 'linear-gradient(180deg, #894DBD 0%, #5E5EFF 100%)',
       }, 
+
+      fontFamily: {
+        sans: ['Montserrat', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
+      },
+
     },
   },
   plugins: [],
