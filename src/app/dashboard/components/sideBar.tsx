@@ -71,41 +71,41 @@ const Sidebar: FC = () => {
 
   useEffect(() => {
     switch (pathname) {
-      case '/':
+      case '/dashboard':
         setActivePath('/');
         break;
-      case '/projects':
+      case '/dashboard/projects':
         setActivePath('/projects');
         break;
-      case '/dashboard/user/transactions':
+      case '/dashboard/transactions':
         setActivePath('/transactions');
         break;
-      case '/target':
+      case '/dashboard/target':
         setActivePath('/target');
         break;
-      case '/appeals':
+      case '/dashboard/appeals':
         setActivePath('/appeals');
         setIsAppealsOpen(true);
         break;
-      case '/appeals/pending':
+      case '/dashboard/appeals/pending':
         setActivePath('/appeals/pending');
         setIsAppealsOpen(true);
         break;
-      case '/appeals/resolved':
+      case '/dashboard/appeals/resolved':
         setActivePath('/appeals/resolved');
         setIsAppealsOpen(true);
         break;
-      case '/schedules':
+      case '/dashboard/schedules':
         setActivePath('/schedules');
         break;
-      case '/settings':
+      case '/dashboard/settings':
         setActivePath('/settings');
         break;
-      case '/help':
+      case '/dashboard/help':
         setActivePath('/help');
         break;
       default:
-        setActivePath('/target'); // Default active item
+        setActivePath('/dashboard'); // Default active item
         break;
     }
   }, [pathname]);
@@ -117,31 +117,31 @@ const Sidebar: FC = () => {
       </div>
       <div className="flex-grow">
         <SidebarItem
-          href="/"
+          href="/dashboard"
           icon={<HomeIcon size={20} />}
           text="Home"
           active={activePath === '/'}
         />
         <SidebarItem
-          href="/projects"
+          href="/dashboard/projects"
           icon={<FolderIcon size={20} />}
           text="Projects"
           active={activePath === '/projects'}
         />
         <SidebarItem
-          href="/transactions"
+          href="/dashboard/transactions"
           icon={<CreditCardIcon size={20} />}
           text="Transactions"
           active={activePath === '/transactions'}
         />
         <SidebarItem
-          href="/target"
+          href="/dashboard/target"
           icon={<TargetIcon size={20} />}
           text="Target"
           active={activePath === '/target'}
         />
         <SidebarItem
-          href="/appeals"
+          href="/dashboard/appeals"
           icon={<InfoIcon size={20} />}
           text="Appeals"
           active={
@@ -155,7 +155,7 @@ const Sidebar: FC = () => {
         {isAppealsOpen && (
           <div className="pl-9 bg-gray-800 bg-opacity-40">
             <Link
-              href="/appeals/pending"
+              href="/dashboard/appeals/pending"
               className={`block py-2 text-sm ${
                 activePath === '/appeals/pending'
                   ? 'text-indigo-400'
@@ -167,7 +167,7 @@ const Sidebar: FC = () => {
             <Link
               href="/appeals/resolved"
               className={`block py-2 text-sm ${
-                activePath === '/appeals/resolved'
+                activePath === '/dashboard/appeals/resolved'
                   ? 'text-indigo-400'
                   : 'text-gray-400 hover:text-white'
               }`}
@@ -178,7 +178,7 @@ const Sidebar: FC = () => {
         )}
 
         <SidebarItem
-          href="/schedules"
+          href="/dashboard/schedules"
           icon={<CalendarIcon size={20} />}
           text="Schedules"
           active={activePath === '/schedules'}
@@ -186,13 +186,13 @@ const Sidebar: FC = () => {
 
         <div className="mt-32 pt-2">
           <SidebarItem
-            href="/settings"
+            href="/dashboard/settings"
             icon={<SettingsIcon size={20} />}
             text="Settings"
             active={activePath === '/settings'}
           />
           <SidebarItem
-            href="/help"
+            href="/dashboard/help"
             icon={<HelpCircleIcon size={20} />}
             text="Help centre"
             active={activePath === '/help'}
