@@ -8,9 +8,9 @@ const OutcomeStatistics = () => {
         <h2 className="text-lg font-semibold">Outcome Statistics</h2>
         <button className="text-gray-400 hover:text-white">⋮</button>
       </div>
-      <ProgressBar key={'icon1'} label="STRK" value={'75%'} color="#a100ff" />
-      <ProgressBar key={'icon2'} label="USDC" value={'33%'} color="#0044ff" />
-      <ProgressBar key={'icon3'} label="Fiat" value={'16%'} color="#ff6600" />
+      <ProgressBar key={'icon1'} label="STRK" value={75} color="#a100ff" />
+      <ProgressBar key={'icon2'} label="USDC" value={33} color="#0044ff" />
+      <ProgressBar key={'icon3'} label="Fiat" value={16} color="#ff6600" />
     </div>
   );
 };
