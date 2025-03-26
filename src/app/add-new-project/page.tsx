@@ -1,5 +1,5 @@
 import React from 'react';
-import AddNewProject from './addNewProject';
+import AddNewProject from './add-new-project';
 import NavBar from '../dashboard/components/navBar';
 import Sidebar from '../dashboard/components/sideBar';
 

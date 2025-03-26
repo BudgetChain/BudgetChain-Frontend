@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { ArrowLeft, Download } from 'lucide-react';
 // import Sidebar from '';
 
-
 interface FormData {
   project: string;
   totalAmount: string;
@@ -191,7 +190,7 @@ export default function Project() {
                 name="date"
                 value={fixedDate}
                 disabled
-                className="w-full bg-[#1c1c24] rounded p-3 text-white opacity-70"
+                className="w-full bg-[#4a4a5b] rounded p-3 text-white opacity-70"
               />
               <p className="text-xs text-gray-500">*Fixed</p>
             </div>
@@ -203,7 +202,7 @@ export default function Project() {
                 name="time"
                 value={fixedTime}
                 disabled
-                className="w-full bg-[#1c1c24] rounded p-3 text-white opacity-70"
+                className="w-full bg-[#4a4a5b] rounded p-3 text-white opacity-70"
               />
               <p className="text-xs text-gray-500">*Fixed</p>
             </div>
@@ -219,7 +218,7 @@ export default function Project() {
                 placeholder="Name of Project"
                 value={formData.project}
                 onChange={handleChange}
-                className={`w-full bg-[#1c1c24] rounded p-3 text-white ${errors.project ? 'border border-red-500' : 'border-transparent border'}`}
+                className={`w-full bg-[#4a4a5b] rounded p-3 text-white ${errors.project ? 'border border-red-500' : 'border-transparent border'}`}
               />
               {errors.project && (
                 <p className="text-red-500 text-xs mt-1">{errors.project}</p>
@@ -237,7 +236,7 @@ export default function Project() {
                   placeholder="$***"
                   value={formData.totalAmount}
                   onChange={handleChange}
-                  className={`w-full bg-[#1c1c24] rounded-l p-3 text-white ${errors.totalAmount ? 'border border-red-500' : 'border-transparent border'}`}
+                  className={`w-full bg-[#4a4a5b] rounded-l p-3 text-white ${errors.totalAmount ? 'border border-red-500' : 'border-transparent border'}`}
                 />
                 <div
                   className={`bg-[#1c1c24] rounded-r p-3 text-gray-400 flex items-center ${errors.totalAmount ? 'border-r border-t border-b border-red-500' : 'border-transparent border'}`}
@@ -275,7 +274,7 @@ export default function Project() {
               value={formData.description}
               onChange={handleChange}
               rows={6}
-              className={`w-full bg-[#1c1c24] rounded p-3 text-white resize-none ${errors.description ? 'border border-red-500' : 'border-transparent border'}`}
+              className={`w-full bg-[#4a4a5b] rounded p-3 text-white resize-none ${errors.description ? 'border border-red-500' : 'border-transparent border'}`}
             />
             <div className="flex justify-between">
               {errors.description && (
