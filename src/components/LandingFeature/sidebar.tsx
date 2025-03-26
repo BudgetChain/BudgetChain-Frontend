@@ -64,7 +64,7 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="${montserrat.variable} font-montserrat w-64 hidden md:flex flex-col bg-[#050512] rounded-md h-full min-h-screen p-4 ml-4 border border-green-500">
+    <aside className="${montserrat.variable} font-montserrat top-0 w-60 md:w-64 flex flex-col bg-[#050512] rounded-md h-full min-h-screen p-4 absolute left-0 md:relative md:ml-4 right-0">
       <div className="flex justify-center mt-7">
         <Image src="/svg/Logo.svg" alt="Logo" width={121.61} height={10.64} />
       </div>

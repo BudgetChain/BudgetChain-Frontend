@@ -30,13 +30,13 @@ const data = [
 
 export function AIAnalysis() {
   return (
-    <Card className={`${montserrat.variable} font-montserrat bg-[#171720] shadow-[0px_0px_4px_0px_rgba(235,235,235,0.25)] border-none w-[650px] h-full`}>
+    <Card className={`${montserrat.variable} font-montserrat bg-[#171720] shadow-[0px_0px_4px_0px_rgba(235,235,235,0.25)] border-none md:w-[650px] h-full`}>
       <CardHeader className="pb-2">
         <CardTitle className="text-sm font-semibold text-white">AI Analysis</CardTitle>
       </CardHeader>
       <CardContent className="p-0">
-        <div className="h-[400px] w-full">
-          <ResponsiveContainer width="100%" height="110%">
+        <div className="h-[250px] md:h-[400px] w-full">
+          <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
               <defs>
                 <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
