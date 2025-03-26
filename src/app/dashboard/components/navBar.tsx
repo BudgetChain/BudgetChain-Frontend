@@ -8,8 +8,8 @@ const NavBar = () => {
     <nav className="w-full h-[100px] hidden md:flex justify-between gap-3 items-center px-4">
       <div className="flex items-center border-2 border-[#22222e] rounded-md overflow-x-hidden px-2">
 
-    <nav className="w-full h-[100px] flex justify-between items-center px-4 ">
-      <div className="relative w-[400px]">
+    
+     
 
         <input
           placeholder="Search"
