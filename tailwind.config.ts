@@ -14,6 +14,10 @@ export default {
         primary: "#4F4AE6",
         secondary: "#171720",
       },
+      fontFamily: {
+        sans: ['Montserrat', 'sans-serif'],
+        montserrat: ['Montserrat', 'sans-serif'],
+      },
     },
   },
   plugins: [],
