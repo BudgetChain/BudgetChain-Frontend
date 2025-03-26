@@ -54,7 +54,7 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] md:flex-row items-center w-full gap-4 md:col-span-3">
           <Card className="p-4 border border-[#EBEBEB40] bg-[#171720]">
-            <h3 className="text-white">A.I Analysis</h3>
+            <h3 className="text-white py-5 px-8">A.I Analysis</h3>
             <ResponsiveContainer
               className={'bg-[#171720]'}
               width="100%"
