@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -44,6 +46,7 @@
     --input: 220 13% 91%;
 
     --ring: 224 71.4% 4.1%;
+
 
     --chart-1: 12 76% 61%;
 

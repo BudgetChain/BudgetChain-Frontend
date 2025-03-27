@@ -2,15 +2,12 @@
 import Navbar from '@/components/navbar';
 import Image from 'next/image';
 import Brand from '../../public/svg/BUDGETCHAIN.svg';
-import Land1 from "../../public/svg/landingImage1.svg"
-import HowItWorks from "../components/LandingFeature/howItWorks"
-import WhyChooseBudgetChain from "../components/LandingFeature/choosebudgetchain"
+import Land1 from '../../public/svg/landingImage1.svg';
+import HowItWorks from '../components/LandingFeature/howItWorks';
+import WhyChooseBudgetChain from '../components/LandingFeature/choosebudgetchain';
 import Testimonial from '@/components/LandingFeature/testimonial';
 import Newsletter from '@/components/LandingFeature/newsletter';
 import Footer from '@/components/footer';
-
-
-
 
 export default function Home() {
   return (
@@ -40,8 +37,8 @@ export default function Home() {
 
       {/* Snapshot Od Dashboard */}
 
-      <main className='flex flex-col items-center justify-center'>
-          <Image src={Land1} alt="Images" />
+      <main className="flex flex-col items-center justify-center">
+        <Image src={Land1} alt="Images" />
       </main>
       {/* How it works */}
       <main className="flex flex-col items-center justify-center">
@@ -50,7 +47,7 @@ export default function Home() {
 
       {/* Why Choose Budgetchain */}
       <main className="flex flex-col items-center justify-center">
-          <WhyChooseBudgetChain />
+        <WhyChooseBudgetChain />
       </main>
 
       {/* Testimonials */}

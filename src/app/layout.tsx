@@ -25,6 +25,7 @@ export default function RootLayout({
         />
       </head>
       <body className="mt-0 bg-[#050512]">
+
         <Providers>{children}</Providers>
       </body>
     </html>

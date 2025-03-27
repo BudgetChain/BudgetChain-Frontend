@@ -1,5 +1,3 @@
-
-
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -19,7 +17,7 @@ const Navbar: React.FC = () => {
   const isActive = (href: string) => pathname === href;
 
   return (
-    <header className="bg-[#060612] text-white rounded-[20px] border border-[#EBEBEB80] max-w-6xl mx-auto">
+    <header className="bg-[#060612] mt-10 text-white rounded-[20px] border border-[#EBEBEB80] max-w-6xl mx-auto">
       <nav className="flex max-w-7xl items-center justify-between px-4 py-4 w-[95%] mx-10">
         {/* Logo */}
         <Link href={'/'}>
