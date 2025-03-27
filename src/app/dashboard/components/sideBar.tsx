@@ -88,8 +88,8 @@ const Sidebar: FC = () => {
       case '/dashboard/target':
         setActivePath('/target');
         break;
-      case '/dashboard/appeals':
-        setActivePath('/appeals');
+      case '/appeals':
+        setActivePath('/dashboard/appeals');
         setIsAppealsOpen(true);
         break;
       case '/dashboard/appeals/pending':
