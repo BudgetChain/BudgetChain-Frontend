@@ -1,56 +1,56 @@
 import { createConfig, http } from 'wagmi';
 import { mainnet, polygon, optimism, arbitrum } from 'wagmi/chains';
-import { 
-  metaMask, 
-  coinbaseWallet, 
-  walletConnect, 
-  injected 
+import {
+  metaMask,
+  coinbaseWallet,
+  walletConnect,
+  injected,
 } from 'wagmi/connectors';
 
-// Extend Window interface for BinanceChain
-declare global {
-  interface Window {
-    BinanceChain?: any;
-  }
-}
+// Set WalletConnect project ID
+const walletConnectProjectId =
+  process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '';
 
-const walletConnectProjectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '';
+// Helper function to check for Binance wallet
+export const isBinanceWalletAvailable = (): boolean => {
+  if (typeof window === 'undefined') return false;
+
+  // Different ways Binance Wallet might be detected
+  return (
+    !!window.BinanceChain ||
+    (window.ethereum &&
+      (window.ethereum.isBinance ||
+        (Array.isArray(window.ethereum.providers) &&
+          window.ethereum.providers.some((provider) => provider.isBinance))))
+  );
+};
 
 export const config = createConfig({
   chains: [mainnet, polygon, optimism, arbitrum],
   connectors: [
-    metaMask(), // shimDisconnect removed as it's not needed in v2
+    metaMask(),
     coinbaseWallet({
       appName: 'BudgetChain',
-      appLogoUrl: '/logo.png'
     }),
     walletConnect({
       projectId: walletConnectProjectId,
-      showQrModal: true,
+      showQrModal: true, // Ensure QR modal is shown
       metadata: {
         name: 'BudgetChain',
         description: 'BudgetChain Wallet Connection',
         url: 'https://budgetchain.xyz',
-        icons: ['https://budgetchain.xyz/logo.png']
-      }
+        icons: ['https://budgetchain.xyz/logo.png'],
+      },
     }),
+    // Use injected connector for Binance
     injected({
-      name: 'Binance',
-      getProvider: () => {
-        if (typeof window !== 'undefined') {
-          // Check for Binance first
-          if (window.BinanceChain) return window.BinanceChain;
-          // Fallback to generic injected
-          return window.ethereum;
-        }
-      }
-    })
+      shimDisconnect: true,
+    }),
   ],
   transports: {
     [mainnet.id]: http(),
     [polygon.id]: http(),
     [optimism.id]: http(),
-    [arbitrum.id]: http()
+    [arbitrum.id]: http(),
   },
-  ssr: true
 });

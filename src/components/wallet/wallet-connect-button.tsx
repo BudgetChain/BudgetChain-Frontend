@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAccount, useDisconnect } from 'wagmi';
 import { ConnectWalletModal } from './connect-wallet-modal';
 
@@ -8,9 +8,25 @@ export default function WalletConnectButton() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { address, isConnected } = useAccount();
   const { disconnect } = useDisconnect();
+  // State to track client-side rendering
+  const [isClient, setIsClient] = useState(false);
 
-  const formatAddress = (addr: string) =>
-    `${addr.slice(0, 6)}...${addr.slice(-4)}`;
+  // Set isClient to true after mount to avoid hydration mismatch
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const formatAddress = (addr: string | undefined) =>
+    addr ? `${addr.slice(0, 6)}...${addr.slice(-4)}` : '';
+
+  // Return a consistent UI during server-side rendering to avoid hydration issues
+  if (!isClient) {
+    return (
+      <button className="bg-blue-500 text-white rounded-lg py-2.5 px-4 text-sm font-semibold hover:bg-blue-600">
+        Connect Wallet
+      </button>
+    );
+  }
 
   return (
     <>

@@ -1,17 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useConnect, useAccount } from 'wagmi';
-import Image from 'next/image';
 import { X } from 'lucide-react';
-
-interface WalletOption {
-  id: string;
-  name: string;
-  icon: string;
-  connectorId: string;
-  walletConnectId?: string;
-}
+import { WalletSelection } from './wallet-selection';
 
 export function ConnectWalletModal({
   isOpen,
@@ -20,58 +11,12 @@ export function ConnectWalletModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
-  const { connect, connectors, error, isPending } = useConnect();
-  const { isConnected } = useAccount();
-  const [selectedWallet, setSelectedWallet] = useState<WalletOption | null>(
-    null
-  );
+  const [isClient, setIsClient] = useState(false);
 
-  // Wallet options configuration
-  const walletOptions: WalletOption[] = [
-    {
-      id: 'metaMask',
-      name: 'MetaMask',
-      icon: '/wallet-icons/metamask.svg',
-      connectorId: 'metaMask',
-    },
-    {
-      id: 'coinbase',
-      name: 'Coinbase',
-      icon: '/wallet-icons/coinbase.svg',
-      connectorId: 'coinbaseWallet',
-    },
-    {
-      id: 'walletConnect',
-      name: 'WalletConnect',
-      icon: '/wallet-icons/walletconnect.svg',
-      connectorId: 'walletConnect',
-    },
-    {
-      id: 'argent',
-      name: 'Argent',
-      icon: '/wallet-icons/argent.svg',
-      connectorId: 'walletConnect',
-      walletConnectId: 'argent',
-    },
-    {
-      id: 'bybit',
-      name: 'BYBIT',
-      icon: '/wallet-icons/bybit.svg',
-      connectorId: 'walletConnect',
-      walletConnectId: 'bybit',
-    },
-    {
-      id: 'binance',
-      name: 'Binance',
-      icon: '/wallet-icons/binance.svg',
-      connectorId: 'injected',
-    },
-  ];
-
-  // Close modal when connected
+  // Set isClient to true after mount to avoid hydration mismatch
   useEffect(() => {
-    if (isConnected) onClose();
-  }, [isConnected, onClose]);
+    setIsClient(true);
+  }, []);
 
   // Close modal with ESC key
   useEffect(() => {
@@ -91,17 +36,8 @@ export function ConnectWalletModal({
     };
   }, [isOpen]);
 
-  const handleConnectWallet = () => {
-    if (!selectedWallet) return;
-
-    const connector = connectors.find(
-      (c) => c.id === selectedWallet.connectorId
-    );
-    if (connector) {
-      connect({ connector });
-    }
-  };
-
+  // Return null during server-side rendering to avoid hydration issues
+  if (!isClient) return null;
   if (!isOpen) return null;
 
   return (
@@ -128,75 +64,7 @@ export function ConnectWalletModal({
           Connect Wallet
         </h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-          {walletOptions.map((wallet) => {
-            const isAvailable = connectors.some((c) => {
-              if (c.id === 'io.metamask') return window.ethereum?.isMetaMask;
-              if (c.id === 'com.coinbase.wallet')
-                return window.ethereum?.isCoinbaseWallet;
-              if (c.id === 'binance') return window.BinanceChain;
-              return true; // For WalletConnect
-            });
-            const isSelected = selectedWallet?.id === wallet.id;
-
-            return (
-              <button
-                key={wallet.id}
-                className={`flex flex-col items-center justify-center bg-[#2a2a2a] border-2 ${
-                  isSelected
-                    ? 'border-blue-500 bg-blue-500/10'
-                    : 'border-transparent'
-                } rounded-xl p-4 transition-all duration-200 ${
-                  !isAvailable
-                    ? 'opacity-50 cursor-not-allowed'
-                    : 'hover:bg-[#333] hover:-translate-y-0.5 cursor-pointer'
-                }`}
-                onClick={() => isAvailable && setSelectedWallet(wallet)}
-                disabled={!isAvailable}
-                aria-pressed={isSelected}
-              >
-                <div className="w-12 h-12 flex items-center justify-center mb-2 rounded-lg bg-[#333] p-2">
-                  <Image
-                    src={wallet.icon}
-                    alt={`${wallet.name} logo`}
-                    width={40}
-                    height={40}
-                    className="w-full h-auto object-contain"
-                  />
-                </div>
-                <span className="text-white text-sm font-medium text-center">
-                  {wallet.name}
-                  {wallet.walletConnectId && (
-                    <span className="block text-xs text-gray-400 mt-1">
-                      via WalletConnect
-                    </span>
-                  )}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {error && (
-          <div className="text-red-500 text-center mb-4 p-2 bg-red-500/10 rounded-lg text-sm">
-            {error.message}
-          </div>
-        )}
-
-        <button
-          className={`w-full bg-blue-500 text-white rounded-lg py-3.5 px-4 text-base font-semibold flex items-center justify-center ${
-            !selectedWallet || isPending
-              ? 'opacity-70 cursor-not-allowed'
-              : 'hover:bg-blue-600'
-          }`}
-          onClick={handleConnectWallet}
-          disabled={!selectedWallet || isPending}
-        >
-          {isPending ? (
-            <span className="w-5 h-5 border-2 border-white/30 rounded-full border-t-white animate-spin mr-2"></span>
-          ) : null}
-          CONNECT WALLET
-        </button>
+        <WalletSelection onClose={onClose} />
       </div>
     </div>
   );
