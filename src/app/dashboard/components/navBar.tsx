@@ -1,5 +1,5 @@
 'use client';
-import WalletConnectButton from '@/components/wallet/wallet-connect-button';
+import WalletConnectButton from '@/components/walletConnection/wallet-connect-button';
 import { Search } from 'lucide-react';
 
 const NavBar = () => {
