@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-// import { Providers } from "@/components/Providers";
 import './globals.css';
-import { Providers } from '@/components/wallet/providers';
+import { Providers } from '@/components/Providers';
+// import { Providers } from '@/components/wallet/providers';
 
 export const metadata: Metadata = {
   title: 'BudgetChain',

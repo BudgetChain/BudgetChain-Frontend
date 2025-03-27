@@ -1,33 +1,49 @@
-"use client";
-import { ReactNode } from "react";
+'use client';
 
-import { sepolia } from "@starknet-react/chains";
+import { type ReactNode } from 'react';
+import { WagmiProvider } from 'wagmi';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {
-  StarknetConfig,
   argent,
   braavos,
   useInjectedConnectors,
-  jsonRpcProvider,
   voyager,
-} from "@starknet-react/core";
+  StarknetConfig,
+} from '@starknet-react/core';
+import { sepolia } from '@starknet-react/chains';
+import { config } from '@/lib/wagmi';
+import { useStarknetConfig } from '@/lib/starknet';
+
+const queryClient = new QueryClient();
 
 export function Providers({ children }: { children: ReactNode }) {
-  const { connectors } = useInjectedConnectors({
-    // Show these connectors if the user has no connector installed.
+  // Get custom Starknet config from your hook
+  const { connectors: customConnectors, ...starknetConfig } =
+    useStarknetConfig();
+
+  // Fallback to default connectors if none provided by the hook
+  const { connectors: defaultConnectors } = useInjectedConnectors({
     recommended: [argent(), braavos()],
-    // Hide recommended connectors if the user has any connector installed.
-    includeRecommended: "onlyIfNoConnectors",
-    // Randomize the order of the connectors.
-    order: "random",
+    includeRecommended: 'onlyIfNoConnectors',
+    order: 'random',
   });
+
+  // Use custom connectors if provided, otherwise use defaults
+  const mergedConnectors = customConnectors || defaultConnectors;
+
   return (
-    <StarknetConfig
-      chains={[sepolia]}
-      provider={jsonRpcProvider({ rpc: (chain) => ({ nodeUrl: process.env.NEXT_PUBLIC_RPC_URL }) })}
-      connectors={connectors}
-      explorer={voyager}
-    >
-      {children}
-    </StarknetConfig>
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <StarknetConfig
+          {...starknetConfig}
+          connectors={mergedConnectors}
+          explorer={voyager}
+          chains={[sepolia]}
+          autoConnect={true} // Recommended to enable auto-connect
+        >
+          {children}
+        </StarknetConfig>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 }

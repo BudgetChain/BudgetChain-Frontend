@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import WalletConnectButton from '@/components/wallet/wallet-connect-button';
 import { Search } from 'lucide-react';
 
 const NavBar = () => {
@@ -14,7 +14,7 @@ const NavBar = () => {
           <Search size={20} className="text-gray-400" />
         </div>
       </div>
-      
+
       <div className="flex gap-3 items-center">
         <div className="w-[300px] h-[48px] bg-[#181824] border border-gray-800 text-white rounded-md flex items-center justify-center">
           <div className="flex items-center gap-2">
@@ -22,9 +22,9 @@ const NavBar = () => {
             <span className="text-white">Eli`z DAO</span>
           </div>
         </div>
-        
+
         <div className="w-[300px] h-[48px] bg-[#181824] border border-gray-800 text-white rounded-md flex items-center justify-center">
-          <span className="text-white">0xdf23Z.....bF42l5G</span>
+          <WalletConnectButton />
         </div>
       </div>
     </nav>
