@@ -15,8 +15,7 @@ import {
   SettingsIcon,
   HelpCircleIcon,
   InfoIcon,
-  MenuIcon,
-  XIcon,
+ 
 } from 'lucide-react';
 
 interface SidebarItemProps {
@@ -70,7 +69,7 @@ const Sidebar: FC = () => {
   const pathname = usePathname();
   const [isAppealsOpen, setIsAppealsOpen] = useState(false);
   const [activePath, setActivePath] = useState('/admin');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen] = useState(false);
 
   useEffect(() => {
     switch (pathname) {
@@ -289,7 +288,8 @@ const Sidebar: FC = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
+    </div>
   );
 };
 
