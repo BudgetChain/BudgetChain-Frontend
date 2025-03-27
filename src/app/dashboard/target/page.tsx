@@ -1,8 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { NextPage } from 'next';
-import Sidebar from '../components/sideBar';
-import NavBar from '../components/navBar';
 import ProgressCard from '../components/progressCard';
 import Records from '../records/page';
 
@@ -54,9 +52,7 @@ const Target: NextPage = () => {
 
   return (
     <main className="flex bg-[#171720]">
-      <Sidebar />
       <div className="w-full bg-[#171720] px-10">
-        <NavBar />
         {showRecords ? (
           <Records />
         ) : (
