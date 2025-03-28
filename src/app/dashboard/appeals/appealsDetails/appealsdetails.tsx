@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { ArrowLeft } from "lucide-react"
 import Button from "@/components/form/Button"
+import Image from "next/image"
 
 interface AppealData {
   id: string
@@ -117,7 +118,7 @@ export default function AppealPage({ params }: { params: { id: string } }) {
 
             {status === "approved" && (
             <div className="absolute top-[70%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 rotate-12 opacity-80">
-               <img
+               <Image
                 src="/approve.svg" 
                 alt="approved"
                 className=" w-72 h-60 -rotate-[17deg]"
