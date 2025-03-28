@@ -1,28 +1,51 @@
-import { mainnet, sepolia } from '@starknet-react/chains';
+'use client';
+
+import { useCallback, useMemo } from 'react';
 import {
   argent,
   braavos,
-  publicProvider,
   useInjectedConnectors,
+  voyager,
+  publicProvider,
 } from '@starknet-react/core';
+import { mainnet, sepolia } from '@starknet-react/chains';
 
-// Get injected connectors (like Argent X, Braavos, etc.)
+/**
+ * Hook to get Starknet connectors
+ */
 export function useStarknetConnectors() {
   return useInjectedConnectors({
-    // Show these connectors as recommended
-    recommended: [argent(), braavos()], // Changed from 'connectors' to 'recommended'
+    recommended: [argent(), braavos()],
+    includeRecommended: 'onlyIfNoConnectors',
+    order: 'random',
   });
 }
 
-// Create Starknet provider config
+/**
+ * Hook to get the complete Starknet configuration
+ * Includes error handling for disconnection events
+ */
 export function useStarknetConfig() {
-  // Changed to a hook by prefixing with 'use'
   const { connectors } = useStarknetConnectors();
 
-  return {
-    chains: [mainnet, sepolia],
-    provider: publicProvider(),
-    connectors,
-    autoConnect: true,
-  };
+  // Handle wallet disconnection errors
+  const handleDisconnectError = useCallback((error: Error) => {
+    console.warn('Starknet disconnect error:', error);
+    // Dispatch a custom event that our components can listen for
+    window.dispatchEvent(new CustomEvent('wallet_disconnected'));
+    // Return true to indicate the error was handled
+    return true;
+  }, []);
+
+  return useMemo(
+    () => ({
+      chains: [mainnet, sepolia],
+      provider: publicProvider(),
+      connectors,
+      explorer: voyager,
+      autoConnect: true,
+      onDisconnectError: handleDisconnectError,
+    }),
+    [connectors, handleDisconnectError]
+  );
 }

@@ -11,7 +11,7 @@ import {
 } from '@starknet-react/core';
 import Image from 'next/image';
 import { isBinanceWalletAvailable } from '@/lib/wagmi';
-import { WalletOption } from '@/types/types';
+import type { WalletOption } from '@/types/types';
 
 export function WalletSelection({ onClose }: { onClose: () => void }) {
   // Ethereum wallet connections
@@ -64,8 +64,14 @@ export function WalletSelection({ onClose }: { onClose: () => void }) {
 
   // Close modal when connected
   useEffect(() => {
-    if (isEthereumConnected || isStarknetConnected) onClose();
-  }, [isEthereumConnected, isStarknetConnected, onClose]);
+    // Only close the modal when a connection is successful
+    if (
+      (isEthereumConnected && activeTab === 'ethereum') ||
+      (isStarknetConnected && activeTab === 'starknet')
+    ) {
+      onClose();
+    }
+  }, [isEthereumConnected, isStarknetConnected, activeTab, onClose]);
 
   // Reset selected wallet when changing tabs
   useEffect(() => {
@@ -84,6 +90,31 @@ export function WalletSelection({ onClose }: { onClose: () => void }) {
       setConnectionError(ethereumError.message);
     }
   }, [ethereumError]);
+
+  // Add error handling for Starknet connection errors
+  useEffect(() => {
+    if (starknetError) {
+      setConnectionError(
+        starknetError.message || 'Failed to connect to Starknet wallet'
+      );
+    }
+  }, [starknetError]);
+
+  // Add error handling for wallet disconnection
+  useEffect(() => {
+    // This helps recover from disconnection errors
+    const handleWalletDisconnect = () => {
+      // Reset any error states
+      setConnectionError(null);
+      setSelectedWallet(null);
+    };
+
+    window.addEventListener('wallet_disconnected', handleWalletDisconnect);
+
+    return () => {
+      window.removeEventListener('wallet_disconnected', handleWalletDisconnect);
+    };
+  }, []);
 
   const getEthereumWalletOptions = (): WalletOption[] => {
     const options: WalletOption[] = [];
