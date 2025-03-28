@@ -19,7 +19,7 @@ const Calendar = () => {
   };
 
   return (
-    <div className="flex gap-6 bg-secondary p-6">
+    <div className="flex gap-6 px-6 mb-6 bg-[#171720] text-[#FFFFFF]">
       <div className="w-1/4 rounded-lg ring-2 ring-white/10 p-6">
         <ScheduleHeader />
       </div>

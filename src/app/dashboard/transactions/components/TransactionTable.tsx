@@ -137,8 +137,8 @@ const transactions: Transaction[] = [
 
 const TransactionTable: React.FC = () => {
   return (
-    <div className="py-4">
-      <div className="overflow-x-auto rounded-lg bg-gray-900 border border-[#EBEBEB40]">
+    <div className="py-4 bg-[#171720]">
+      <div className="overflow-x-auto rounded-lg bg-[#171720] border-2 border-[#EBEBEB40]">
         <div className="flex justify-between w-full items-center p-4">
           <h2>Ndida’s Transactions</h2>
           <div className="flex items-center space-x-3">
@@ -147,7 +147,7 @@ const TransactionTable: React.FC = () => {
           </div>
         </div>
 
-        <table className="min-w-full bg-gray-900 rounded-lg text-white text-sm border border-[#EBEBEB40] ">
+        <table className="min-w-full bg-[#171720] rounded-lg text-white text-sm border border-[#EBEBEB40] ">
           <thead>
             <tr className="bg-gray-800 text-left">
               <th className="p-4">S/N</th>
