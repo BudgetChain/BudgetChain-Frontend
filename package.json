@@ -30,6 +30,7 @@
     "react-hot-toast": "^2.5.2",
     "react-icons": "^5.5.0",
     "recharts": "^2.15.1",
+    "sharp": "^0.33.5",
     "starknet": "^6.23.1",
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",

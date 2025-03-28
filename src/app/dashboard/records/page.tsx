@@ -16,7 +16,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex-grow min-h-screen bg-[#171720] text-white p-2 sm:p-4">
+    <div className="flex-grow min-h-screen bg-[#171720] text-white">
       <main className="max-w-6xl mx-auto">
         <div className="md:hidden flex justify-end mb-4">
           <button
@@ -27,7 +27,7 @@ export default function Home() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-6 pr-4">
           <StatCard title="Total Transactions" value="3" />
           <StatCard title="Total Successful" value="2" />
           <StatCard title="Total Cancelled" value="1" />

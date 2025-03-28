@@ -51,12 +51,13 @@ const Target: NextPage = () => {
   const projectsToRender = defaultProjects;
 
   return (
-    <main className="flex bg-[#171720]">
-      <div className="w-full bg-[#171720] px-10">
+    <main className="flex mb-6 bg-[#171720] text-[#FFFFFF]">
+
+      <div className="bg-[#171720] px-6">
         {showRecords ? (
           <Records />
         ) : (
-          <div className="flex flex-wrap gap-4 mt-4">
+          <div className="flex justify-between flex-wrap gap-y-6 mt-4">
             {projectsToRender.map((project, index) => (
               <div
                 key={index}
