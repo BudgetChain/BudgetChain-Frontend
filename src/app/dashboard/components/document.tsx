@@ -1,8 +1,7 @@
-// ProjectDashboard.tsx
-import { useState } from 'react';
 import { ArrowLeft, Download } from 'lucide-react';
 import Image from 'next/image';
 import Cert from '../../../../public/svg/image 29.png';
+import { PieChart, Pie, Cell } from 'recharts';
 
 interface ProjectDocument {
   id: string;
@@ -37,6 +36,13 @@ const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
   completionPercentage,
   documents,
 }) => {
+  const pieData = [
+    { name: 'Completed', value: completionPercentage },
+    { name: 'Remaining', value: 100 - completionPercentage },
+  ];
+
+  const COLORS = ['#e14eca', '#171720'];
+
   return (
     <div className="flex flex-col bg-[#171720] text-white w-full h-full rounded-md border border-gray-700 p-3">
       <div className="flex justify-between items-center mb-8">
@@ -47,36 +53,32 @@ const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
         </button>
       </div>
 
-      <div className="flex flex-col items-center justify-center mb-10">
-        <div className="relative h-36 w-36">
-          <div className="absolute inset-0 rounded-full bg-[#171720]"></div>
-
-          <svg className="absolute inset-0" viewBox="0 0 100 100">
-            <circle
-              cx="50"
-              cy="50"
-              r="45"
-              fill="none"
-              stroke="#171720"
-              strokeWidth="10"
-            />
-            <circle
-              cx="50"
-              cy="50"
-              r="45"
-              fill="none"
-              stroke="#e14eca"
-              strokeWidth="10"
-              strokeDasharray={`${(2 * Math.PI * 45 * completionPercentage) / 100} ${2 * Math.PI * 45 * (1 - completionPercentage / 100)}`}
-              strokeDashoffset={(2 * Math.PI * 45) / 4}
-              strokeLinecap="round"
-            />
-          </svg>
-
-          <div className="absolute inset-0 flex flex-col justify-center items-center">
-            <span className="text-3xl font-bold">{completionPercentage}%</span>
-            <span className="text-xs text-gray-400">Completed</span>
-          </div>
+      <div className="flex flex-col items-center justify-center mb-10 relative">
+        <PieChart width={300} height={300}>
+          <Pie
+            data={pieData}
+            cx={140}
+            cy={140}
+            innerRadius={110}
+            outerRadius={125}
+            paddingAngle={0}
+            dataKey="value"
+            startAngle={90}
+            endAngle={-270}
+            cornerRadius={25}
+            stroke="none"
+          >
+            {pieData.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
+        </PieChart>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col justify-center items-center">
+          <span className="text-3xl font-bold">{completionPercentage}%</span>
+          <span className="text-xs text-gray-400">Completed</span>
         </div>
       </div>
 

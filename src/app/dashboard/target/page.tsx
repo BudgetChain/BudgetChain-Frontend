@@ -1,8 +1,6 @@
 'use client';
 import { useState } from 'react';
 import { NextPage } from 'next';
-import Sidebar from '../components/sideBar';
-import NavBar from '../components/navBar';
 import ProgressCard from '../components/progressCard';
 import Records from '../records/page';
 
@@ -53,14 +51,13 @@ const Target: NextPage = () => {
   const projectsToRender = defaultProjects;
 
   return (
-    <main className="flex bg-[#171720]">
-      <Sidebar />
-      <div className="w-full bg-[#171720] px-10">
-        <NavBar />
+    <main className="flex mb-6 bg-[#171720] text-[#FFFFFF]">
+
+      <div className="bg-[#171720] px-6">
         {showRecords ? (
           <Records />
         ) : (
-          <div className="flex flex-wrap gap-4 mt-4">
+          <div className="flex justify-between flex-wrap gap-y-6 mt-4">
             {projectsToRender.map((project, index) => (
               <div
                 key={index}
