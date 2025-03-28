@@ -281,11 +281,11 @@ export function WalletSelection({ onClose }: { onClose: () => void }) {
     activeTab === 'ethereum' ? isEthereumPending : isStarknetPending;
 
   return (
-    <>
+    <div className="animate-fadeIn">
       {/* Network tabs */}
       <div className="flex mb-6 border-b border-gray-700">
         <button
-          className={`flex-1 py-2 text-center font-medium ${
+          className={`flex-1 py-2 text-center font-medium transition-all duration-200 ${
             activeTab === 'ethereum'
               ? 'text-blue-500 border-b-2 border-blue-500'
               : 'text-gray-400 hover:text-gray-200'
@@ -295,7 +295,7 @@ export function WalletSelection({ onClose }: { onClose: () => void }) {
           Ethereum
         </button>
         <button
-          className={`flex-1 py-2 text-center font-medium ${
+          className={`flex-1 py-2 text-center font-medium transition-all duration-200 ${
             activeTab === 'starknet'
               ? 'text-blue-500 border-b-2 border-blue-500'
               : 'text-gray-400 hover:text-gray-200'
@@ -339,16 +339,16 @@ export function WalletSelection({ onClose }: { onClose: () => void }) {
       </div>
 
       {error && (
-        <div className="text-red-500 text-center mb-4 p-2 bg-red-500/10 rounded-lg text-sm">
+        <div className="text-red-500 text-center mb-4 p-2 bg-red-500/10 rounded-lg text-sm animate-fadeIn">
           {error}
         </div>
       )}
 
       <button
-        className={`w-full bg-blue-500 text-white rounded-lg py-3.5 px-4 text-base font-semibold flex items-center justify-center ${
+        className={`w-full bg-blue-500 text-white rounded-lg py-3.5 px-4 text-base font-semibold flex items-center justify-center transition-all duration-200 ${
           !selectedWallet || isPending
             ? 'opacity-70 cursor-not-allowed'
-            : 'hover:bg-blue-600'
+            : 'hover:bg-blue-600 hover:shadow-lg active:scale-98'
         }`}
         onClick={handleConnectWallet}
         disabled={!selectedWallet || isPending}
@@ -358,6 +358,6 @@ export function WalletSelection({ onClose }: { onClose: () => void }) {
         ) : null}
         CONNECT WALLET
       </button>
-    </>
+    </div>
   );
 }

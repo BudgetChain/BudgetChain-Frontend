@@ -16,12 +16,14 @@ export const isBinanceWalletAvailable = (): boolean => {
   if (typeof window === 'undefined') return false;
 
   // Different ways Binance Wallet might be detected
-  return (
-    !!window.BinanceChain ||
+  return !!(
+    window.BinanceChain ||
     (window.ethereum &&
       (window.ethereum.isBinance ||
         (Array.isArray(window.ethereum.providers) &&
-          window.ethereum.providers.some((provider) => provider.isBinance))))
+          window.ethereum.providers.some(
+            (provider: any) => provider.isBinance
+          ))))
   );
 };
 

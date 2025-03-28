@@ -77,7 +77,7 @@ export default function WalletConnectButton() {
   return (
     <>
       {isAnyWalletConnected && activeAddress ? (
-        <div className="flex items-center bg-[#2a2a2a] rounded-lg py-1.5 px-3">
+        <div className="flex items-center bg-[#2a2a2a] rounded-lg py-1.5 px-3 transition-all duration-200 hover:bg-[#333]">
           <span className="text-white text-sm font-medium mr-2">
             {connectedChain && (
               <span className="bg-blue-500/20 text-blue-400 rounded px-1.5 py-0.5 mr-1.5 text-[10px]">
@@ -88,7 +88,7 @@ export default function WalletConnectButton() {
           </span>
           <button
             onClick={handleDisconnect}
-            className="bg-transparent text-red-500 border border-red-500 rounded-md py-1 px-2 text-xs hover:bg-red-500/10"
+            className="bg-transparent text-red-500 border border-red-500 rounded-md py-1 px-2 text-xs hover:bg-red-500/10 transition-colors duration-200"
           >
             Disconnect
           </button>
@@ -96,7 +96,7 @@ export default function WalletConnectButton() {
       ) : (
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-blue-500 text-white rounded-lg py-2.5 px-4 text-sm font-semibold hover:bg-blue-600"
+          className="bg-blue-500 text-white rounded-lg py-2.5 px-4 text-sm font-semibold hover:bg-blue-600 transition-all duration-200 hover:shadow-lg active:scale-95"
         >
           Connect Wallet
         </button>
