@@ -1,7 +1,7 @@
 import { ChevronDown } from 'lucide-react';
 export default function AdminSummary(){
     return (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 mt-16 md:mt-6 ">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 mt-16 md:mt-0 ">
         <div className="bg-custom-gradient rounded-xl p-6 flex flex-col justify-center">
          <div>
          <div className="flex justify-between items-center mb-2">
