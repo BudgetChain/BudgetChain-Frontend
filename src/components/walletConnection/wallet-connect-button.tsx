@@ -96,7 +96,7 @@ export default function WalletConnectButton() {
       ) : (
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-blue-500 text-white rounded-lg py-2.5 px-4 text-sm font-semibold hover:bg-blue-600 transition-all duration-200 hover:shadow-lg active:scale-95"
+          className="bg-[#4F4AE6] text-white rounded-lg py-2.5 px-4 text-sm font-semibold hover:bg-[#3A35D1] transition-all duration-200 hover:shadow-lg active:scale-95"
         >
           Connect Wallet
         </button>
