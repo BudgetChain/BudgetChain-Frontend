@@ -34,13 +34,13 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({ currentDate, view }) => {
 
   return (
     <div className="mt-4">
-      <div className="grid grid-cols-7 gap-0 border-[0.5px] border-white/100 rounded-xl">
+      <div className="grid grid-cols-7 gap-0 border-2 border-white/10 rounded-xl overflow-hidden">
         {WEEKDAYS.map((day, index) => (
           <div
             key={day}
             className={`p-4 text-center text-sm font-medium text-gray-400 bg-[#2B2B46] ${
-              index === 0 ? 'rounded-tl-2xl' : ''
-            } ${index === WEEKDAYS.length - 1 ? 'rounded-tr-2xl' : ''}`}
+              index === 0 ? 'rounded-tl-xl' : ''
+            } ${index === WEEKDAYS.length - 1 ? 'rounded-tr-xl' : ''}`}
           >
             {day}
           </div>

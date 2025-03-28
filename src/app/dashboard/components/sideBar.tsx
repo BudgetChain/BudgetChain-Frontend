@@ -111,7 +111,7 @@ const Sidebar: FC = () => {
   }, [pathname]);
 
   return (
-    <div className="w-[260px] h-screen sticky bg-[#050512] text-white flex flex-col left-[20px] top-0 rounded-md">
+    <div className="min-w-[260px] h-screen sticky bg-[#050512] text-white flex flex-col left-[20px] top-0 rounded-md">
       <div className="w-full mb-5 flex justify-center items-center pt-10">
         <Image src={Brand} alt="Logo" />
       </div>
