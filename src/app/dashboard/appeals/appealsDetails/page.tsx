@@ -1,5 +1,5 @@
-import React from 'react';
-import AppealsDetails from './appealsdetails';
+import React from 'react'
+import AppealsDetails from './appealsdetails'
 
 function page() {
   return (
