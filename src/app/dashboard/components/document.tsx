@@ -1,5 +1,5 @@
 'use client';
-import { ArrowLeft, Download } from 'lucide-react';
+import { Download } from 'lucide-react';
 import Image from 'next/image';
 import Cert from '../../../../public/doc.png';
 import { PieChart, Pie, Cell } from 'recharts';

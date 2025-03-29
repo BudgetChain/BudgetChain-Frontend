@@ -46,8 +46,8 @@ const SidebarItem: FC<SidebarItemProps> = ({
       }`}
       onClick={
         hasDropdown
-          ? (e) => {
-              e.preventDefault();
+          ? () => {
+              // e.preventDefault();
               toggleDropdown && toggleDropdown();
             }
           : undefined

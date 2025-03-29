@@ -1,5 +1,5 @@
 import React from 'react'
-import Appeals from './appeals'
+import Appeals from '../components/appeals'
 
 
 function page() {
@@ -8,8 +8,6 @@ function page() {
       <div className="flex-1">
         <Appeals />
       </div>
-
-      {/* <FundRequestPage /> */}
     </div>
   )
 }
