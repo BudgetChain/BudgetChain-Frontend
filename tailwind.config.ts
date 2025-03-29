@@ -8,6 +8,7 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+
   	extend: {
   		colors: {
   			background: 'hsl(var(--background))',
@@ -67,6 +68,7 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		}
   	}
+
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

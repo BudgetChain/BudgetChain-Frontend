@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { FC, useState, useEffect } from 'react';
 import Brand from '../../../../public/svg/Logo.svg';
 import Image from 'next/image';
@@ -48,7 +48,7 @@ const SidebarItem: FC<SidebarItemProps> = ({
         hasDropdown
           ? () => {
               // e.preventDefault();
-              toggleDropdown && toggleDropdown();
+              if (toggleDropdown) toggleDropdown();
             }
           : undefined
       }
@@ -67,7 +67,8 @@ const SidebarItem: FC<SidebarItemProps> = ({
 const Sidebar: FC = () => {
   const pathname = usePathname();
   const [isAppealsOpen, setIsAppealsOpen] = useState(false);
-  const [activePath, setActivePath] = useState('/target');
+  const [activePath, setActivePath] = useState('/admin');
+  const [isSidebarOpen] = useState(false);
 
   useEffect(() => {
     switch (pathname) {
@@ -105,13 +106,15 @@ const Sidebar: FC = () => {
         setActivePath('/help');
         break;
       default:
-        setActivePath('/dashboard'); // Default active item
+        setActivePath('/dashboard');
         break;
     }
   }, [pathname]);
 
   return (
-    <div className="min-w-[260px] h-screen sticky bg-[#050512] text-white flex flex-col left-[20px] top-0 rounded-md">
+    <div className={`fixed md:relative w-[260px] h-screen bg-[#050512] text-white flex flex-col transform transition-transform duration-300 ease-in-out ${
+      isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+    } z-50 md:z-0`}>
       <div className="w-full mb-5 flex justify-center items-center pt-10">
         <Image src={Brand} alt="Logo" />
       </div>
@@ -165,7 +168,7 @@ const Sidebar: FC = () => {
               Pending
             </Link>
             <Link
-              href="/appeals/resolved"
+              href="/dashboard/appeals/resolved"
               className={`block py-2 text-sm ${
                 activePath === '/dashboard/appeals/resolved'
                   ? 'text-indigo-400'

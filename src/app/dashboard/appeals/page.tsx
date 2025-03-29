@@ -9,7 +9,7 @@ function page() {
         <Appeals />
       </div>
     </div>
-  )
+  );
 }
 
-export default page
+export default page;

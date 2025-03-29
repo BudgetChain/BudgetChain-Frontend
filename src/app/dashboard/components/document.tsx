@@ -77,7 +77,10 @@ const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
     <div className="flex flex-col bg-[#171720] text-white w-full h-full rounded-md border border-gray-700 p-3">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-lg font-medium">{teamHead}</h1>
-        <button onClick={handleDownload} className="flex items-center text-sm gap-1 border border-gray-500 rounded-md p-2 text-gray-300">
+        <button
+          onClick={handleDownload}
+          className="flex items-center text-sm gap-1 border border-gray-500 rounded-md p-2 text-gray-300"
+        >
           <Download size={16} />
           <span>Download Records</span>
         </button>
@@ -99,7 +102,10 @@ const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
             stroke="none"
           >
             {pieData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
             ))}
           </Pie>
         </PieChart>
@@ -121,17 +127,18 @@ const ProjectDashboard: React.FC<ProjectDashboardProps> = ({
       <div className="space-y-4">
         <h2 className="text-gray-400 mr-3">Uploaded Documents:</h2>
         <div className="flex flex-wrap gap-4">
-          {documents && documents.map((doc) => (
-            <div key={doc.id} className="w-[150px] relative">
-              <Image
-                src={doc.imageUrl ? doc.imageUrl : Cert.src}
-                alt={doc.title}
-                width={150}
-                height={150}
-                className="object-cover"
-              />
-            </div>
-          ))}
+          {documents &&
+            documents.map((doc) => (
+              <div key={doc.id} className="w-[150px] relative">
+                <Image
+                  src={doc.imageUrl ? doc.imageUrl : Cert.src}
+                  alt={doc.title}
+                  width={150}
+                  height={150}
+                  className="object-cover"
+                />
+              </div>
+            ))}
         </div>
       </div>
     </div>
