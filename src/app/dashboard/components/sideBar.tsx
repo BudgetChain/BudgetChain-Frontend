@@ -15,7 +15,6 @@ import {
   SettingsIcon,
   HelpCircleIcon,
   InfoIcon,
- 
 } from 'lucide-react';
 
 interface SidebarItemProps {
@@ -73,10 +72,8 @@ const Sidebar: FC = () => {
 
   useEffect(() => {
     switch (pathname) {
-
       case '/dashboard':
         setActivePath('/');
-
         break;
       case '/dashboard/projects':
         setActivePath('/projects');
@@ -109,17 +106,16 @@ const Sidebar: FC = () => {
         setActivePath('/help');
         break;
       default:
-
-        setActivePath('/dashboard'); // Default active item
-
+        setActivePath('/dashboard');
         break;
     }
   }, [pathname]);
 
   return (
-  
-    <div className="min-w-[260px] h-screen sticky bg-[#050512] text-white flex flex-col left-[20px] top-0 rounded-md">
-<div className="w-full mb-5 flex justify-center items-center pt-10">
+    <div className={`fixed md:relative w-[260px] h-screen bg-[#050512] text-white flex flex-col transform transition-transform duration-300 ease-in-out ${
+      isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+    } z-50 md:z-0`}>
+      <div className="w-full mb-5 flex justify-center items-center pt-10">
         <Image src={Brand} alt="Logo" />
       </div>
       <div className="flex-grow">
@@ -172,7 +168,7 @@ const Sidebar: FC = () => {
               Pending
             </Link>
             <Link
-              href="/appeals/resolved"
+              href="/dashboard/appeals/resolved"
               className={`block py-2 text-sm ${
                 activePath === '/dashboard/appeals/resolved'
                   ? 'text-indigo-400'
@@ -191,31 +187,8 @@ const Sidebar: FC = () => {
           active={activePath === '/schedules'}
         />
 
-
-      {/* Sidebar */}
-      <div
-        className={`fixed md:relative w-[260px] h-screen bg-[#050512] text-white flex flex-col transform transition-transform duration-300 ease-in-out ${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-        } z-50 md:z-0`}
-      >
-        <div className="w-full mb-5 flex justify-center items-center pt-10">
-          <Image src={Brand} alt="Logo" />
-        </div>
-        <div className="flex-grow">
+        <div className="mt-32 pt-2">
           <SidebarItem
-            href="/dashboard/admin"
-            icon={<HomeIcon size={20} />}
-            text="Home"
-            active={activePath === '/dashboard/admin'}
-          />
-          <SidebarItem
-            href="/projects"
-            icon={<FolderIcon size={20} />}
-            text="Projects"
-            active={activePath === '/projects'}
-          />
-          <SidebarItem
-
             href="/dashboard/settings"
             icon={<SettingsIcon size={20} />}
             text="Settings"
@@ -226,69 +199,9 @@ const Sidebar: FC = () => {
             icon={<HelpCircleIcon size={20} />}
             text="Help centre"
             active={activePath === '/help'}
-
           />
-          <SidebarItem
-            href="/appeals"
-            icon={<InfoIcon size={20} />}
-            text="Appeals"
-            active={
-              activePath === '/appeals' || activePath.startsWith('/appeals/')
-            }
-            hasDropdown={true}
-            isOpen={isAppealsOpen}
-            toggleDropdown={() => setIsAppealsOpen(!isAppealsOpen)}
-          />
-
-          {isAppealsOpen && (
-            <div className="pl-9 bg-gray-800 bg-opacity-40">
-              <Link
-                href="/appeals/pending"
-                className={`block py-2 text-sm ${
-                  activePath === '/appeals/pending'
-                    ? 'text-indigo-400'
-                    : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                Pending
-              </Link>
-              <Link
-                href="/appeals/resolved"
-                className={`block py-2 text-sm ${
-                  activePath === '/appeals/resolved'
-                    ? 'text-indigo-400'
-                    : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                Resolved
-              </Link>
-            </div>
-          )}
-
-          <SidebarItem
-            href="/schedules"
-            icon={<CalendarIcon size={20} />}
-            text="Schedules"
-            active={activePath === '/schedules'}
-          />
-
-          <div className="mt-32 pt-2">
-            <SidebarItem
-              href="/settings"
-              icon={<SettingsIcon size={20} />}
-              text="Settings"
-              active={activePath === '/settings'}
-            />
-            <SidebarItem
-              href="/help"
-              icon={<HelpCircleIcon size={20} />}
-              text="Help centre"
-              active={activePath === '/help'}
-            />
-          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };
