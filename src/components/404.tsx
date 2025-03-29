@@ -1,7 +1,7 @@
 import React from 'react';
 import NotFoundHeader from './ui/notFoundHeader';
 import Image from 'next/image';
-import errorimage from '../../public/404image.webp.png';
+import errorimage from '../../public/404image.svg';
 import Link from 'next/link';
 
 const NotFound = () => {
