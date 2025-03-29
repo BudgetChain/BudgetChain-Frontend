@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import Logo from '../../../public/svg/Logo.svg';
 import { usePathname } from 'next/navigation';
 import { Button } from './button';
+import { Search } from 'lucide-react';
 
 const NotFoundHeader = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,16 +31,18 @@ const NotFoundHeader = () => {
 
         {/* Button and search */}
         <div className="flex md:space-x-4">
-          <input
-            type="text"
-            name="search"
-            placeholder="Search..."
-            id="search"
-            className="w-[210px] h-[50px] hidden md:flex rounded-[12px] border border-[#EBEBEB80] border-solid focus:outline-none bg-transparent transition pl-4"
-          />
-          {/* <button className="w-[170px] h-[50px] rounded-[12px] bg-white px-4 py-2 text-black transition hover:bg-opacity-80">
-            Back to Home
-          </button> */}
+          <div className="relative">
+            <input
+              type="text"
+              name="search"
+              placeholder="Search..."
+              id="search"
+              className="w-[210px] h-[50px] hidden md:flex rounded-[12px] border border-[#EBEBEB80] border-solid focus:outline-none bg-transparent transition pl-4 pr-[40px]"
+            />
+            <section className="w-[50px] h-[50px] hidden md:flex items-center justify-center absolute right-0 top-0 cursor-pointer">
+              <Search size={20} className="text-gray-400  " />
+            </section>
+          </div>
           <a href="/">
             <Button
               variant={'secondary'}
