@@ -18,16 +18,16 @@ const NotFound = () => {
           to be.
         </h4>
       </section>
-      <div className="absolute top-[29%] md:top-[22%] left-1/2 transform -translate-x-1/2 flex items-center justify-center text-[12rem] sm:text-[20rem] md:text-[24rem] lg:text-[28rem] xl:text-[25rem] font-bold text-[#2D3248] opacity-60 w-full -z-10">
+      <div className="absolute top-[38%] sm:top-[22%] left-1/2 transform -translate-x-1/2 flex items-center justify-center text-[12rem] sm:text-[20rem] md:text-[24rem] lg:text-[28rem] xl:text-[25rem] font-bold text-[#2D3248] opacity-60 w-full -z-10">
         404
       </div>
       <Image
         src={errorimage}
         alt="404_image"
-        className=" w-[25rem] h-[-2rem] mx-auto mt-[3rem]"
+        className=" w-[18rem] md:w-[25rem] mx-auto mt-[3rem]"
       />
-      <section className="flex flex-row w-full justify-center items-center">
-        <div className="absolute bottom-0 h-20 w-[40rem] bg-[#050512] rounded-xl border-[#736fe8] border-solid border-[1px] flex flex-row items-center gap-3 justify-center px-4 py-2">
+      <section className="flex flex-row w-full justify-center items-center absolute bottom-0 px-6">
+        <div className=" h-20 w-full md:w-[40rem] bg-[#050512] rounded-xl border-[#736fe8] border-solid border-[1px] flex flex-row items-center gap-3 justify-center px-4 py-2 flex-wrap">
           <h3>Recommeded Routes:</h3>{' '}
           <ul className="flex flex-row gap-2">
             <Link href={'/'}>Home</Link>/

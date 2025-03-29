@@ -48,7 +48,7 @@ const NotFoundHeader = () => {
               variant={'secondary'}
               className="w-[130px] md:w-[170px] h-[40px] md:h-[50px] md:rounded-xl"
             >
-              Back Home
+              Back home
             </Button>
           </a>
         </div>
