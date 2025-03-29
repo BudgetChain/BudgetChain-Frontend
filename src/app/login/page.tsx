@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import { z } from 'zod';
 import Navbar from '@/components/navbar';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -9,6 +11,7 @@ const loginSchema = z.object({
 });
 
 const LoginPage: React.FC = () => {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
@@ -32,11 +35,15 @@ const LoginPage: React.FC = () => {
     setErrors({}); 
   };
 
+
+  const navigateToCreateAccount = () => {
+    router.push('/upload-account');
+  };  
   return (
     <div className="min-h-screen bg-[#050512] text-white flex flex-col">
       <Navbar />
       
-      <main className="flex-grow flex my-10 items-center justify-center p-4">
+      <main className="flex-grow flex my-10 items-center justify-center p-4 mt-[-280px]">
         <div className="w-full space-y-8 max-w-[1010px]">
           <div className="mb-4 text-center lg:text-left">
             <h1 className="text-[#4F4AE6] text-2xl font-bold mb-1">Login To Your Account</h1>
@@ -78,6 +85,7 @@ const LoginPage: React.FC = () => {
               <button
                 type="submit"
                 className="w-[50%] text-center bg-[#4F4AE6] hover:bg-[#36329c] text-white font-medium py-3 px-4 rounded-xl transition-colors"
+                onClick={navigateToCreateAccount}
               >
                 LOGIN
               </button>
