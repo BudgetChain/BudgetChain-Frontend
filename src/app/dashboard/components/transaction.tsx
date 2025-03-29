@@ -75,20 +75,22 @@ const TransactionTable = () => {
   };
 
   return (
-    <div className="rounded-md border border-gray-700 py-3">
+    <div className="bg-[#171720] rounded-md border border-gray-700 py-3">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-2 px-3">
         <h2 className="text-xl font-semibold">Nduka's Transactions</h2>
         <div className="flex items-center space-x-2">
           <span className="text-gray-400 text-sm">Filter by:</span>
           <select className="bg-gray-800 text-gray-300 text-sm rounded-md px-2 py-1 border border-gray-700">
             <option>First uploaded</option>
+            <option>Date</option>
+            <option>Status</option>
           </select>
         </div>
       </div>
 
       <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-sm">
-          <thead>
+          <thead> 
             <tr className="text-gray-400 border-b border-gray-800 bg-[#2B2B46]">
               <th className="py-3 text-left pl-4">S/N</th>
               <th className="py-3 text-left">Date</th>

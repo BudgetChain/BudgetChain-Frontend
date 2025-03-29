@@ -6,7 +6,7 @@ import TransactionTable from './components/TransactionTable';
 
 const Dashboard = () => {
   return (
-    <div className="bg-[#0a0a12] min-h-screen text-white p-8">
+    <div className="bg-[#171720] min-h-screen text-white px-6">
       <div className="flex gap-4 w-fit -z-0 border-b border-[#EBEBEB] items-center text-gray-400">
         <h1 className="text-2xl cursor-pointer z-10 border-b-2 border-[#4F4AE6] font-semibold">
           Records
