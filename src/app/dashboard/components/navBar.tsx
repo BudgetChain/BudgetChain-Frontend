@@ -4,8 +4,10 @@ import { Search } from 'lucide-react';
 
 const NavBar = () => {
   return (
+
     <nav className="w-full h-[100px] bg-[#171720] flex justify-between items-center px-6 ">
       <div className="flex justify-center items-center w-[300px] bg-transparent border-2 border-white/10 rounded-md px-4 overflow-hidden">
+
         <input
           placeholder="Search"
           className="w-full h-[48px] bg-transparent text-white pr-4 focus:outline-none"

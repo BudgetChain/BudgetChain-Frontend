@@ -11,7 +11,7 @@ function page() {
 
       {/* <FundRequestPage /> */}
     </div>
-  )
+  );
 }
 
-export default page
+export default page;
