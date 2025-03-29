@@ -7,6 +7,20 @@ import {
   injected,
 } from 'wagmi/connectors';
 
+// Extend the Window interface to include BinanceChain
+declare global {
+  interface Window {
+    BinanceChain?: {
+      bnbSign?: (
+        address: string,
+        message: string
+      ) => Promise<{ publicKey: string; signature: string }>;
+      switchNetwork?: (networkId: string) => Promise<void>;
+      // Add other BinanceChain methods you might use
+    };
+  }
+}
+
 // Set WalletConnect project ID
 const walletConnectProjectId =
   process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '';
