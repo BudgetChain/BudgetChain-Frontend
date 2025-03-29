@@ -51,7 +51,7 @@ export default function WalletConnectButton() {
     if (isStarknetConnected) disconnectStarknet();
   };
 
-  // Listen for wallet disconnection events
+  // Listen for wallet disconnection event
   useEffect(() => {
     const handleWalletDisconnect = () => {
       // Force a re-render when wallet is disconnected externally
