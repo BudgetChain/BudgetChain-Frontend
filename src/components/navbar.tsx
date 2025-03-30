@@ -4,10 +4,12 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Logo from '../../public/svg/Logo.svg';
+import { useRouter } from 'next/navigation';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname(); // Get current path
+  const router = useRouter();
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -15,6 +17,11 @@ const Navbar: React.FC = () => {
 
   // Function to check if link is active
   const isActive = (href: string) => pathname === href;
+
+  const handleNext = () => {
+   
+    router.push('/role-selection');
+  };
 
   return (
     <header className="bg-[#060612] mt-10 text-white rounded-[20px] border border-[#EBEBEB80] max-w-6xl mx-auto">
@@ -54,10 +61,10 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Buttons */}
         <div className="hidden md:flex md:space-x-4">
-          <button className="w-[170px] h-[50px] rounded-[12px] border border-[#EBEBEB80] px-4 py-2 transition hover:bg-white hover:text-black">
+          <button className="w-[170px] h-[50px] rounded-[12px] border border-[#EBEBEB80] px-4 py-2 transition hover:bg-white hover:text-black" onClick={handleNext}>
             LOGIN
           </button>
-          <button className="w-[170px] h-[50px] rounded-[12px] bg-white px-4 py-2 text-black transition hover:bg-opacity-80">
+          <button className="w-[170px] h-[50px] rounded-[12px] bg-white px-4 py-2 text-black transition hover:bg-opacity-80" >
             GET STARTED
           </button>
         </div>
@@ -113,7 +120,7 @@ const Navbar: React.FC = () => {
               </Link>
             ))}
             <div className="mt-4 flex flex-col space-y-2">
-              <button className="rounded border border-white px-4 py-2 transition hover:bg-white hover:text-black">
+              <button className="rounded border border-white px-4 py-2 transition hover:bg-white hover:text-black" onClick={handleNext}>
                 LOGIN
               </button>
               <button className="rounded bg-white px-4 py-2 text-black transition hover:bg-opacity-80">
