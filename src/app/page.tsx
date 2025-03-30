@@ -1,4 +1,5 @@
 'use client';
+import { useRouter } from 'next/navigation';
 import Navbar from '@/components/navbar';
 import Image from 'next/image';
 import Brand from '../../public/svg/BUDGETCHAIN.svg';
@@ -10,6 +11,13 @@ import Newsletter from '@/components/LandingFeature/newsletter';
 import Footer from '@/components/footer';
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleRole = () => {
+    router.push('/role-selection');
+  };
+
+
   return (
     <div className="bg-[#050512]">
       <Navbar />
@@ -24,10 +32,17 @@ export default function Home() {
           resources with real-time insights and AI-driven automation.
         </p>
         <div className="flex space-x-4">
+
+          <button className="w-[170px] h-[50px] rounded-[12px]  border border-[#EBEBEB80] px-4 py-2 transition hover:bg-white hover:text-black"  onClick={handleRole}>
+          </button>
           <button className="w-[170px] h-[50px] rounded-[12px] bg-[#050512] border border-[#EBEBEB80] px-4 py-2 text-[#EBEBEB] transition hover:bg-white hover:text-black">
+
             LOGIN
           </button>
-          <button className="w-[170px] h-[50px] rounded-[12px] bg-white px-4 py-2 text-black transition hover:bg-opacity-80">
+          <button 
+            className="w-[170px] h-[50px] rounded-[12px] bg-white px-4 py-2 text-black transition hover:bg-opacity-80"
+           
+          >
             GET STARTED
           </button>
         </div>
