@@ -28,7 +28,7 @@ function OrganizationDashboard() {
           />
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-6 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-4 mb-6 w-full">
           <AIAnalysis />
           <div className="grid grid-cols-1 gap-4 w-full">
             <PendingAppeals />
