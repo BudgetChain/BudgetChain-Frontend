@@ -17,7 +17,7 @@ const data = [
 
 export function FundsAllocation() {
   return (
-    <Card className="${montserrat.variable} font-montserrat leading-[100%] tracking-[0%] bg-[#171720] shadow-[0px_0px_4px_0px_rgba(235,235,235,0.25)] border-none w-[352px] h-[246px]">
+    <Card className="${montserrat.variable} font-montserrat leading-[100%] tracking-[0%] bg-[#171720] shadow-[0px_0px_4px_0px_rgba(235,235,235,0.25)] border-none w-full h-[246px]">
       <CardHeader className="pb-2">
         <CardTitle className="text-sm font-normal text-[#848484]">Projects/Fund Allocation</CardTitle>
       </CardHeader>

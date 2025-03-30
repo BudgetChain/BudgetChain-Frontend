@@ -1,14 +1,22 @@
-"use client"
+'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Area, AreaChart, ResponsiveContainer, ReferenceLine, Tooltip, XAxis, YAxis } from "recharts"
-import { Montserrat } from "next/font/google"
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Area,
+  AreaChart,
+  ResponsiveContainer,
+  ReferenceLine,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
+import { Montserrat } from 'next/font/google';
 
 const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-montserrat",
-})
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-montserrat',
+});
 
 const data = [
   { day: 2, value: 500, value2: 600 },
@@ -26,18 +34,25 @@ const data = [
   { day: 26, value: 900, value2: 800 },
   { day: 28, value: 700, value2: 600 },
   { day: 30, value: 500, value2: 400 },
-]
+];
 
 export function AIAnalysis() {
   return (
-    <Card className={`${montserrat.variable} font-montserrat bg-[#171720] shadow-[0px_0px_4px_0px_rgba(235,235,235,0.25)] border-none md:w-[650px] h-full`}>
+    <Card
+      className={`${montserrat.variable} font-montserrat bg-[#171720] shadow-[0px_0px_4px_0px_rgba(235,235,235,0.25)] border-none w-full h-full`}
+    >
       <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-semibold text-white">AI Analysis</CardTitle>
+        <CardTitle className="text-sm font-semibold text-white">
+          AI Analysis
+        </CardTitle>
       </CardHeader>
       <CardContent className="p-0">
         <div className="h-[250px] md:h-[400px] w-full">
           <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={data} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
+            <AreaChart
+              data={data}
+              margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+            >
               <defs>
                 <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#C7D2FE" stopOpacity={0.8} />
@@ -48,7 +63,13 @@ export function AIAnalysis() {
                   <stop offset="95%" stopColor="#4F46E5" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <XAxis dataKey="day" stroke="#666" tickLine={false} axisLine={false} tick={{ fontSize: 12 }} />
+              <XAxis
+                dataKey="day"
+                stroke="#666"
+                tickLine={false}
+                axisLine={false}
+                tick={{ fontSize: 12 }}
+              />
               <YAxis
                 stroke="#666"
                 tickLine={false}
@@ -69,10 +90,10 @@ export function AIAnalysis() {
               <ReferenceLine y={1000} stroke="#666" strokeWidth={0.5} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "#1c1917",
-                  borderColor: "#292524",
-                  borderRadius: "0.375rem",
-                  fontSize: "0.875rem",
+                  backgroundColor: '#1c1917',
+                  borderColor: '#292524',
+                  borderRadius: '0.375rem',
+                  fontSize: '0.875rem',
                 }}
               />
               <Area
@@ -96,5 +117,5 @@ export function AIAnalysis() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }
