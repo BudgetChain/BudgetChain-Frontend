@@ -1,6 +1,12 @@
+
+import AdminHomePage from "../components/admin/adminHomePage";
+
 function AdminDashboard(){
     return(
-        <h1>Implement the admin dashboard here</h1>
+       <div className="">
+        <AdminHomePage/>
+      </div>
+      
     )
 }
 
