@@ -27,10 +27,10 @@ export function PendingAppeals() {
         <p className="text-xs text-muted-foreground mt-5">From <span className="text-white">Nidus Project</span> via <span className="text-white">BudgetChain</span></p>
       </CardContent>
       <CardFooter className="flex justify-center gap-3 pt-0 overflow-hidden">
-        <Button className="h-9 px-12 py-6 bg-[#171720] border-[#4F4AE6] border-2 text-sm font-semibold">
+        <Button className="h-9 px-4 py-2 bg-[#171720] border-[#4F4AE6] border-2 text-sm font-semibold">
           Reject
         </Button>
-        <Button size="sm" className="h-9 px-12 py-6 bg-indigo-600 hover:bg-indigo-700 font-semibold">
+        <Button size="sm" className="h-9 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 font-semibold">
           Approve
         </Button>
       </CardFooter>
