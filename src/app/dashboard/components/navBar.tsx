@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import WalletConnectButton from '@/components/walletConnection/wallet-connect-button';
 import { Search } from 'lucide-react';
 
 const NavBar = () => {
@@ -25,8 +25,8 @@ const NavBar = () => {
           </div>
         </div>
 
-        <div className="w-[280px] h-[48px]  bg-transparent border-2 border-white/10 text-white rounded-md flex items-center justify-center">
-          <span className="text-white">0xdf23Z.....bF42l5G</span>
+        <div className="w-[300px] h-[48px] bg-[#181824] border border-gray-800 text-white rounded-md flex items-center justify-center">
+          <WalletConnectButton />
         </div>
       </div>
     </nav>
