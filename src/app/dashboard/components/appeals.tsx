@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { Download, ArrowUpRight } from "lucide-react"
-import { useRouter } from "next/navigation" // Import useRouter
+import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 
 // Types for our data
@@ -198,12 +199,16 @@ export default function Appeals() {
               </button>
             </div>
             <div className="h-24 w-24">
-              <img src="/appeal.svg" alt="Justice scales" className="h-full w-full" />
+              <Image src="/appeal.svg"
+                alt="Justice scales"
+                width={150}
+                height={150}
+                className="h-full w-full" />
             </div>
           </div>
         </div>
       </div>
-      
+
 
       {/* Main content with table and details */}
       <div className="">
@@ -269,8 +274,8 @@ export default function Appeals() {
                           setSelectedAppeal(appeal);
                           router.push(`/dashboard/appeals/appealsDetails`);
                         }}
-                        
-                    // onClick={() => router.push(`/dashboard/appeals/appealsDetails`)}
+
+                      // onClick={() => router.push(`/dashboard/appeals/appealsDetails`)}
 
                       >
                         <td className="py-4 px-4 text-sm text-[#EBEBEB]">{appeal.id}.</td>
@@ -318,14 +323,14 @@ export default function Appeals() {
           </div>
         </div>
 
-{/* floating div */}
+        {/* floating div */}
         <div className="w-1/3 fixed top-44 right-20 z-50 shadow-[0px_0px_4px_0px_rgba(235,235,235,0.25)] rounded-xl">
           <div className="bg-[#1A1D29] border-[#2A2D3A] rounded-xl h-full">
             <div className="p-6 border-b border-[#2A2D3A] flex justify-between items-center">
-            <h2 className="text-lg font-medium text-[#848484]">
+              <h2 className="text-lg font-medium text-[#848484]">
                 {selectedAppeal.status === "PENDING" ? "Pending Appeal" : "Appeal Details"}
               </h2>
-              <button  className="text-xs cursor-pointer py-1 px-1 border border-[#848484] flex items-center gap-1 text-[#EBEBEB] rounded-lg">
+              <button className="text-xs cursor-pointer py-1 px-1 border border-[#848484] flex items-center gap-1 text-[#EBEBEB] rounded-lg">
                 View <ArrowUpRight className="h-3 w-3" />
               </button>
             </div>
@@ -339,8 +344,8 @@ export default function Appeals() {
                 <span className="text-[#848484]">via</span>
                 <span className=""> BudgetChain</span>
               </div>
-              </div>
-              <div className="pb-3 px-3">
+            </div>
+            <div className="pb-3 px-3">
 
               {selectedAppeal.status === "PENDING" && (
                 <div className="flex gap-3">
@@ -358,21 +363,19 @@ export default function Appeals() {
                   <div className="flex items-center gap-2 mb-2">
                     <div
                       className={`
-                      ${
-                        selectedAppeal.status === "APPROVED"
+                      ${selectedAppeal.status === "APPROVED"
                           ? "bg-[#00B759]/20 text-[#00B759]"
                           : "bg-[#FA0303]/20 text-[#FA0303]"
-                      }
+                        }
                     `}
                     >
                       <span
-                        className={`h-2 w-2 rounded-full ${
-                          selectedAppeal.status === "APPROVED" ? "bg-[#00B759]" : "bg-[#FA0303]"
-                        } mr-1.5`}
+                        className={`h-2 w-2 rounded-full ${selectedAppeal.status === "APPROVED" ? "bg-[#00B759]" : "bg-[#FA0303]"
+                          } mr-1.5`}
                       ></span>
                       {selectedAppeal.status}
-                      </div>
-                      <span className="text-gray-400">{selectedAppeal.address}</span>
+                    </div>
+                    <span className="text-gray-400">{selectedAppeal.address}</span>
                   </div>
                   <p className="text-gray-400 text-sm mt-4">{selectedAppeal.note}</p>
                 </div>

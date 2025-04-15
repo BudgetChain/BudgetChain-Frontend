@@ -1,9 +1,10 @@
-import React from 'react';
-import Appeals from './appeals';
+import React from 'react'
+import Appeals from '../components/appeals'
+
 
 function page() {
   return (
-    <div className="flex">
+    <div>
       <div className="flex-1">
         <Appeals />
       </div>
