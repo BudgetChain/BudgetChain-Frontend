@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
