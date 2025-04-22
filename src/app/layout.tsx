@@ -1,12 +1,13 @@
-import type { Metadata } from 'next';
-import './globals.css';
-import { Providers } from '@/components/Providers';
-// import { Providers } from '@/components/wallet/providers';
 
-export const metadata: Metadata = {
-  title: 'BudgetChain',
-  description: 'AI Powered Treasury Platform',
-};
+import type { Metadata } from "next";
+import { Providers } from "@/components/Providers";
+import "./globals.css";
+
+
+ export const metadata: Metadata = {
+   title: "BudgetChain",
+   description: "AI Powered Treasury Platform",
+ };
 
 export default function RootLayout({
   children,

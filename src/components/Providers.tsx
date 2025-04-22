@@ -1,23 +1,33 @@
-'use client';
+"use client";
+import { ReactNode } from "react";
 
-import type { ReactNode } from 'react';
-import { WagmiProvider } from 'wagmi';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { StarknetConfig } from '@starknet-react/core';
-import { config } from '@/lib/wagmi';
-import { useStarknetConfig } from '@/lib/starknet';
-
-const queryClient = new QueryClient();
+import { sepolia } from "@starknet-react/chains";
+import {
+  StarknetConfig,
+  argent,
+  braavos,
+  useInjectedConnectors,
+  jsonRpcProvider,
+  voyager,
+} from "@starknet-react/core";
 
 export function Providers({ children }: { children: ReactNode }) {
-  // Get the complete Starknet configuration from our hook
-  const starknetConfig = useStarknetConfig();
-
+  const { connectors } = useInjectedConnectors({
+    // Show these connectors if the user has no connector installed.
+    recommended: [argent(), braavos()],
+    // Hide recommended connectors if the user has any connector installed.
+    includeRecommended: "onlyIfNoConnectors",
+    // Randomize the order of the connectors.
+    order: "random",
+  });
   return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <StarknetConfig {...starknetConfig}>{children}</StarknetConfig>
-      </QueryClientProvider>
-    </WagmiProvider>
+    <StarknetConfig
+      chains={[sepolia]}
+      provider={jsonRpcProvider({ rpc: (chain) => ({ nodeUrl: process.env.NEXT_PUBLIC_RPC_URL }) })}
+      connectors={connectors}
+      explorer={voyager}
+    >
+      {children}
+    </StarknetConfig>
   );
 }
