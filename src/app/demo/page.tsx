@@ -164,11 +164,39 @@ export default function Demo() {
               trackFeatureEngagement(`tab_${value}`);
             }}
           >
-            <TabsList className="grid grid-cols-4 mb-8 bg-transparent border border-gray-400 overflow-hidden">
-              <TabsTrigger value="dashboard">Dashboard</TabsTrigger>
-              <TabsTrigger value="wallet">Wallet Integration</TabsTrigger>
-              <TabsTrigger value="budget">Budget Management</TabsTrigger>
-              <TabsTrigger value="insights">AI Insights</TabsTrigger>
+            <TabsList className="flex gap-4 overflow-x-scroll md:overflow-x-visible scrollbar-hide bg-transparent border-gray-400 border mb-6">
+              <TabsTrigger
+                value="dashboard"
+                className="flex-shrink-0 min-w-[120px] text-center opacity-0 sm:hidden"
+              ></TabsTrigger>
+              <TabsTrigger
+                value="dashboard"
+                className="flex-shrink-0 min-w-[120px] text-center opacity-0 sm:hidden"
+              ></TabsTrigger>
+              <TabsTrigger
+                value="dashboard"
+                className="flex-shrink-0 min-w-[120px] text-center"
+              >
+                Dashboard
+              </TabsTrigger>
+              <TabsTrigger
+                value="wallet"
+                className="flex-shrink-0 min-w-[120px] text-center"
+              >
+                Wallet Integration
+              </TabsTrigger>
+              <TabsTrigger
+                value="budget"
+                className="flex-shrink-0 min-w-[120px] text-center"
+              >
+                Budget Management
+              </TabsTrigger>
+              <TabsTrigger
+                value="insights"
+                className="flex-shrink-0 min-w-[120px] text-center"
+              >
+                AI Insights
+              </TabsTrigger>
             </TabsList>
 
             {/* Dashboard Tab */}
