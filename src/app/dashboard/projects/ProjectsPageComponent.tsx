@@ -251,7 +251,7 @@ export default function ProjectsPageComponent() {
               </div>
               <div className='flex flex-col md:flex-row'>
                 {/* Progress Circle */}
-                <div className="flex items-center justify-center relative mb-8">
+                <div className="flex items-center justify-center relative">
                   <div className="w-40 h-40 md:w-48 md:h-48 relative">
                     <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
@@ -280,7 +280,7 @@ export default function ProjectsPageComponent() {
                 </div>
 
                 {/* Project Stats */}
-                <div className="space-y-2 md:pl-4">
+                <div className="space-y-2 self-center md:pl-4">
                   <div className="flex items-center space-x-3 text-sm">
                     <span className="w-1 h-1 bg-white rounded-full"></span>
                     <span>{projectData.stats.ready}% Ready for Publishing</span>
