@@ -42,6 +42,7 @@ import {
 } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Analytics as ImportedAnalytics } from '@/lib/analytics';
+import { LocalAnalytics } from './LocalAnalytics';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 
@@ -1169,18 +1170,6 @@ export default function Demo() {
     </div>
   );
 }
-
-// Define Analytics utilities for tracking
-export const LocalAnalytics = {
-  trackPageView: (pageName: string) => {
-    // In a real implementation, this would integrate with analytics provider
-    console.log(`Analytics: Page view - ${pageName}`);
-  },
-  trackEvent: (eventName: string, properties?: Record<string, any>) => {
-    // In a real implementation, this would integrate with analytics provider
-    console.log(`Analytics: Event - ${eventName}`, properties);
-  },
-};
 
 // Mock function for a non-existing component
 const Copy = (props: any) => {
