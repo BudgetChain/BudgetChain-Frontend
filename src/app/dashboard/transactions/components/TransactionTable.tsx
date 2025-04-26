@@ -1,4 +1,6 @@
-import React from 'react';
+"use client"
+
+import React, { useState } from 'react';
 import TransactionFilter from './TransactionFilter';
 
 interface Transaction {
@@ -136,6 +138,12 @@ const transactions: Transaction[] = [
 ];
 
 const TransactionTable: React.FC = () => {
+  const [filter, setFilter] = useState<'ALL' | 'SUCCESSFUL' | 'CANCELED'>('ALL');
+
+  const filteredTransactions = filter === 'ALL'
+    ? transactions
+    : transactions.filter((tx) => tx.status === filter);
+
   return (
     <div className="py-4 bg-[#171720]">
       <div className="overflow-x-auto rounded-lg bg-[#171720] border-2 border-[#EBEBEB40]">
@@ -143,11 +151,11 @@ const TransactionTable: React.FC = () => {
           <h2>Ndida’s Transactions</h2>
           <div className="flex items-center space-x-3">
             <h3>Filter by:</h3>
-            <TransactionFilter />
+            <TransactionFilter value={filter} onChange={setFilter} />
           </div>
         </div>
 
-        <table className="min-w-full bg-[#171720] rounded-lg text-white text-sm border border-[#EBEBEB40] ">
+        <table className="min-w-full bg-[#171720] rounded-lg text-white text-sm border border-[#EBEBEB40]">
           <thead>
             <tr className="bg-gray-800 text-left">
               <th className="p-4">S/N</th>
@@ -162,10 +170,10 @@ const TransactionTable: React.FC = () => {
           </thead>
 
           <tbody className="rounded-lg">
-            {transactions.map((tx) => (
+            {filteredTransactions.map((tx) => (
               <tr
                 key={tx.id}
-                className="border-b border-gray-700 hover:bg-gray-800 "
+                className="border-b border-gray-700 hover:bg-gray-800"
               >
                 <td className="p-4">{tx.id}</td>
                 <td className="p-4">{tx.currency}</td>
