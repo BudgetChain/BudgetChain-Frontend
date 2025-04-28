@@ -43,10 +43,15 @@ const HowItWorks: React.FC = () => {
               className="flex items-center justify-center space-x-4  gap-10 px-20"
             >
               <div className="flex items-center justify-center w-10 h-10 border border-dashed  rounded-full text-lg font-bold p-10">
+              {/* style={{
+                border: steps. === 1 ? 
+              }} */}
+             
                 <span className="bg-[#28283A] py-5 px-6 rounded-full ">
                   {step.number}
                 </span>
               </div>
+
 
               <hr className="border border-dashed text-white w-48" />
               <div>
@@ -59,6 +64,6 @@ const HowItWorks: React.FC = () => {
       </section>
     </main>
   );
-};
 
+};
 export default HowItWorks;
