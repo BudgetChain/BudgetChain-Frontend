@@ -32,7 +32,8 @@ const mockAppealData: AppealData = {
   time: '8:00 UTC',
 };
 
-export default function AppealPage() {  const [appeal] = useState<AppealData>(mockAppealData);  const [status, setStatus] = useState<'pending' | 'approved' | 'rejected'>(
+export default function AppealPage() { 
+   const [appeal] = useState<AppealData>(mockAppealData);  const [status, setStatus] = useState<'pending' | 'approved' | 'rejected'>(
     appeal.status
   );
   const [activeTab, setActiveTab] = useState<'appeal' | 'document'>('appeal');

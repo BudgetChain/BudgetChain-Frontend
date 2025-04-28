@@ -76,7 +76,7 @@ export default function Dashboard() {
                 <Line
                   type="monotone"
                   dataKey="value2"
-                  stroke="#EC4899"
+                  stroke="#B1BBE4"
                   strokeWidth={2}
                   dot={false}
                 />
