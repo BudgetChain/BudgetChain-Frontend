@@ -11,7 +11,7 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('records');
   const router = useRouter();
 
-  const handleBackClick = () => {
+  const handleBackClick = () => { 
     router.back();
   };
 
