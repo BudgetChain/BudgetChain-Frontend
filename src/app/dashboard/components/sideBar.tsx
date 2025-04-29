@@ -115,7 +115,7 @@ const Sidebar: FC = () => {
         {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
-      <div className={`fixed md:sticky md:top-0 w-[260px] h-screen bg-[#050512] text-white flex flex-col transform transition-transform duration-300 ease-in-out ${
+      <div className={`fixed md:sticky md:top-0 min-w-[260px] h-screen bg-[#050512] text-white flex flex-col transform transition-transform duration-300 ease-in-out ${
         isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
       } z-40 md:z-0 overflow-y-auto`}>
         <div className="w-full mb-5 flex justify-center items-center pt-10">
