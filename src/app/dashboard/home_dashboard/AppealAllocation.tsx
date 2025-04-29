@@ -10,9 +10,9 @@ const pieChartData = [
 
 export default function AppealAllocation() {
   return (
-    <div className="bg-[#0F0F1A]  rounded-lg space-y-6">
+    <div className="rounded-lg space-y-6">
       {/* Pending Appeal Section */}
-      <div className="text-center border p-5 rounded-xl border-[#EBEBEB40]">
+      <div className="text-center border bg-[#171720] p-5 rounded-xl border-[#EBEBEB40]">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-[#848484] text-lg font-semibold">
             Pending Appeal
@@ -55,7 +55,7 @@ export default function AppealAllocation() {
       </div>
 
       {/* Projects Funds Allocation Section */}
-      <div className="text-center border p-5 rounded-xl border-[#EBEBEB40]">
+      <div className="text-center border bg-[#171720] p-5 rounded-xl border-[#EBEBEB40]">
         <h2 className="text-[#848484] text-left text-lg font-semibold mb-4">
           Projects Funds Allocation
         </h2>
