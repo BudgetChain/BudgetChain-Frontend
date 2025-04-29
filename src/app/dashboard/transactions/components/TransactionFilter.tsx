@@ -1,23 +1,22 @@
-"use client"
+'use client';
 
-import React from 'react';
+import { useState } from 'react';
 
-interface TransactionFilterProps {
-  value: 'ALL' | 'SUCCESSFUL' | 'CANCELED';
-  onChange: (value: 'ALL' | 'SUCCESSFUL' | 'CANCELED') => void;
-}
+const TransactionFilter = () => {
+  const [sortBy, setSortBy] = useState('Date Added');
 
-const TransactionFilter: React.FC<TransactionFilterProps> = ({ value, onChange }) => {
   return (
-    <select
-      value={value}
-      onChange={(e) => onChange(e.target.value as 'ALL' | 'SUCCESSFUL' | 'CANCELED')}
-      className="bg-[#28283A] text-white rounded p-2"
-    >
-      <option value="ALL">All</option>
-      <option value="SUCCESSFUL">Successful</option>
-      <option value="CANCELED">Canceled</option>
-    </select>
+    <div>
+      <select
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+        className="bg-gray-900 text-gray-300 border border-[#42415B] px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500"
+      >
+        <option value="Date Added">Date Added</option>
+        <option value="Amount">Amount</option>
+        <option value="Status">Status</option>
+      </select>
+    </div>
   );
 };
 
