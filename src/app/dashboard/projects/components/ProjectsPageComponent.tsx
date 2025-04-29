@@ -1,11 +1,58 @@
 "use client"
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import Image from 'next/image';
-import CoinImage from "../../../../public/coin.svg"
-import TransactionTable from '../transactions/components/TransactionTable';
-import { ArrowLeft, ChevronDown, Download, Loader, Plus } from 'lucide-react';
+import CoinImage from "../../../../../public/coin.svg"
+import { ArrowLeft, ChevronDown, Download, Loader, Plus, MoreVertical } from 'lucide-react';
+import ProjectPageTransactionTable from './TransactionTable';
+
+
+// Define types for our data structures
+interface Project {
+  id: number;
+  name: string;
+  address: string;
+  amount: string;
+  amountInUSD: string;
+  startDate: string;
+  timeLeft: string;
+  status: 'ACTIVE' | 'ON-HOLD' | 'COMPLETED' | 'CANCELLED';
+}
 
 const CURRENCIES = ["USDC", "STRK", "FIAT"];
+
+// Sample data for projects
+const projects: Project[] = [
+  {
+    id: 1,
+    name: "Ndida",
+    address: "0xcK4R....7G4F",
+    amount: "20,000 STRK",
+    amountInUSD: "$10,200",
+    startDate: "21/12/2026",
+    timeLeft: "4 Weeks",
+    status: "ACTIVE"
+  },
+  {
+    id: 2,
+    name: "Fragma",
+    address: "0xcK4R....7G4F",
+    amount: "$1,200",
+    amountInUSD: "$1,200",
+    startDate: "21/12/2026",
+    timeLeft: "5 Days",
+    status: "ACTIVE"
+  },
+  {
+    id: 3,
+    name: "Steloz",
+    address: "0xcK4R....7G4F",
+    amount: "2,000 STRK",
+    amountInUSD: "$1,200",
+    startDate: "21/12/2026",
+    timeLeft: "2 Months",
+    status: "ON-HOLD"
+  }
+];
 
 export default function ProjectsPageComponent() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -13,6 +60,9 @@ export default function ProjectsPageComponent() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState('USDC');
   const [showCurrencyDropdown, setShowCurrencyDropdown] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [filterBy, setFilterBy] = useState("Date Added");
+  const [showFilterDropdown, setShowFilterDropdown] = useState(false);
 
   // Form fields state
   const [formData, setFormData] = useState({
@@ -118,11 +168,37 @@ export default function ProjectsPageComponent() {
     setSelectedCurrency(currency);
     setShowCurrencyDropdown(false);
   };
+  
+  const handleProjectClick = (project: Project) => {
+    if (selectedProject && selectedProject.id === project.id) {
+      setSelectedProject(null); // Close if already selected
+    } else {
+      setSelectedProject(project); // Select new project
+    }
+  };
+
+  const selectFilter = (filter: string) => {
+    setFilterBy(filter);
+    setShowFilterDropdown(false);
+  };
+
+  const getStatusClass = (status: string) => {
+    switch(status) {
+      case 'ACTIVE': 
+        return 'text-green-500';
+      case 'ON-HOLD': 
+        return 'text-gray-400';
+      case 'COMPLETED': 
+        return 'text-blue-500';
+      case 'CANCELLED': 
+        return 'text-red-500';
+      default: 
+        return 'text-white';
+    }
+  };
 
   return (
-    <div className="bg-[#171720] min-h-screen text-white w-full">
-
-
+    <div className="bg-[#171720] min-h-screen text-white w-full p-4">
       {/* Banner Card */}
       <div className="w-full mb-5 border border-gray-700 bg-gradient-to-r from-[#171720] from-[60%] to-[#894DBD] to-[120%] rounded-lg p-6 flex justify-between items-center">
         {/* Left section with transaction info */}
@@ -162,7 +238,6 @@ export default function ProjectsPageComponent() {
         </div>
       </div>
       
-
       {/* Tab Navigation */}
       <div className="flex border-b border-gray-700 mb-6">
         <button
@@ -174,7 +249,7 @@ export default function ProjectsPageComponent() {
         </button>
         <button
           onClick={() => setActiveTab('register')}
-          className={`py-4 px-6 text-sm font-medium relative `}
+          className={`py-4 px-6 text-sm font-medium relative ${activeTab === 'register' ? 'text-white' : 'text-gray-400'}`}
         >
           Add New Project
           {activeTab === 'register' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></div>}
@@ -184,25 +259,131 @@ export default function ProjectsPageComponent() {
       {/* Header */}
       <div className="flex w-full justify-between items-center mb-6">
         <div className="flex items-center">
-          {activeTab !== "dashboard" && <button className="p-2 rounded-full hover:bg-gray-800">
-            <ArrowLeft onClick={() => setActiveTab("dashboard")} size={20} />
-          </button>}
+          {(activeTab !== "dashboard" || selectedProject) && (
+            <button 
+              className="p-2 rounded-full hover:bg-gray-800"
+              onClick={() => {
+                if (selectedProject) {
+                  setSelectedProject(null);
+                } else {
+                  setActiveTab("dashboard");
+                }
+              }}
+            >
+              <ArrowLeft size={20} />
+            </button>
+          )}
+          {activeTab === "dashboard" && !selectedProject && (
+            <h1 className="text-xl font-medium ml-2">All Projects</h1>
+          )}
+          {selectedProject && (
+            <h1 className="text-xl font-medium ml-2">{selectedProject.name} Project</h1>
+          )}
         </div>
-        {activeTab === "dashboard" &&
-          <button onClick={() => setActiveTab("register")} className="flex justify-between items-center bg-[#4F4AE6] hover:bg-blue-700 text-white px-4 h-[40px] py-2 rounded-md text-sm">
+        
+        {activeTab === "dashboard" && !selectedProject && (
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center text-sm">
+              <span className="mr-2">Filter by:</span>
+              <div className="relative">
+                <button 
+                  className="flex items-center space-x-1 bg-transparent border border-gray-700 px-3 py-1.5 rounded-md"
+                  onClick={() => setShowFilterDropdown(!showFilterDropdown)}
+                >
+                  <span>{filterBy}</span>
+                  <ChevronDown size={16} />
+                </button>
+                
+                {showFilterDropdown && (
+                  <div className="absolute right-0 mt-1 w-40 bg-[#28283A] rounded-md shadow-lg z-10">
+                    {["Date Added", "Status", "Amount"].map((filter) => (
+                      <div
+                        key={filter}
+                        className="px-4 py-2 text-sm hover:bg-[#3a3a4d] cursor-pointer"
+                        onClick={() => selectFilter(filter)}
+                      >
+                        {filter}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <button 
+              onClick={() => setActiveTab("register")} 
+              className="flex justify-between items-center bg-[#4F4AE6] hover:bg-blue-700 text-white px-4 h-[40px] py-2 rounded-md text-sm"
+            >
+              <Plus size={16} className="mr-2" />
+              Add Project
+            </button>
+          </div>
+        )}
+        
+        {activeTab === "dashboard" && selectedProject && (
+          <button className="flex justify-between items-center bg-[#4F4AE6] hover:bg-blue-700 text-white px-4 h-[40px] py-2 rounded-md text-sm">
             <Plus size={16} className="mr-2" />
-            Add Project
+            Add Transaction
           </button>
-        }
+        )}
       </div>
 
       {/* Dashboard Content */}
-      {activeTab === "dashboard" &&
-        <>
-          <TransactionTable />
-        </>
-      }
+      {activeTab === "dashboard" && !selectedProject && (
+        <div className="overflow-x-auto rounded-lg bg-[#171720] border border-[#EBEBEB40]">
+          <table className="min-w-full bg-[#171720] text-white text-sm">
+            <thead>
+              <tr className="bg-[#1c1c26] text-left">
+                <th className="p-4">S/N</th>
+                <th className="p-4">Project</th>
+                <th className="p-4">Address</th>
+                <th className="p-4">Amount Requested</th>
+                <th className="p-4">Start Date</th>
+                <th className="p-4">Time Left</th>
+                <th className="p-4">Status</th>
+                <th className="p-4">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {projects.map((project) => (
+                <tr 
+                  key={project.id} 
+                  className="border-b border-gray-700 hover:bg-gray-800 cursor-pointer"
+                  onClick={() => handleProjectClick(project)}
+                >
+                  <td className="p-4">{project.id}.</td>
+                  <td className="p-4">{project.name}</td>
+                  <td className="p-4">{project.address}</td>
+                  <td className="p-4">
+                    {project.amount}
+                    <div className="text-xs text-gray-400">{project.amountInUSD}</div>
+                  </td>
+                  <td className="p-4">{project.startDate}</td>
+                  <td className="p-4">{project.timeLeft}</td>
+                  <td className="p-4">
+                    <span className={`flex items-center ${getStatusClass(project.status)}`}>
+                      <span className="h-2 w-2 rounded-full bg-current mr-2"></span>
+                      {project.status}
+                    </span>
+                  </td>
+                  <td className="p-4">
+                    <button className="text-gray-400 hover:text-white">
+                      <MoreVertical size={18} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      
+      {/* Selected Project Transactions */}
+      {activeTab === "dashboard" && selectedProject && (
+        <ProjectPageTransactionTable />
+      )}
 
+      {/* Add Project Form */}
       {activeTab === 'register' && (
         <div className="bg-transparent border border-[#EBEBEB40] rounded-lg p-8 w-full">
           <form onSubmit={handleSubmit} className="w-full">
