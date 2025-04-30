@@ -26,6 +26,7 @@ const NotFound = () => {
         alt="404_image"
         className=" w-[18rem] md:w-[25rem] mx-auto mt-[3rem]"
       />
+      
       <section className="flex flex-row w-full justify-center items-center absolute bottom-0 px-6">
         <div className=" h-20 w-full md:w-[40rem] bg-[#050512] rounded-xl border-[#736fe8] border-solid border-[1px] flex flex-row items-center gap-3 justify-center px-4 py-2 flex-wrap">
           <h3>Recommeded Routes:</h3>{' '}
