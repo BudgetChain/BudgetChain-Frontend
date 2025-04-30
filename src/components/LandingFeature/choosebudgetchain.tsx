@@ -1,14 +1,12 @@
-
-
-'use client';
+ 'use client';
 
 import React from 'react';
 import Image from 'next/image';
-import { ReactNode } from "react";
+// import { ReactNode } from "react";
 import Icon1 from "../../../public/svg/Icons.svg"
 import Icon2 from "../../../public/svg/Icons (1).svg"
-import Icon3 from "../../../public/svg/Settings.svg"
-import Icon4 from "../../../public/svg/Profile.svg"
+import Icon4 from "../../../public/svg/Settings.svg"
+import Icon3 from "../../../public/svg/Profile.svg"
 import { StatCard } from './statsCard';
 
 
@@ -46,7 +44,7 @@ const stats = [
 const WhyChooseBudgetChain: React.FC = () => {
   return(
     <>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 mx-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 mx-10">
     {stats.map((stat, index) => (
       <StatCard key={index} {...stat} />
     ))}

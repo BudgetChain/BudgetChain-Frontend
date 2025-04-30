@@ -1,7 +1,12 @@
 import React from 'react';
+import ProjectsPageComponent from './components/ProjectsPageComponent';
 
 const page = () => {
-  return <div>Projects</div>;
+  return (
+    <div className='bg-[#171720] min-h-screen text-white px-6'>
+      <ProjectsPageComponent />
+    </div>
+  )
 };
 
 export default page;

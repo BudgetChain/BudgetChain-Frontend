@@ -151,21 +151,21 @@ const transactions: Transaction[] = [
 const TransactionTable: React.FC = () => {
   return (
     <div className="py-4 px-5">
-      <div className="overflow-x-auto rounded-lg bg-gray-900 border border-[#EBEBEB40]">
-        <div className="flex justify-between w-full items-center p-4">
+      <div className="overflow-x-auto rounded-lg border border-[#747479]">
+        <div className="flex justify-between bg-[#171720] w-full items-center p-4">
           <div className="flex items-center space-x-3">
-            <h2 className="text-[#EBEBEB]">All Transactions</h2>
+            <h2 className="text-[#EBEBEB] bg-[#171720]">All Transactions</h2>
             <TransactionFilter />
           </div>
           <div className="flex items-center space-x-3">
-            <h3>Filter by:</h3>
+            <h3 className="text-[#EBEBEB] bg-[#171720]">Filter by:</h3>
             <TransactionFilter />
           </div>
         </div>
 
-        <table className="min-w-full bg-gray-900 rounded-lg text-white text-sm border border-[#EBEBEB40] ">
+        <table className="min-w-full bg-gray-900 rounded-lg text-white text-sm border border-[#747479] ">
           <thead>
-            <tr className="bg-gray-800 text-left">
+            <tr className="bg-[#2B2B46] text-left">
               <th className="p-4">S/N</th>
               <th className="p-4">Projects</th>
               <th className="p-4 hidden md:table-cell">Currency</th>
@@ -177,11 +177,11 @@ const TransactionTable: React.FC = () => {
             </tr>
           </thead>
 
-          <tbody className="rounded-lg">
+          <tbody className="rounded-lg bg-[#171720]">
             {transactions.map((tx) => (
               <tr
                 key={tx.id}
-                className="border-b border-gray-700 hover:bg-gray-800 "
+                className="border-b border-[#747479] hover:bg-[#747479]"
               >
                 <td className="p-4">{tx.id}</td>
                 <td className="p-4">{tx.projects}</td>

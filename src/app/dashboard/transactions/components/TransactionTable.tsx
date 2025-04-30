@@ -143,7 +143,7 @@ const TransactionTable: React.FC = () => {
           <h2>Ndida’s Transactions</h2>
           <div className="flex items-center space-x-3">
             <h3>Filter by:</h3>
-            <TransactionFilter />
+            <TransactionFilter  />
           </div>
         </div>
 

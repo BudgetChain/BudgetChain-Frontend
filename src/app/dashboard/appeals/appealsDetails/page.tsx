@@ -5,7 +5,7 @@ function page() {
   return (
     <div className="flex">
       <div className="flex-1">
-        <AppealsDetails params={{ id: 'some-id' }} />
+        <AppealsDetails />
       </div>
     </div>
   );
