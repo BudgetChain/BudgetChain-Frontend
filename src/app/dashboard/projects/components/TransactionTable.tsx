@@ -211,7 +211,6 @@ const ProjectPageTransactionTable: React.FC = () => {
                         dataKey="value"
                         startAngle={90}
                         endAngle={-270}
-                        // cornerRadius={9}
                         stroke="none"
                       >
                         <Cell key="completed" fill={COLORS.progress} radius={80} />
@@ -297,6 +296,7 @@ const ProjectPageTransactionTable: React.FC = () => {
           <table className="min-w-full bg-transparent text-white text-sm">
             <thead>
               <tr className="bg-[#1c1c26] text-left">
+                <th className="p-4">S/N</th>
                 <th className="p-4">Currency</th>
                 <th className="p-4">Address</th>
                 <th className="p-4">Amount</th>
@@ -308,19 +308,16 @@ const ProjectPageTransactionTable: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredTransactions.map((tx) => (
+              {filteredTransactions.map((tx, index) => (
                 <tr
-                  key={tx.id}
-                  className="border-b border-gray-700 hover:bg-gray-800 cursor-pointer"
-                  onClick={() => {}}
+                key={tx.id}
+                className="border-b border-gray-700 hover:bg-gray-800 cursor-pointer"
+                onClick={() => {}}
                 >
+                <td className="p-4">{index+1}</td>
                   <td className="p-4">
                     <div className="flex items-center">
-                      <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center mr-2">
-                        {tx.currency === 'STRK' && <span className="text-[#7E04F0] text-xs font-bold">STRK</span>}
-                        {tx.currency === 'USDC' && <span className="text-[#0E02F2] text-xs font-bold">USDC</span>}
-                        {tx.currency === 'Fiat' && <span className="text-[#EC6105] text-xs font-bold">$</span>}
-                      </div>
+                     
                       {tx.currency}
                     </div>
                   </td>
