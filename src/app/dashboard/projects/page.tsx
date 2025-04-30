@@ -1,3 +1,4 @@
+
 // import React from 'react';
 // import ProjectCard from './components/ProjectCard';
 // import OutcomeStatistics from './components/OutcomeStatistics';
@@ -16,6 +17,17 @@
 //         </span>
 //       </div>
 //       <ArrowLeft className="text-xl cursor-pointer mt-4" size={30} />
+import React from 'react';
+import ProjectsPageComponent from './components/ProjectsPageComponent';
+
+const page = () => {
+  return (
+    <div className='bg-[#171720] min-h-screen text-white px-6'>
+      <ProjectsPageComponent />
+    </div>
+  )
+};
+
 
 //       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 w-full gap-6">
 //         <ProjectCard key="project-card" />
