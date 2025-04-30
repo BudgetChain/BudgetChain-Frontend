@@ -66,32 +66,71 @@ export const SettingsForm = () => {
     reset,
     setValue,
     watch,
+    control,
   } = useForm<SettingsFormValues>({
     resolver: zodResolver(settingsSchema),
     defaultValues,
   });
 
   React.useEffect(() => {
-    // Load settings from localStorage on component mount
-    const savedSettings = localStorage.getItem('userSettings');
-    if (savedSettings) {
-      reset(JSON.parse(savedSettings));
-    }
-  }, [reset]);
+    const loadSettings = () => {
+      try {
+        const savedSettings = localStorage.getItem('userSettings');
+        if (savedSettings) {
+          const parsedSettings = JSON.parse(savedSettings) as SettingsFormValues;
+          setValue('language', parsedSettings.language || defaultValues.language);
+          setValue('timezone', parsedSettings.timezone || defaultValues.timezone);
+          setValue('theme', parsedSettings.theme || defaultValues.theme);
+          setValue('emailNotifications', Boolean(parsedSettings.emailNotifications));
+          setValue('pushNotifications', Boolean(parsedSettings.pushNotifications));
+          setValue('projectUpdates', Boolean(parsedSettings.projectUpdates));
+        }
+      } catch (error) {
+        Object.entries(defaultValues).forEach(([key, value]) => {
+          setValue(key as keyof SettingsFormValues, value);
+        });
+      }
+    };
+
+    loadSettings();
+  }, [setValue]);
 
   const onSubmit = async (data: SettingsFormValues) => {
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Save to localStorage
-      localStorage.setItem('userSettings', JSON.stringify(data));
+      const settingsToSave: SettingsFormValues = {
+        language: data.language,
+        timezone: data.timezone,
+        theme: data.theme,
+        emailNotifications: Boolean(data.emailNotifications),
+        pushNotifications: Boolean(data.pushNotifications),
+        projectUpdates: Boolean(data.projectUpdates),
+      };
       
+      localStorage.setItem('userSettings', JSON.stringify(settingsToSave));
       toast.success('Settings saved successfully');
     } catch (error) {
       toast.error('Failed to save settings');
     }
   };
+
+  React.useEffect(() => {
+    const subscription = watch((value) => {
+      if (value) {
+        const settingsToSave: SettingsFormValues = {
+          language: value.language || defaultValues.language,
+          timezone: value.timezone || defaultValues.timezone,
+          theme: value.theme || defaultValues.theme,
+          emailNotifications: Boolean(value.emailNotifications),
+          pushNotifications: Boolean(value.pushNotifications),
+          projectUpdates: Boolean(value.projectUpdates),
+        };
+        localStorage.setItem('userSettings', JSON.stringify(settingsToSave));
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full">
@@ -126,7 +165,7 @@ export const SettingsForm = () => {
                     <Label htmlFor="language" className="text-white">Language</Label>
                     <Select
                       value={watch("language")}
-                      onValueChange={(value) => setValue("language", value)}
+                      onValueChange={(value) => setValue("language", value, { shouldValidate: true })}
                     >
                       <SelectTrigger className="bg-[#1E1E2E] border-[#EBEBEB40] text-white w-full">
                         <SelectValue placeholder="Select language" />
@@ -152,7 +191,7 @@ export const SettingsForm = () => {
                     <Label htmlFor="timezone" className="text-white">Timezone</Label>
                     <Select
                       value={watch("timezone")}
-                      onValueChange={(value) => setValue("timezone", value)}
+                      onValueChange={(value) => setValue("timezone", value, { shouldValidate: true })}
                     >
                       <SelectTrigger className="bg-[#1E1E2E] border-[#EBEBEB40] text-white w-full">
                         <SelectValue placeholder="Select timezone" />
@@ -174,11 +213,11 @@ export const SettingsForm = () => {
                     )}
                   </div>
                   
-                  <div className="space-y-2 md:col-span-2">
+                  <div className="space-y-2">
                     <Label htmlFor="theme" className="text-white">Theme</Label>
                     <Select
                       value={watch("theme")}
-                      onValueChange={(value) => setValue("theme", value)}
+                      onValueChange={(value) => setValue("theme", value, { shouldValidate: true })}
                     >
                       <SelectTrigger className="bg-[#1E1E2E] border-[#EBEBEB40] text-white w-full">
                         <SelectValue placeholder="Select theme" />
@@ -242,7 +281,7 @@ export const SettingsForm = () => {
                     />
                   </div>
                   
-                  <div className="flex items-center justify-between p-4 bg-[#1E1E2E] rounded-lg md:col-span-2">
+                  <div className="flex items-center justify-between p-4 bg-[#1E1E2E] rounded-lg">
                     <div className="space-y-0.5">
                       <Label className="text-white">Project Updates</Label>
                       <p className="text-sm text-gray-400">
