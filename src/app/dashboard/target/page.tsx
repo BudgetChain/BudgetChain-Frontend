@@ -20,8 +20,8 @@ const Target: NextPage = () => {
 
   const defaultProjects = [
     {
-      name: 'Nibiru Project',
-      lead: 'John Adams & Mark Johnson',
+      name: 'Ndida Project',
+      update: 'Last updated 30 minutes ago',
       timeline: '2 Months',
       timeLeft: '5 Days',
       percentage: 80,
@@ -29,8 +29,8 @@ const Target: NextPage = () => {
       border: '#be48ed',
     },
     {
-      name: 'Pragma Project',
-      lead: 'Alice Chen & Bob Thomas',
+      name: 'Fragma Project',
+      update: 'last updated 2 days',
       timeline: '3 Months',
       timeLeft: '2 Days',
       percentage: 58,
@@ -38,8 +38,9 @@ const Target: NextPage = () => {
       border: '#3b82f6',
     },
     {
-      name: 'Saturn Project',
-      lead: 'Samantha Henderson',
+      name: 'Steloz Project',
+      update: 'Samantha Henderson',
+      status: 'On-Hold',
       timeline: '2 Months',
       timeLeft: '9 Days',
       percentage: 32,
@@ -66,7 +67,8 @@ const Target: NextPage = () => {
               >
                 <ProgressCard
                   name={project.name}
-                  lead={project.lead}
+                  update={project.update}
+                  status={project.status || ''}
                   timeline={project.timeline}
                   timeLeft={project.timeLeft}
                   percentage={project.percentage}
@@ -74,12 +76,11 @@ const Target: NextPage = () => {
                   border={project.border}
                 />
               </div>
-            ))}
-          </div>
+            ))}          </div>
         )}
       </div>
     </main>
   );
-};
 
+};
 export default Target;

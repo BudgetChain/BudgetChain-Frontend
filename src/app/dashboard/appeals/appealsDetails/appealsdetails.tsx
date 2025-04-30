@@ -32,9 +32,8 @@ const mockAppealData: AppealData = {
   time: '8:00 UTC',
 };
 
-export default function AppealPage({ params }: { params: { id: string } }) {
-  const [appeal] = useState<AppealData>(mockAppealData);
-  const [status, setStatus] = useState<'pending' | 'approved' | 'rejected'>(
+export default function AppealPage() { 
+   const [appeal] = useState<AppealData>(mockAppealData);  const [status, setStatus] = useState<'pending' | 'approved' | 'rejected'>(
     appeal.status
   );
   const [activeTab, setActiveTab] = useState<'appeal' | 'document'>('appeal');
@@ -60,7 +59,7 @@ export default function AppealPage({ params }: { params: { id: string } }) {
             className={`py-2 text-center cursor-pointer ${activeTab === 'appeal' ? 'border-b-4 border-[#4F4AE6]' : 'border-b border-[#848484]'}`}
             onClick={() => setActiveTab('appeal')}
           >
-            Appealwhite white
+            Appeal
           </div>
           <div
             className={`py-2 text-center cursor-pointer ${activeTab === 'document' ? 'border-b-4 border-[#4F4AE6]' : 'border-b border-[#848484]'}`}
