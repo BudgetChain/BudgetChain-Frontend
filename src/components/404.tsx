@@ -13,8 +13,8 @@ const NotFound = () => {
           Oops! Page Not Found
         </h2>
         <h4 className="max-w-[33rem] mx-auto text-sm leading-6 px-2">
-          The page you're looking for seems to have wandered off... Like a
-          budget that got off track! Let’s help you get back to where you need
+          The page you are looking for seems to have wandered off... Like a
+          budget that got off track! Lets help you get back to where you need
           to be.
         </h4>
       </section>
@@ -26,7 +26,6 @@ const NotFound = () => {
         alt="404_image"
         className=" w-[18rem] md:w-[25rem] mx-auto mt-[3rem]"
       />
-      
       <section className="flex flex-row w-full justify-center items-center absolute bottom-0 px-6">
         <div className=" h-20 w-full md:w-[40rem] bg-[#050512] rounded-xl border-[#736fe8] border-solid border-[1px] flex flex-row items-center gap-3 justify-center px-4 py-2 flex-wrap">
           <h3>Recommeded Routes:</h3>{' '}
