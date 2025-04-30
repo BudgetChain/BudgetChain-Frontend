@@ -41,7 +41,9 @@ export function FAQSection({ trackArticleView }: FAQSectionProps) {
           <p>To change your password:</p>
           <ol className="list-decimal pl-4 md:pl-5 mt-2 space-y-1">
             <li>Go to Settings in the dashboard</li>
-            <li>Select the Security tab</li>
+            <li>Select the Security tabs
+              
+            </li>
             <li>Click on Change Password</li>
             <li>Enter your current password and your new password</li>
             <li>Click Save to update your password</li>
