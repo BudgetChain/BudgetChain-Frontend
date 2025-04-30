@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import Image from 'next/image';
+import ArrowCircleUpRight from '../../public/ArrowCircleUpRight.svg'
+import Logo from '../../public/svg/Logo.svg';
 import Link from 'next/link';
 
 const Footer = () => {
@@ -13,16 +16,21 @@ const Footer = () => {
 
   return (
     <footer className="  text-white py-10 px-6 md:px-16 mt-5">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="flex justify-between w-full">
         {/* Left Section */}
         <div>
-          <h2 className="font-bold text-lg">BUDGETCHAIN</h2>
-          <p className="text-gray-400 text-sm mt-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          <div className="text-white h-[37.34px] w-[150px] pr-4">
+            <Image
+              src={Logo}
+              width={50}
+              height={50}
+              alt="Logo"
+              className="w-full h-full object-fill"
+            />
+          </div>
+          <p className="text-gray-400 text-sm mt-2 w-[300px]">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam doloribus voluptatibus ipsa debitis consequuntur iure!
           </p>
-          <button className="mt-4 border border-gray-500 px-4 py-2 text-sm rounded-md hover:bg-gray-700">
-            Contact Support
-          </button>
         </div>
 
         {/* Product Section */}
@@ -33,9 +41,8 @@ const Footer = () => {
               <li key={item.name}>
                 <Link
                   href={item.path}
-                  className={`hover:text-white ${
-                    activePage === item.path ? 'text-blue-500' : ''
-                  }`}
+                  className={`hover:text-white ${activePage === item.path ? 'text-blue-500' : ''
+                    }`}
                   onClick={() => setActivePage(item.path)}
                 >
                   {item.name}
@@ -100,6 +107,18 @@ const Footer = () => {
         </div>
       </div>
       <div className="text-[12px] mt-10">
+        <div>
+          <button className="mt-4 mb-6 border px-4 py-2 text-lg text-black rounded-md bg-white flex">
+            Contact Support
+            <Image
+              src={ArrowCircleUpRight}
+              width={25}
+              height={35}
+              alt="Logo"
+              className=" object-fill ml-2"
+            ></Image>
+          </button>
+        </div>
         <h1>
           Sorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu
           turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec
