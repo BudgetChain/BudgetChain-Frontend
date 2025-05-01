@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import Logo from '../../public/svg/Logo.svg';
+// import Logo from '../../public/svg/Logo.svg';
 import { useRouter } from 'next/navigation';
 import LoginModal from '@/components/ui/login-modal';
 
@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
         <Link href={'/dashboard/admin'}>
           <div className="text-white h-[37.34px] w-[157px] pr-4">
             <Image
-              src={Logo}
+              src="/svg/Logo.svg"
               width={50}
               height={50}
               alt="Logo"
