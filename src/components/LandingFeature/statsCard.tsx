@@ -11,7 +11,7 @@ interface StatCardProps {
 export function StatCard({ icon, label, description }: StatCardProps) {
   return (
     <div
-      className={` bg-[#131322] cursor-pointer p-6 rounded-lg w-[px]`}
+      className={` bg-[#131322] cursor-pointer p-6 rounded-2xl w-[px] border border-gray-800`}
     >
       <div className=" min-h-[60px]  ">
         <div className="min-h-[px] flex justify-end text-end">
@@ -23,7 +23,6 @@ export function StatCard({ icon, label, description }: StatCardProps) {
         </div>
 
         <div>
-        
           <p className="text-white text-[13px] md:text-[24px]">{label}</p>
           <p className="text-[#848484] text-[13px] md:text-[14px]">{description}</p>
         </div>

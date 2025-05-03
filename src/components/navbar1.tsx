@@ -1,17 +1,13 @@
-'use client';
+"use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-// import Logo from '../../public/svg/Logo.svg';
-import { useRouter } from 'next/navigation';
-import LoginModal from '@/components/ui/login-modal';
+import Logo from '../../public/svg/Logo.svg';
 
-const Navbar: React.FC = () => {
+const Navbar1: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [loginOpen, setLoginOpen] = useState(false);
   const pathname = usePathname(); // Get current path
-  const router = useRouter();
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -20,9 +16,6 @@ const Navbar: React.FC = () => {
   // Function to check if link is active
   const isActive = (href: string) => pathname === href;
 
-  const handleLoginClick = () => {
-    setLoginOpen(true);
-  };
 
   return (
     <header className="bg-[#060612] mt-10 text-white rounded-[20px] border border-[#EBEBEB80] max-w-6xl mx-auto">
@@ -31,7 +24,7 @@ const Navbar: React.FC = () => {
         <Link href={'/dashboard/admin'}>
           <div className="text-white h-[37.34px] w-[157px] pr-4">
             <Image
-              src="/svg/Logo.svg"
+              src={Logo}
               width={50}
               height={50}
               alt="Logo"
@@ -41,7 +34,7 @@ const Navbar: React.FC = () => {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex md:justify-center md:pl-20 md:items-center md:space-x-6">
+        <div className="hidden md:flex md:justify-center md:pl-20 md:items-center mr-6 md:space-x-6">
           {['about-us', 'white-paper', 'faqs', 'demo'].map((item) => (
             <Link
               key={item}
@@ -58,19 +51,6 @@ const Navbar: React.FC = () => {
               {/* Capitalize each word */}
             </Link>
           ))}
-        </div>
-
-        {/* Desktop Buttons */}
-        <div className="hidden md:flex md:space-x-4">
-          <button
-            className="w-[170px] h-[50px] rounded-[12px] border border-[#EBEBEB80] px-4 py-2 transition hover:bg-white hover:text-black"
-            onClick={handleLoginClick}
-          >
-            LOGIN
-          </button>
-          <button className="w-[170px] h-[50px] rounded-[12px] bg-white px-4 py-2 text-black transition hover:bg-opacity-80">
-            GET STARTED
-          </button>
         </div>
 
         {/* Mobile Menu Toggle Button */}
@@ -123,25 +103,11 @@ const Navbar: React.FC = () => {
                 {item.charAt(0).toUpperCase() + item.slice(1)}
               </Link>
             ))}
-            <div className="mt-4 flex flex-col space-y-2">
-              <button
-                className="rounded border border-white px-4 py-2 transition hover:bg-white hover:text-black"
-                onClick={handleLoginClick}
-              >
-                LOGIN
-              </button>
-              <button className="rounded bg-white px-4 py-2 text-black transition hover:bg-opacity-80">
-                GET STARTED
-              </button>
-            </div>
           </div>
         </div>
       )}
-
-      {/* Login Modal */}
-      <LoginModal isOpen={loginOpen} onOpenChange={setLoginOpen} />
     </header>
   );
 };
 
-export default Navbar;
+export default Navbar1;

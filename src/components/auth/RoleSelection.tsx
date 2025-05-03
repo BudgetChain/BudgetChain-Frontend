@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import Navbar from '@/components/navbar';
+import Navbar1 from '@/components/navbar1';
 
 type RoleType = 'Investor' | 'Admin' | 'DAO Member' | '';
 
@@ -26,16 +26,16 @@ const RoleSelection: React.FC<RoleSelectionProps> = ({ onRoleSelect, onNext }) =
   return (
     <div className="min-h-screen bg-[#050512] text-white flex flex-col">
       {/* Navbar */}
-      <Navbar />
+      <Navbar1 />
       
-      <main className="flex-grow flex items-center justify-center p-4 mt-[-280px]">
+      <main className="flex-grow flex items-center justify-center p-4 mt-[30px]">
         <div className="w-full space-y-8 max-w-[1010px]">
-          <div className="mb-4 text-center lg:text-left">
-            <h1 className="text-[#4F4AE6] text-2xl font-bold mb-1">Login To Your Account</h1>
+          <div className="mb-4 text-left">
+            <h1 className="text-[#4F4AE6] text-xl font-semibold mb-1">Login To Your Account</h1>
             <p className="text-white text-sm">To View Activity</p>
           </div>
           
-          <div className="gap-12 flex lg:justify-end">
+          <div className="gap-12 flex justify-center">
             <div className="lg:w-[60%] w-full text-center">
               <div className="mb-8">
                 <h2 className="text-white text-lg mb-6 text-center">Select Your Role</h2>
@@ -101,7 +101,7 @@ const RoleSelection: React.FC<RoleSelectionProps> = ({ onRoleSelect, onNext }) =
                 </button>
                 
                 <div className="mt-4 text-center text-sm">
-                  <span className="text-gray-400">Don't have an Account? </span>
+                  <span className="text-gray-400">Don&apos;t  have an Account? </span>
                   <Link href="/create-account" className="text-[#4F4AE6] hover:underline">
                     Create an Account
                   </Link>

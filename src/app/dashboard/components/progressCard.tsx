@@ -3,7 +3,8 @@ import { PieChart, Pie, Cell } from 'recharts';
 
 interface ProgressCardProps {
   name: string;
-  lead?: string;
+  update?: string;
+  status: string;
   timeline: string;
   timeLeft: string;
   percentage: number;
@@ -13,7 +14,8 @@ interface ProgressCardProps {
 
 const ProgressCard: React.FC<ProgressCardProps> = ({
   name,
-  lead,
+  update,
+  status,
   timeline,
   timeLeft,
   percentage,
@@ -27,15 +29,22 @@ const ProgressCard: React.FC<ProgressCardProps> = ({
 
   return (
     <div
-      className="w-[500px] h-[294px] rounded-lg p-4 bg-[#171720] cursor-pointer"
+      className="w-[500px] h-[294px] rounded-lg p-4 m-2 bg-[#171720] cursor-pointer"
       style={{ borderColor: border, borderWidth: '2px' }}
     >
-      <div className="mb-2">
-        <h3 className="text-white font-medium">{name}</h3>
-        {lead && (
-          <p className="text-xs text-gray-400">
-            Lead: <span className="text-gray-300">{lead}</span>
-          </p>
+      <div className='flex justify-between'>
+        <div className="mb-2">
+          <h3 className="text-white font-medium">{name}</h3>
+          {update && (
+            <p className="text-xs text-gray-400">
+              <span className="text-gray-300">{update}</span>
+            </p>
+          )}
+        </div>
+        {status ? (
+          <p className="text-[#282828] bg-[#595959] p-1 h-fit rounded-lg">{status}</p>
+        ) : (
+          <div className="bg-gray-900"></div>
         )}
       </div>
 

@@ -60,7 +60,7 @@ const Testimonial: React.FC = () => {
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {testimonial.map((testimonial, index) => (
-          <div key={index} className=" p-6 rounded-lg shadow-lg border border-[]">
+          <div key={index} className=" p-6 rounded-lg shadow-lg border border-gray-800">
             <div className="flex items-center space-x-4 mb-4">
               <Image
                 src={Icon1}
