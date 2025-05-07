@@ -13,8 +13,8 @@ const NotFound = () => {
           Oops! Page Not Found
         </h2>
         <h4 className="max-w-[33rem] mx-auto text-sm leading-6 px-2">
-          The page you're looking for seems to have wandered off... Like a
-          budget that got off track! Let’s help you get back to where you need
+          The page you are looking for seems to have wandered off... Like a
+          budget that got off track! Lets help you get back to where you need
           to be.
         </h4>
       </section>
