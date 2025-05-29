@@ -12,7 +12,7 @@ export function HelpCenterHeader({ toggleSearch }: HelpCenterHeaderProps) {
   const isMobile = useIsMobile()
 
   return (
-    <div className="sticky top-0 z-10 bg-transparent border-r-3 pb-2 pt-4 border-radius: 0.125rem" >
+    <div className="z-10 bg-transparent border-r-3 pb-2 pt-4 border-radius: 0.125rem" >
       <div className="flex flex-col space-y-2 p-2 md:p-4">
         <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white">Help Center</h1>
         <p className="text-sm md:text-base text-blue-200">

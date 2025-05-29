@@ -29,7 +29,7 @@ const ProgressCard: React.FC<ProgressCardProps> = ({
 
   return (
     <div
-      className="w-[500px] h-[294px] rounded-lg p-4 m-2 bg-[#171720] cursor-pointer"
+      className="min-w-[520px] h-[294px] rounded-lg p-4 m-2 bg-[#171720] cursor-pointer"
       style={{ borderColor: border, borderWidth: '2px' }}
     >
       <div className='flex justify-between'>

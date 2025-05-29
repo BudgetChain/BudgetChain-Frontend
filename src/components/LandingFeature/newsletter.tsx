@@ -6,7 +6,13 @@ import Icon1 from '../../../public/svg/newsletterimage.svg';
 
 const Newsletter: React.FC = () => {
   return (
-    <section className="py-16 px-8 md:px-16 bg-gradient-to-r from-indigo-900 via-black to-indigo-900 text-white text-center rounded-2xl w-[60%]">
+    <section
+      className="py-16 px-8 md:px-16 text-white text-center rounded-2xl w-[60%]"
+      style={{
+        background:
+          'linear-gradient(to right, #312e81 0%, #050512 30%, #050512 70%, #312e81 100%)',
+      }}
+    >
       <div className="flex flex-col justify-center items-center">
         <Image src={Icon1} alt="People" />
       </div>

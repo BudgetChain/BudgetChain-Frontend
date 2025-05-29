@@ -28,7 +28,7 @@ const Navbar: React.FC = () => {
     <header className="bg-[#060612] mt-10 text-white rounded-[20px] border border-[#EBEBEB80] max-w-6xl mx-auto">
       <nav className="flex max-w-7xl items-center justify-between px-4 py-4 w-[95%] mx-10">
         {/* Logo */}
-        <Link href={'/dashboard/admin'}>
+        <Link href={'/'}>
           <div className="text-white h-[37.34px] w-[157px] pr-4">
             <Image
               src="/svg/Logo.svg"

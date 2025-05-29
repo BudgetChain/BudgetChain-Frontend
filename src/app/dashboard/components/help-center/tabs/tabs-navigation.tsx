@@ -18,7 +18,7 @@ export function TabsNavigation({ }: TabsNavigationProps) {
   }
 
   return (
-    <div className="px-2 md:px-4 sticky top-[120px] z-10 bg-transparent border-[#1a365d]">
+    <div className="px-2 md:px-4 top-[120px] z-10 bg-transparent border-[#1a365d]">
       <TabsList className="grid grid-cols-4 w-full bg-transparent border-[#1a365d]">
         <TabsTrigger value="faqs" className="flex items-center justify-center gap-1 md:gap-2 px-1 md:px-3 py-2">
           <HelpCircle className="h-4 w-4" />
