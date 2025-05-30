@@ -71,33 +71,43 @@ const Sidebar: FC = () => {
   };
 
   useEffect(() => {
-    // Determine active path and dropdown state based on current route
-    if (pathname.includes('/appeals')) {
-      setIsAppealsOpen(true);
-    }
-
-    if (pathname === '/dashboard') {
-      setActivePath('/');
-    } else if (pathname.includes('/projects')) {
-      setActivePath('/projects');
-    } else if (pathname.includes('/transactions')) {
-      setActivePath('/transactions');
-    } else if (pathname.includes('/target')) {
-      setActivePath('/target');
-    } else if (pathname.includes('/appeals/pending')) {
-      setActivePath('/appeals/pending');
-    } else if (pathname.includes('/appeals/resolved')) {
-      setActivePath('/appeals/resolved');
-    } else if (pathname.includes('/appeals')) {
-      setActivePath('/appeals');
-    } else if (pathname.includes('/schedules')) {
-      setActivePath('/schedules');
-    } else if (pathname.includes('/settings')) {
-      setActivePath('/settings');
-    } else if (pathname.includes('/help')) {
-      setActivePath('/help');
-    } else {
-      setActivePath('/');
+    switch (pathname) {
+      case '/':
+        setActivePath('/');
+        break;
+      case '/projects':
+        setActivePath('/projects');
+        break;
+      case '/dashboard/user/transactions':
+        setActivePath('/transactions');
+        break;
+      case '/target':
+        setActivePath('/target');
+        break;
+      case '/appeals':
+        setActivePath('/appeals');
+        setIsAppealsOpen(true);
+        break;
+      case '/appeals/pending':
+        setActivePath('/appeals/pending');
+        setIsAppealsOpen(true);
+        break;
+      case '/appeals/resolved':
+        setActivePath('/appeals/resolved');
+        setIsAppealsOpen(true);
+        break;
+      case '/schedules':
+        setActivePath('/schedules');
+        break;
+      case '/settings':
+        setActivePath('/settings');
+        break;
+      case '/help':
+        setActivePath('/help');
+        break;
+      default:
+        setActivePath('/target'); // Default active item
+        break;
     }
   }, [pathname]);
 
