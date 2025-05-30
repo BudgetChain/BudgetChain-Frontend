@@ -54,7 +54,7 @@ const Target: NextPage = () => {
   return (
     <main className="flex mb-6 bg-[#171720] text-[#FFFFFF]">
 
-      <div className="bg-[#171720] px-6">
+      <div className="bg-[#171720] px-4 w-full">
         {showRecords ? (
           <Records />
         ) : (

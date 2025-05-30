@@ -101,28 +101,43 @@ const Sidebar: FC = () => {
     }
   }, [pathname]);
 
-  const handleToggleDropdown = () => {
-    // e.preventDefault();
+  const handleToggleDropdown = (e: React.MouseEvent) => {
+    e.preventDefault();
     setIsAppealsOpen(!isAppealsOpen);
   };
 
   return (
     <>
-      <button
-        className="fixed top-4 left-4 z-50 p-2 rounded-md bg-[#050512] text-white md:hidden"
-        onClick={toggleSidebar}
-      >
-        {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
-
-      <div
-        className={`fixed md:sticky md:top-0 min-w-[260px] h-screen bg-[#050512] text-white flex flex-col transform transition-transform duration-300 ease-in-out ${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-        } z-40 md:z-0 overflow-y-auto`}
-      >
-        <div className="w-full mb-5 flex justify-center items-center pt-10">
-          <Image src={Brand} alt="Logo" />
+      {/* Mobile toggle button - Fixed in top-left corner, always visible on mobile */}
+      <div className="md:hidden fixed top-0 left-0 w-full h-16 bg-[#050512] z-50 px-4 flex items-center">
+        <button
+          className="p-2 rounded-md bg-gray-800 text-white"
+          onClick={toggleSidebar}
+          aria-label="Toggle sidebar menu"
+        >
+          {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+        <div className="ml-4">
+          <Image src={Brand} alt="Logo" width={100} height={32} />
         </div>
+      </div>
+
+      {/* Main sidebar */}
+      <div
+        className={`fixed md:sticky top-0 w-64 h-screen bg-[#050512] text-white flex flex-col transform transition-transform duration-300 ease-in-out ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+        } z-40 md:z-10 overflow-y-auto`}
+      >
+        {/* Only show logo in sidebar on desktop */}
+        <Link href={'/'}>
+          <div className="w-full mb-5 justify-center items-center pt-10 hidden md:flex">
+            <Image src={Brand} alt="Logo" />
+          </div>
+        </Link>
+
+        {/* Add padding on mobile to account for the header */}
+        <div className="md:hidden h-16"></div>
+
         <div className="flex flex-col justify-between flex-grow overflow-y-auto">
           <div>
             <SidebarItem
@@ -150,7 +165,7 @@ const Sidebar: FC = () => {
               active={activePath === '/target'}
             />
             <SidebarItem
-              href="/dashboard/appeals"
+              href="#"
               icon={<InfoIcon size={20} />}
               text="Appeals"
               active={
@@ -215,6 +230,7 @@ const Sidebar: FC = () => {
         </div>
       </div>
 
+      {/* Overlay that appears when sidebar is open on mobile */}
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
