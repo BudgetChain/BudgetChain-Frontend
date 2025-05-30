@@ -1,9 +1,14 @@
-function AdminDashboard(){
-    return(
-        <h1>Implement the admin dashboard here</h1>
-    )
+import AdminDashboardPage from '../components/admin/adminDashboard';
+import { AdminAuthGuard } from '../components/admin/auth/adminAuthGuard';
+
+function AdminDashboard() {
+  return (
+    <AdminAuthGuard>
+      <div className="container mx-auto">
+        <AdminDashboardPage />
+      </div>
+    </AdminAuthGuard>
+  );
 }
-
-
 
 export default AdminDashboard;

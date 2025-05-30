@@ -15,6 +15,8 @@ import {
   SettingsIcon,
   HelpCircleIcon,
   InfoIcon,
+  Menu,
+  X,
 } from 'lucide-react';
 
 interface SidebarItemProps {
@@ -24,7 +26,7 @@ interface SidebarItemProps {
   active?: boolean;
   hasDropdown?: boolean;
   isOpen?: boolean;
-  toggleDropdown?: () => void;
+  toggleDropdown?: (e: React.MouseEvent) => void;
 }
 
 const SidebarItem: FC<SidebarItemProps> = ({
@@ -38,20 +40,13 @@ const SidebarItem: FC<SidebarItemProps> = ({
 }) => {
   return (
     <Link
-      href={href}
+      href={hasDropdown ? '#' : href}
       className={`flex items-center px-4 py-3 text-sm transition-colors ${
         active
-          ? 'text-indigo-900 border-r-2 border-indigo-900'
-          : 'text-gray-400 hover:text-white'
+          ? 'text-indigo-900 border-r-2 border-indigo-900 bg-opacity-20 bg-indigo-900'
+          : 'text-gray-400 hover:text-white hover:bg-gray-800 hover:bg-opacity-30'
       }`}
-      onClick={
-        hasDropdown
-          ? (e) => {
-              e.preventDefault();
-              toggleDropdown && toggleDropdown();
-            }
-          : undefined
-      }
+      onClick={hasDropdown && toggleDropdown ? toggleDropdown : undefined}
     >
       <span className="mr-3">{icon}</span>
       <span className="flex-grow">{text}</span>
@@ -67,139 +62,166 @@ const SidebarItem: FC<SidebarItemProps> = ({
 const Sidebar: FC = () => {
   const pathname = usePathname();
   const [isAppealsOpen, setIsAppealsOpen] = useState(false);
-  const [activePath, setActivePath] = useState('/target');
+  const [activePath, setActivePath] = useState('');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Handle mobile sidebar toggle
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   useEffect(() => {
-    switch (pathname) {
-      case '/':
-        setActivePath('/');
-        break;
-      case '/projects':
-        setActivePath('/projects');
-        break;
-      case '/dashboard/user/transactions':
-        setActivePath('/transactions');
-        break;
-      case '/target':
-        setActivePath('/target');
-        break;
-      case '/appeals':
-        setActivePath('/appeals');
-        setIsAppealsOpen(true);
-        break;
-      case '/appeals/pending':
-        setActivePath('/appeals/pending');
-        setIsAppealsOpen(true);
-        break;
-      case '/appeals/resolved':
-        setActivePath('/appeals/resolved');
-        setIsAppealsOpen(true);
-        break;
-      case '/schedules':
-        setActivePath('/schedules');
-        break;
-      case '/settings':
-        setActivePath('/settings');
-        break;
-      case '/help':
-        setActivePath('/help');
-        break;
-      default:
-        setActivePath('/target'); // Default active item
-        break;
+    // Determine active path and dropdown state based on current route
+    if (pathname.includes('/appeals')) {
+      setIsAppealsOpen(true);
+    }
+
+    if (pathname === '/dashboard') {
+      setActivePath('/');
+    } else if (pathname.includes('/projects')) {
+      setActivePath('/projects');
+    } else if (pathname.includes('/transactions')) {
+      setActivePath('/transactions');
+    } else if (pathname.includes('/target')) {
+      setActivePath('/target');
+    } else if (pathname.includes('/appeals/pending')) {
+      setActivePath('/appeals/pending');
+    } else if (pathname.includes('/appeals/resolved')) {
+      setActivePath('/appeals/resolved');
+    } else if (pathname.includes('/appeals')) {
+      setActivePath('/appeals');
+    } else if (pathname.includes('/schedules')) {
+      setActivePath('/schedules');
+    } else if (pathname.includes('/settings')) {
+      setActivePath('/settings');
+    } else if (pathname.includes('/help')) {
+      setActivePath('/help');
+    } else {
+      setActivePath('/');
     }
   }, [pathname]);
 
+  const handleToggleDropdown = () => {
+    // e.preventDefault();
+    setIsAppealsOpen(!isAppealsOpen);
+  };
+
   return (
-    <div className="w-[260px] h-screen sticky bg-[#050512] text-white flex flex-col left-[20px] top-0 rounded-md">
-      <div className="w-full mb-5 flex justify-center items-center pt-10">
-        <Image src={Brand} alt="Logo" />
-      </div>
-      <div className="flex-grow">
-        <SidebarItem
-          href="/"
-          icon={<HomeIcon size={20} />}
-          text="Home"
-          active={activePath === '/'}
-        />
-        <SidebarItem
-          href="/projects"
-          icon={<FolderIcon size={20} />}
-          text="Projects"
-          active={activePath === '/projects'}
-        />
-        <SidebarItem
-          href="/transactions"
-          icon={<CreditCardIcon size={20} />}
-          text="Transactions"
-          active={activePath === '/transactions'}
-        />
-        <SidebarItem
-          href="/target"
-          icon={<TargetIcon size={20} />}
-          text="Target"
-          active={activePath === '/target'}
-        />
-        <SidebarItem
-          href="/appeals"
-          icon={<InfoIcon size={20} />}
-          text="Appeals"
-          active={
-            activePath === '/appeals' || activePath.startsWith('/appeals/')
-          }
-          hasDropdown={true}
-          isOpen={isAppealsOpen}
-          toggleDropdown={() => setIsAppealsOpen(!isAppealsOpen)}
-        />
+    <>
+      <button
+        className="fixed top-4 left-4 z-50 p-2 rounded-md bg-[#050512] text-white md:hidden"
+        onClick={toggleSidebar}
+      >
+        {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
 
-        {isAppealsOpen && (
-          <div className="pl-9 bg-gray-800 bg-opacity-40">
-            <Link
-              href="/appeals/pending"
-              className={`block py-2 text-sm ${
-                activePath === '/appeals/pending'
-                  ? 'text-indigo-400'
-                  : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              Pending
-            </Link>
-            <Link
-              href="/appeals/resolved"
-              className={`block py-2 text-sm ${
-                activePath === '/appeals/resolved'
-                  ? 'text-indigo-400'
-                  : 'text-gray-400 hover:text-white'
-              }`}
-            >
-              Resolved
-            </Link>
+      <div
+        className={`fixed md:sticky md:top-0 min-w-[260px] h-screen bg-[#050512] text-white flex flex-col transform transition-transform duration-300 ease-in-out ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+        } z-40 md:z-0 overflow-y-auto`}
+      >
+        <div className="w-full mb-5 flex justify-center items-center pt-10">
+          <Image src={Brand} alt="Logo" />
+        </div>
+        <div className="flex flex-col justify-between flex-grow overflow-y-auto">
+          <div>
+            <SidebarItem
+              href="/dashboard"
+              icon={<HomeIcon size={20} />}
+              text="Home"
+              active={activePath === '/'}
+            />
+            <SidebarItem
+              href="/dashboard/projects"
+              icon={<FolderIcon size={20} />}
+              text="Projects"
+              active={activePath === '/projects'}
+            />
+            <SidebarItem
+              href="/dashboard/transactions"
+              icon={<CreditCardIcon size={20} />}
+              text="Transactions"
+              active={activePath === '/transactions'}
+            />
+            <SidebarItem
+              href="/dashboard/target"
+              icon={<TargetIcon size={20} />}
+              text="Target"
+              active={activePath === '/target'}
+            />
+            <SidebarItem
+              href="/dashboard/appeals"
+              icon={<InfoIcon size={20} />}
+              text="Appeals"
+              active={
+                activePath === '/appeals' || activePath.startsWith('/appeals/')
+              }
+              hasDropdown={true}
+              isOpen={isAppealsOpen}
+              toggleDropdown={handleToggleDropdown}
+            />
+
+            {isAppealsOpen && (
+              <div className="pl-9 bg-gray-800 bg-opacity-40">
+                <Link
+                  href="/dashboard/appeals/pending"
+                  className={`block py-2 px-4 text-sm transition-colors ${
+                    activePath === '/appeals/pending'
+                      ? 'text-indigo-400'
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  Pending
+                </Link>
+                <Link
+                  href="/dashboard/appeals/resolved"
+                  className={`block py-2 px-4 text-sm transition-colors ${
+                    activePath === '/appeals/resolved'
+                      ? 'text-indigo-400'
+                      : 'text-gray-400 hover:text-white'
+                  }`}
+                >
+                  Resolved
+                </Link>
+              </div>
+            )}
+
+            <SidebarItem
+              href="/dashboard/schedules"
+              icon={<CalendarIcon size={20} />}
+              text="Schedules"
+              active={activePath === '/schedules'}
+            />
           </div>
-        )}
 
-        <SidebarItem
-          href="/schedules"
-          icon={<CalendarIcon size={20} />}
-          text="Schedules"
-          active={activePath === '/schedules'}
-        />
+          <div className="pt-2">
+            <SidebarItem
+              href="/dashboard/settings"
+              icon={<SettingsIcon size={20} />}
+              text="Settings"
+              active={activePath === '/settings'}
+            />
+            <SidebarItem
+              href="/dashboard/help"
+              icon={<HelpCircleIcon size={20} />}
+              text="Help centre"
+              active={activePath === '/help'}
+            />
+          </div>
+        </div>
 
-        <div className="mt-32 pt-2">
-          <SidebarItem
-            href="/settings"
-            icon={<SettingsIcon size={20} />}
-            text="Settings"
-            active={activePath === '/settings'}
-          />
-          <SidebarItem
-            href="/help"
-            icon={<HelpCircleIcon size={20} />}
-            text="Help centre"
-            active={activePath === '/help'}
-          />
+        <div className="p-4 text-xs text-gray-500 border-t border-gray-800">
+          <p>© 2027 Ndida DAO</p>
         </div>
       </div>
-    </div>
+
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 md:hidden"
+          onClick={toggleSidebar}
+        />
+      )}
+    </>
   );
 };
 
