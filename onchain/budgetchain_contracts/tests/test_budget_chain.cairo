@@ -1,5 +1,5 @@
-use budget_contract::budgetchain::Budget;
-use budget_contract::interfaces::IBudget::{IBudgetDispatcher, IBudgetDispatcherTrait};
+use budgetchain_contracts::budgetchain::Budget;
+use budgetchain_contracts::interfaces::IBudget::{IBudgetDispatcher, IBudgetDispatcherTrait};
 use snforge_std::{
     CheatSpan, ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait,
     cheat_caller_address, declare, spy_events, stop_cheat_caller_address,

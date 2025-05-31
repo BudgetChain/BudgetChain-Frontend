@@ -1,16 +1,17 @@
 #[feature("deprecated_legacy_map")]
 #[starknet::contract]
 pub mod Budget {
-    use budget_contract::base::errors::*;
-    use budget_contract::base::types::{Organization, ADMIN_ROLE, ORGANIZATION_ROLE};
-
-    use budget_contract::interfaces::IBudget::IBudget;
+     use budgetchain_contracts::base::errors::*;
+    use budgetchain_contracts::base::types::{ADMIN_ROLE,ORGANIZATION_ROLE, Organization};
+    use budgetchain_contracts::interfaces::IBudget::IBudget;
     use core::array::{Array, ArrayTrait};
     use core::option::Option;
-    use core::result::Result;
     use openzeppelin::access::accesscontrol::{AccessControlComponent, DEFAULT_ADMIN_ROLE};
     use openzeppelin::introspection::src5::SRC5Component;
-    use starknet::storage::Map;
+    use starknet::storage::{
+        Map, StorageMapReadAccess, StorageMapWriteAccess, 
+        StoragePointerReadAccess, StoragePointerWriteAccess
+    };
     use starknet::{
         ContractAddress, contract_address_const, get_block_timestamp, get_caller_address,
     };

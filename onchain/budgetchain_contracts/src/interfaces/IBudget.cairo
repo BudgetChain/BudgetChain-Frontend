@@ -1,4 +1,4 @@
-use budget_contract::base::types::Organization;
+use budgetchain_contracts::base::types::Organization;
 use starknet::ContractAddress;
 
 #[starknet::interface]
