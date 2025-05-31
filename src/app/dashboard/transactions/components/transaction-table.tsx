@@ -1,5 +1,3 @@
-'use client';
-
 import { ChevronUp, ChevronDown, FileX, Loader2 } from 'lucide-react';
 import {
   Table,
@@ -124,7 +122,10 @@ export function TransactionTable({
           </TableHeader>
           <TableBody>
             {[...Array(10)].map((_, i) => (
-              <TableRow key={i} className="border-[#42415B] h-16">
+              <TableRow
+                key={i}
+                className="border-[#42415B] hover:bg-[#2A2A3A]/50 h-16"
+              >
                 {[...Array(8)].map((_, j) => (
                   <TableCell key={j} className="px-6 py-4">
                     <Skeleton className="h-4 w-full bg-[#2A2A3A]" />
@@ -216,7 +217,7 @@ export function TransactionTable({
               </TableRow>
             ))
           ) : (
-            <TableRow className="border-[#42415B]">
+            <TableRow className="border-[#42415B] hover:bg-[#2A2A3A]/50">
               <TableCell colSpan={8} className="h-60 text-center">
                 <div className="flex flex-col items-center justify-center py-10">
                   <FileX className="h-16 w-16 text-gray-500 mb-4" />
