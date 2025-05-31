@@ -168,17 +168,26 @@ export function useTransactions(
 ) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [stats, setStats] = useState<StatsData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     const fetchTransactions = async () => {
-      setLoading(true);
+      // Only show full loading state on initial load
+      if (!isInitialized) {
+        setIsInitialLoading(true);
+      }
+
+      setIsLoading(true);
       setError(null);
 
       try {
-        // Simulate API delay
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        // Simulate API delay - shorter for subsequent operations
+        await new Promise((resolve) =>
+          setTimeout(resolve, isInitialized ? 300 : 1000)
+        );
 
         let filteredTransactions = [...mockTransactions];
 
@@ -249,15 +258,17 @@ export function useTransactions(
         );
 
         setTransactions(paginatedTransactions);
+        setIsInitialized(true);
       } catch (err) {
         setError('Failed to fetch transactions. Please try again.');
       } finally {
-        setLoading(false);
+        setIsLoading(false);
+        setIsInitialLoading(false);
       }
     };
 
     fetchTransactions();
-  }, [filters, currentPage, sortConfig]);
+  }, [filters, currentPage, sortConfig, isInitialized]);
 
-  return { transactions, stats, loading, error };
+  return { transactions, stats, isLoading, isInitialLoading, error };
 }

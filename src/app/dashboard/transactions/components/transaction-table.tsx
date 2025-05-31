@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronUp, ChevronDown, FileX } from 'lucide-react';
+import { ChevronUp, ChevronDown, FileX, Loader2 } from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -33,6 +33,7 @@ export interface SortConfig {
 interface TransactionTableProps {
   transactions: Transaction[];
   loading: boolean;
+  isProcessing?: boolean;
   error: string | null;
   sortConfig: SortConfig;
   onSort: (config: SortConfig) => void;
@@ -41,22 +42,50 @@ interface TransactionTableProps {
 export function TransactionTable({
   transactions,
   loading,
+  isProcessing = false,
   error,
   sortConfig,
   onSort,
 }: TransactionTableProps) {
-  const handleSort = (key: string) => {
-    const direction =
-      sortConfig.key === key && sortConfig.direction === 'asc' ? 'desc' : 'asc';
+  const handleSort = (key: string, direction: 'asc' | 'desc') => {
     onSort({ key, direction });
   };
 
-  const SortIcon = ({ column }: { column: string }) => {
-    if (sortConfig.key !== column) return null;
-    return sortConfig.direction === 'asc' ? (
-      <ChevronUp className="h-4 w-4" />
-    ) : (
-      <ChevronDown className="h-4 w-4" />
+  const SortButtons = ({ column }: { column: string }) => {
+    const isActiveAsc =
+      sortConfig.key === column && sortConfig.direction === 'asc';
+    const isActiveDesc =
+      sortConfig.key === column && sortConfig.direction === 'desc';
+
+    return (
+      <div className="flex flex-col ml-2">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleSort(column, 'asc');
+          }}
+          className={`p-0.5 rounded hover:bg-gray-600/50 transition-colors ${
+            isActiveAsc ? 'text-white' : 'text-gray-500 hover:text-gray-300'
+          }`}
+          title="Sort ascending"
+          disabled={isProcessing}
+        >
+          <ChevronUp className="h-3 w-3" />
+        </button>
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleSort(column, 'desc');
+          }}
+          className={`p-0.5 rounded hover:bg-gray-600/50 transition-colors ${
+            isActiveDesc ? 'text-white' : 'text-gray-500 hover:text-gray-300'
+          }`}
+          title="Sort descending"
+          disabled={isProcessing}
+        >
+          <ChevronDown className="h-3 w-3" />
+        </button>
+      </div>
     );
   };
 
@@ -73,16 +102,22 @@ export function TransactionTable({
 
   if (loading) {
     return (
-      <div className="bg-[#1E1E2A] rounded-lg overflow-hidden border border-[#42415B]">
+      <div className="bg-[#171720] rounded-lg overflow-hidden border border-[#42415B]">
         <Table>
           <TableHeader>
-            <TableRow className="border-[#42415B]">
+            <TableRow className="border-[#42415B] bg-[#2B2B46] hover:bg-[#2B2B46]">
               {tableHeaders.map((header) => (
                 <TableHead
                   key={header.key}
                   className="text-gray-300 font-medium h-16 px-6"
                 >
-                  {header.label}
+                  <div className="flex items-center justify-between">
+                    {header.label}
+                    <div className="flex flex-col ml-2">
+                      <ChevronUp className="h-3 w-3 text-gray-500" />
+                      <ChevronDown className="h-3 w-3 text-gray-500" />
+                    </div>
+                  </div>
                 </TableHead>
               ))}
             </TableRow>
@@ -112,19 +147,27 @@ export function TransactionTable({
   }
 
   return (
-    <div className="bg-[#171720] rounded-lg overflow-hidden border border-[#42415B]">
+    <div className="bg-[#171720] rounded-lg overflow-hidden border border-[#42415B] relative">
+      {isProcessing && (
+        <div className="absolute top-4 right-4 z-10">
+          <div className="bg-[#2B2B46] rounded-full p-2 shadow-lg flex items-center gap-2">
+            <Loader2 className="h-4 w-4 text-purple-400 animate-spin" />
+            <span className="text-sm text-gray-300">Processing...</span>
+          </div>
+        </div>
+      )}
+
       <Table>
         <TableHeader>
           <TableRow className="border-[#42415B] bg-[#2B2B46] hover:bg-[#2B2B46]">
             {tableHeaders.map((header) => (
               <TableHead
                 key={header.key}
-                className="text-gray-300 font-medium cursor-pointer hover:text-white transition-colors h-16 px-6"
-                onClick={() => handleSort(header.key)}
+                className="text-gray-300 font-medium h-16 px-6"
               >
-                <div className="flex items-center gap-1">
-                  {header.label}
-                  <SortIcon column={header.key} />
+                <div className="flex items-center justify-between">
+                  <span className="cursor-default">{header.label}</span>
+                  <SortButtons column={header.key} />
                 </div>
               </TableHead>
             ))}
