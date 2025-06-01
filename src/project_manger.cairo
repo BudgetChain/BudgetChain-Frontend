@@ -1,7 +1,7 @@
 use starknet::{ContractAddress, get_caller_address};
 
 #[starknet::interface]
-trait IProjectManager<TContractState> {
+pub trait IProjectManager<TContractState> {
     fn authorize_organization(ref self: TContractState, org: ContractAddress);
     fn revoke_organization(ref self: TContractState, org: ContractAddress);
     fn create_project(
@@ -82,7 +82,7 @@ mod ProjectManager {
     }
 
     #[abi(embed_v0)]
-    impl ProjectManagerImpl of IProjectManager<ContractState> {
+    pub impl ProjectManagerImpl of IProjectManager<ContractState> {
         fn authorize_organization(ref self: ContractState, org: ContractAddress) {
             let _caller = get_caller_address();
             self.accesscontrol.assert_only_role(DEFAULT_ADMIN_ROLE);
