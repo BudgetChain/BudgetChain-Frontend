@@ -1,1 +1,1 @@
-pub mod project_manger;
+pub mod project_manager;

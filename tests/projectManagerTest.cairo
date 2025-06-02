@@ -1,21 +1,38 @@
-use snforge_std::{start_cheat_caller_address_global, stop_cheat_caller_address_global, ContractClassTrait, DeclareResultTrait, declare, spy_events, EventSpyAssertionsTrait, };
-use budget_contract::project_manger::{IProjectManagerDispatcher, IProjectManagerDispatcherTrait, Project};
+use budget_contract::project_manager::ProjectManager::{
+    Event as ProjectManagerEvents, ProjectAllocated,
+};
+use budget_contract::project_manager::{
+    IProjectManagerDispatcher, IProjectManagerDispatcherTrait, Project,
+};
+use snforge_std::{
+    ContractClassTrait, DeclareResultTrait, EventSpyAssertionsTrait, declare, spy_events,
+    start_cheat_caller_address_global, stop_cheat_caller_address_global,
+};
 use starknet::contract_address::ContractAddress;
 use starknet::contract_address_const; // Import for deterministic addresses
 const PROJECT_CREATOR_ROLE: felt252 = selector!("PROJECT_CREATOR_ROLE");
 const DEFAULT_ADMIN_ROLE: felt252 = selector!("DEFAULT_ADMIN_ROLE");
-use budget_contract::project_manger::event::ProjectAllocated;
 
 
 // Helper functions for deterministic test addresses
-fn owner() -> ContractAddress { contract_address_const::<'owner'>() }
-fn non_creator() -> ContractAddress { contract_address_const::<'non_creator'>() }
-fn project_owner() -> ContractAddress { contract_address_const::<'project_owner'>() }
-fn project_owner2() -> ContractAddress { contract_address_const::<'project_owner2'>() }
-fn project_owner3() -> ContractAddress { contract_address_const::<'project_owner3'>() }
+fn owner() -> ContractAddress {
+    contract_address_const::<'owner'>()
+}
+fn non_creator() -> ContractAddress {
+    contract_address_const::<'non_creator'>()
+}
+fn project_owner() -> ContractAddress {
+    contract_address_const::<'project_owner'>()
+}
+fn project_owner2() -> ContractAddress {
+    contract_address_const::<'project_owner2'>()
+}
+fn project_owner3() -> ContractAddress {
+    contract_address_const::<'project_owner3'>()
+}
 
 fn deploy(owner: ContractAddress) -> IProjectManagerDispatcher {
-    let contract = declare("project_manger").unwrap().contract_class();
+    let contract = declare("project_manager").unwrap().contract_class();
     let (contract_address, _) = contract.deploy(@array![owner.into()]).unwrap();
     IProjectManagerDispatcher { contract_address }
 }
@@ -61,9 +78,8 @@ fn test_budget_update_logic() {
     // Check that remaining_budget is initialized correctly
     let project: Project = contract.get_project(project_id);
     assert_eq!(project.remaining_budget, total_budget);
-
     // If you add a function to update budget, test it here.
-    // For now, just check initialization.
+// For now, just check initialization.
 }
 
 #[test]
@@ -137,21 +153,17 @@ fn test_project_allocated_event() {
 
     let mut spy = spy_events();
 
-    let _project_id = contract.create_project(project_owner, total_budget);
+    let project_id = contract.create_project(project_owner, total_budget);
 
-    spy.assert_emitted(
-        @array![
-            (
-                contract.contract_address,
-                budget_contract::project_manger::Event::ProjectAllocated(
-                    budget_contract::project_manger::ProjectAllocated {
-                        project_id,
-                        org: owner,
-                        project_owner,
-                        total_budget,
-                    }
-                )
-            )
-        ]
-    );
+    spy
+        .assert_emitted(
+            @array![
+                (
+                    contract.contract_address,
+                    ProjectManagerEvents::ProjectAllocated(
+                        ProjectAllocated { project_id, org: owner, project_owner, total_budget },
+                    ),
+                ),
+            ],
+        );
 }

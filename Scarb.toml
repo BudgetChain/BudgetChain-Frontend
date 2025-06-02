@@ -15,4 +15,4 @@ openzeppelin_upgrades = "0.20.0"
 [dev-dependencies]
 assert_macros = "2.9.2"
 openzeppelin_utils = "0.20.0"
-snforge_std = "0.36.0"
+snforge_std = "0.44.0"

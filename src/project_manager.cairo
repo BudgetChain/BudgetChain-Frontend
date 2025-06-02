@@ -22,7 +22,7 @@ pub struct Project {
 }
 
 #[starknet::contract]
-mod ProjectManager {
+pub mod ProjectManager {
     use core::num::traits::Zero;
     use openzeppelin_access::accesscontrol::{AccessControlComponent, DEFAULT_ADMIN_ROLE};
     use openzeppelin_introspection::src5::SRC5Component;
@@ -57,7 +57,7 @@ mod ProjectManager {
 
     #[event]
     #[derive(Drop, starknet::Event)]
-    enum Event {
+    pub enum Event {
         ProjectAllocated: ProjectAllocated,
         #[flat]
         AccessControlEvent: AccessControlComponent::Event,
@@ -66,11 +66,11 @@ mod ProjectManager {
     }
 
     #[derive(Drop, starknet::Event)]
-    struct ProjectAllocated {
-        project_id: u64,
-        org: ContractAddress,
-        project_owner: ContractAddress,
-        total_budget: u256,
+    pub struct ProjectAllocated {
+        pub project_id: u64,
+        pub org: ContractAddress,
+        pub project_owner: ContractAddress,
+        pub total_budget: u256,
     }
 
     #[constructor]
