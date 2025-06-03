@@ -6,6 +6,7 @@ import { TransactionFilters } from './transaction-filters';
 import { TransactionTable } from './transaction-table';
 import { TransactionPagination } from './transaction-pagination';
 import { useTransactions } from '@/app/hooks/use-transactions';
+// import TransactionTable from '../../home_dashboard/TransactionTable';
 
 type SortConfig = {
   key: string | null;
@@ -31,15 +32,14 @@ export function TransactionDashboardSection() {
   const { transactions, stats, isLoading, isInitialLoading, error } =
     useTransactions(filters, currentPage, sortConfig);
 
-  const handleSortChange = (config: SortConfig) => {
-    setSortConfig(config);
-  };
+  // const handleSortChange = (config: SortConfig) => {
+  //   setSortConfig(config);
+  // };
 
   return (
     <div className="min-h-screen  text-white">
-      <div className="container mx-auto p-4 md:p-6 space-y-6">
+      <div className=" mx-auto p-4 md:p-6 space-y-6 overflow-hidden">
         <TransactionStats stats={stats} loading={isInitialLoading} />
-
         <TransactionFilters filters={filters} onFiltersChange={setFilters} />
 
         <TransactionTable
@@ -47,10 +47,9 @@ export function TransactionDashboardSection() {
           loading={isInitialLoading}
           isProcessing={isLoading && !isInitialLoading}
           error={error}
-          sortConfig={sortConfig}
-          onSort={handleSortChange}
+          // sortConfig={sortConfig}
+          // onSort={handleSortChange}
         />
-
         <TransactionPagination
           currentPage={currentPage}
           totalPages={Math.ceil((stats?.total || 0) / 10)}
