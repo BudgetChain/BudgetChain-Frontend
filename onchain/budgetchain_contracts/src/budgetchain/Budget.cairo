@@ -1,16 +1,16 @@
 #[feature("deprecated_legacy_map")]
 #[starknet::contract]
 pub mod Budget {
-     use budgetchain_contracts::base::errors::*;
-    use budgetchain_contracts::base::types::{ADMIN_ROLE,ORGANIZATION_ROLE, Organization};
+    use budgetchain_contracts::base::errors::*;
+    use budgetchain_contracts::base::types::{ADMIN_ROLE, ORGANIZATION_ROLE, Organization};
     use budgetchain_contracts::interfaces::IBudget::IBudget;
     use core::array::{Array, ArrayTrait};
     use core::option::Option;
     use openzeppelin::access::accesscontrol::{AccessControlComponent, DEFAULT_ADMIN_ROLE};
     use openzeppelin::introspection::src5::SRC5Component;
     use starknet::storage::{
-        Map, StorageMapReadAccess, StorageMapWriteAccess, 
-        StoragePointerReadAccess, StoragePointerWriteAccess
+        Map, StorageMapReadAccess, StorageMapWriteAccess, StoragePointerReadAccess,
+        StoragePointerWriteAccess,
     };
     use starknet::{
         ContractAddress, contract_address_const, get_block_timestamp, get_caller_address,
@@ -34,9 +34,7 @@ pub mod Budget {
         owner: ContractAddress,
         org_count: u256,
         organizations: Map<u256, Organization>,
-        org_addresses: Map<
-            ContractAddress, bool,
-        >,
+        org_addresses: Map<ContractAddress, bool>,
         org_list: Array<Organization>,
         #[substorage(v0)]
         accesscontrol: AccessControlComponent::Storage,
@@ -113,10 +111,7 @@ pub mod Budget {
         }
 
         fn update_organization(
-            ref self: ContractState,
-            name: felt252,
-            org_id: u256,
-            mission: felt252,
+            ref self: ContractState, name: felt252, org_id: u256, mission: felt252,
         ) {
             let admin = self.admin.read();
             assert(admin == get_caller_address(), ERROR_ONLY_ADMIN);

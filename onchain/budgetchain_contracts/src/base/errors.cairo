@@ -8,4 +8,4 @@ pub const RECIPIENT_CANNOT_BE_ZERO: felt252 = 'Recipient cannot be zero addr';
 
 // Transaction query errors
 pub const TRANSACTION_NOT_FOUND: felt252 = 'Transaction not found';
-pub const INVALID_PAGINATION: felt252 = 'Invalid pagination parameters'; 
+pub const INVALID_PAGINATION: felt252 = 'Invalid pagination parameters';

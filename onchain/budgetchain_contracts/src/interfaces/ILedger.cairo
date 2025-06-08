@@ -9,20 +9,14 @@ pub trait ILedger<TContractState> {
         recipient: ContractAddress,
         amount: u128,
         category: felt252,
-        description: felt252
+        description: felt252,
     ) -> u64;
     fn get_transaction_history(
-        self: @TContractState,
-        project_id: Option<u64>,
-        offset: u64,
-        limit: u64
+        self: @TContractState, project_id: Option<u64>, offset: u64, limit: u64,
     ) -> Array<Transaction>;
     fn get_transaction(self: @TContractState, transaction_id: u64) -> Option<Transaction>;
     fn get_transaction_count(self: @TContractState) -> u64;
     fn get_project_transactions(
-        self: @TContractState,
-        project_id: u64,
-        offset: u64,
-        limit: u64
+        self: @TContractState, project_id: u64, offset: u64, limit: u64,
     ) -> Array<Transaction>;
-} 
+}

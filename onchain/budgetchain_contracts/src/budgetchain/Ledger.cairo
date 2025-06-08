@@ -7,7 +7,8 @@ pub mod Ledger {
     use crate::base::types::{Transaction, TransactionCreated};
     use crate::interfaces::ILedger::ILedger;
     use core::starknet::storage::{
-        StoragePointerReadAccess, StoragePointerWriteAccess, Map, Vec, VecTrait, MutableVecTrait, StorageMapReadAccess, StorageMapWriteAccess
+        StoragePointerReadAccess, StoragePointerWriteAccess, Map, Vec, VecTrait, MutableVecTrait,
+        StorageMapReadAccess, StorageMapWriteAccess,
     };
     use core::array::ArrayTrait;
     use core::array::Array;
@@ -38,9 +39,8 @@ pub mod Ledger {
             recipient: ContractAddress,
             amount: u128,
             category: felt252,
-            description: felt252
+            description: felt252,
         ) -> u64 {
-
             assert(amount > 0, AMOUNT_CANNOT_BE_ZERO);
             // Check if recipient is zero address
             let zero_address: ContractAddress = Zero::zero();
@@ -69,46 +69,45 @@ pub mod Ledger {
 
             // Store transaction
             self.transactions.write(transaction_id, transaction);
-            
+
             // Add to all transactions list
             self.all_transaction_ids.append().write(transaction_id);
-            
+
             // Emit event
-            self.emit(TransactionCreated {
-                id: transaction_id.into(),
-                project_id,
-                sender,
-                recipient,
-                amount,
-                timestamp,
-                category,
-                description,
-            });
+            self
+                .emit(
+                    TransactionCreated {
+                        id: transaction_id.into(),
+                        project_id,
+                        sender,
+                        recipient,
+                        amount,
+                        timestamp,
+                        category,
+                        description,
+                    },
+                );
 
             transaction_id
         }
 
         fn get_transaction_history(
-            self: @ContractState,
-            project_id: Option<u64>,
-            offset: u64,
-            limit: u64
+            self: @ContractState, project_id: Option<u64>, offset: u64, limit: u64,
         ) -> Array<Transaction> {
-            
             let mut transactions = ArrayTrait::new();
             let total_count = self.all_transaction_ids.len();
-            
+
             match project_id {
                 Option::Some(pid) => {
                     // Filter transactions by project_id
                     let mut found_count = 0_u64;
                     let mut added_count = 0_u64;
-                    
+
                     let mut i = 0_u64;
                     while i < total_count && added_count < limit {
                         let tx_id = self.all_transaction_ids.at(i).read();
                         let transaction = self.transactions.read(tx_id);
-                        
+
                         if transaction.project_id == pid {
                             if found_count >= offset {
                                 transactions.append(transaction);
@@ -123,7 +122,7 @@ pub mod Ledger {
                     // Get all transactions with pagination
                     let start_idx = offset;
                     let end_idx = core::cmp::min(start_idx + limit, total_count);
-                    
+
                     let mut i = start_idx;
                     while i < end_idx {
                         let tx_id = self.all_transaction_ids.at(i).read();
@@ -131,9 +130,9 @@ pub mod Ledger {
                         transactions.append(transaction);
                         i += 1;
                     };
-                }
+                },
             }
-            
+
             transactions
         }
 
@@ -155,12 +154,9 @@ pub mod Ledger {
         }
 
         fn get_project_transactions(
-            self: @ContractState,
-            project_id: u64,
-            offset: u64,
-            limit: u64
+            self: @ContractState, project_id: u64, offset: u64, limit: u64,
         ) -> Array<Transaction> {
             self.get_transaction_history(Option::Some(project_id), offset, limit)
         }
     }
-} 
+}
