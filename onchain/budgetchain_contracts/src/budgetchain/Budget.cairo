@@ -18,28 +18,26 @@ pub mod Budget {
     component!(path: AccessControlComponent, storage: accesscontrol, event: AccessControlEvent);
     component!(path: SRC5Component, storage: src5, event: SRC5Event);
 
-    // AccessControl Mixin
     #[abi(embed_v0)]
     impl AccessControlImpl =
         AccessControlComponent::AccessControlImpl<ContractState>;
     impl AccessControlInternalImpl = AccessControlComponent::InternalImpl<ContractState>;
 
-    // SRC5 Mixin
+
     #[abi(embed_v0)]
     impl SRC5Impl = SRC5Component::SRC5Impl<ContractState>;
 
 
     #[storage]
     struct Storage {
-        admin: ContractAddress, // Admin address
-        // Transaction storage
-        owner: ContractAddress, // Owner of the contract
-        org_count: u256, // Unique organization ID counter
-        organizations: Map<u256, Organization>, // Map of organizations by ID
+        admin: ContractAddress,
+        owner: ContractAddress,
+        org_count: u256,
+        organizations: Map<u256, Organization>,
         org_addresses: Map<
             ContractAddress, bool,
-        >, // Map of organization addresses to their active status
-        org_list: Array<Organization>, // List of all organizations
+        >,
+        org_list: Array<Organization>,
         #[substorage(v0)]
         accesscontrol: AccessControlComponent::Storage,
         #[substorage(v0)]
@@ -79,13 +77,9 @@ pub mod Budget {
     #[constructor]
     fn constructor(ref self: ContractState, default_admin: ContractAddress) {
         assert(default_admin != contract_address_const::<0>(), ERROR_ZERO_ADDRESS);
-
-        // Initialize access control
         self.accesscontrol.initializer();
         self.accesscontrol._grant_role(DEFAULT_ADMIN_ROLE, default_admin);
         self.accesscontrol._grant_role(ADMIN_ROLE, default_admin);
-
-        // Initialize contract storage
         self.admin.write(default_admin);
     }
 
@@ -94,15 +88,11 @@ pub mod Budget {
         fn create_organization(
             ref self: ContractState, name: felt252, org_address: ContractAddress, mission: felt252,
         ) -> u256 {
-            // Ensure only the admin can add an organization
             let admin = self.admin.read();
             assert(admin == get_caller_address(), ERROR_ONLY_ADMIN);
 
             let created_at = get_block_timestamp();
-            // // Generate a unique organization ID
             let org_id: u256 = self.org_count.read();
-
-            // Create and store the organization
             let organization = Organization {
                 id: org_id,
                 address: org_address,
@@ -111,18 +101,12 @@ pub mod Budget {
                 mission,
                 created_at: created_at,
             };
-
-            // Emit an event
             self.emit(OrganizationAdded { id: org_id, address: org_address, name: name });
 
             self.org_count.write(org_id + 1);
             self.organizations.write(org_id, organization);
             self.org_addresses.write(org_address, true);
-
-            // Grant organization role
             self.accesscontrol._grant_role(ORGANIZATION_ROLE, organization.address);
-
-            // Emit an event
             self.emit(OrganizationAdded { id: org_id, address: org_address, name: name });
 
             org_id
@@ -131,20 +115,15 @@ pub mod Budget {
         fn update_organization(
             ref self: ContractState,
             name: felt252,
-            org_id: u256, // org_address: ContractAddress,
+            org_id: u256,
             mission: felt252,
         ) {
-            // Ensure only the admin can add an organization
             let admin = self.admin.read();
             assert(admin == get_caller_address(), ERROR_ONLY_ADMIN);
 
             let mut org = self.organizations.read(org_id);
-            // org.is_active = false;
             org.name = name;
-            // org.address = org_address;
             org.mission = mission;
-            // org.created_at = get_block_timestamp();
-            // org.is_active = true;
 
             self.organizations.write(org_id, org);
         }
