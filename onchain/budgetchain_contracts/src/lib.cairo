@@ -6,12 +6,15 @@ pub mod base {
 
 pub mod interfaces {
     pub mod IBudget;
+    pub mod ILedger;
 }
 
 pub mod budgetchain {
     pub mod Budget;
+    pub mod Ledger;
 }
 
 // Re-export the main modules for easier access
-pub use budgetchain::Budget;
-pub use interfaces::IBudget;
+pub use budgetchain::{Budget, Ledger};
+pub use interfaces::{IBudget, ILedger};
+pub use base::types::Transaction;
