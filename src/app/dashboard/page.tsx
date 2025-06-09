@@ -1,10 +1,14 @@
 import React from 'react';
 import Dashboard from './home_dashboard/home_dashboard';
+import { Suspense } from 'react';
+import DashboardLoading from './loading';
 
 const page = () => {
   return (
     <div>
-      <Dashboard />
+      <Suspense fallback={<DashboardLoading />}>
+        <Dashboard />
+      </Suspense>
     </div>
   );
 };

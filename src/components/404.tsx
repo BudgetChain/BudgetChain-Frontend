@@ -14,8 +14,8 @@ const NotFound = () => {
         </h2>
         <h4 className="max-w-[33rem] mx-auto text-sm leading-6 px-2">
           The page you are looking for seems to have wandered off... Like a
-          budget that got off track! Lets help you get back to where you need
-          to be.
+          budget that got off track! Lets help you get back to where you need to
+          be.
         </h4>
       </section>
       <div className="absolute top-[38%] sm:top-[22%] left-1/2 transform -translate-x-1/2 flex items-center justify-center text-[12rem] sm:text-[20rem] md:text-[24rem] lg:text-[28rem] xl:text-[25rem] font-bold text-[#2D3248] opacity-60 w-full -z-10">
@@ -30,9 +30,17 @@ const NotFound = () => {
         <div className=" h-20 w-full md:w-[40rem] bg-[#050512] rounded-xl border-[#736fe8] border-solid border-[1px] flex flex-row items-center gap-3 justify-center px-4 py-2 flex-wrap">
           <h3>Recommeded Routes:</h3>{' '}
           <ul className="flex flex-row gap-2">
-            <Link href={'/'}>Home</Link>/
-            <Link href={'/dashboard'}>Dashboard</Link>/
-            <Link href={''}>Other link</Link>
+            <Link href={'/'} className="hover:text-[#736fe8]">
+              Home
+            </Link>
+            /
+            <Link href={'/dashboard'} className="hover:text-[#736fe8]">
+              Dashboard
+            </Link>
+            /
+            <Link href={''} className="hover:text-[#736fe8]">
+              Other link
+            </Link>
           </ul>
         </div>
       </section>
