@@ -29,7 +29,7 @@ const timelineData = [
 
 const CompanyHistory = () => {
     return (
-        <section className="text-white flex flex-col items-center justify-center py-16 px-8 md:px-16 ">
+        <section className="text-white flex flex-col items-center justify-center px-8 md:px-16">
             <h3 className="text-3xl font-bold mb-6 text-center">
                 Company History & Impact Timeline
             </h3>

@@ -14,7 +14,7 @@ function AboutUs() {
     return (
         <div className="bg-[#050512]">
             <Navbar />
-            <main className="flex flex-col items-center justify-center py-32 space-y-16">
+            <main className="flex flex-col items-center justify-center py-16 space-y-10">
                 <ScrollReveal>
                     <CompanyMission />
                 </ScrollReveal>
@@ -31,7 +31,6 @@ function AboutUs() {
                     <CompanyHistory />
                 </ScrollReveal>
             </main>
-            <hr />
             <Footer />
         </div>
     )

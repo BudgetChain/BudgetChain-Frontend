@@ -28,29 +28,29 @@ export default function Home() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className="bg-[#050512]">
+      <div className="w-full bg-[#050512] overflow-hidden relative">
         <Navbar />
         {/* Hero Section */}
-        <main className=" flex flex-col items-center justify-center px-4 py-16 md:py-24 lg:py-32">
-          <h1 className="mb-6  font-semibold text-gray-300 md:text-[20px]">
+        <main className="flex flex-col items-center justify-center mt-20 px-6 py-16 md:py-24 lg:py-32">
+          <h4 className="font-semibold text-gray-300 md:text-[20px]">
             Introducing
+          </h4>
+          <h1 className="md:text-[64px] text-[30px] font-bold bg-gradient-to-r from-[#c4c4cf] via-[#9493cf] to-[#5B54FF] bg-clip-text text-transparent">
+            BUDGETCHAIN
           </h1>
-          <div className="mb-5">
-            <Image src={Brand} alt="Brand" />
-          </div>
           <p className="mb-8 max-w-2xl text-center text-gray-300">
             Revolutionizing how you manage, allocate, and optimize financial
-            resources with real-time insights and AI-driven automati
+            resources with real-time insights and AI-driven automation
           </p>
-          <div className="flex space-x-4">
+          <div className="w-full flex md:flex-row flex-col gap-4 items-center justify-center">
             <button
-              className="w-[170px] h-[50px] rounded-[12px] bg-[#050512] border border-[#EBEBEB80] px-4 py-2 text-[#EBEBEB] transition hover:bg-white hover:text-black"
+              className="md:w-[170px] w-full h-[50px] rounded-[12px] bg-[#050512] border border-[#EBEBEB80] px-4 py-2 text-[#EBEBEB] transition hover:bg-white hover:text-black"
               onClick={handleLoginClick}
             >
               LOGIN
             </button>
             <button
-              className="w-[170px] h-[50px] rounded-[12px] bg-white px-4 py-2 text-black transition hover:bg-opacity-80"
+              className="md:w-[170px] w-full h-[50px] rounded-[12px] bg-white px-4 py-2 text-black transition hover:bg-opacity-80"
               onClick={handleRole}
             >
               GET STARTED
@@ -58,11 +58,24 @@ export default function Home() {
           </div>
         </main>
 
-        {/* Snapshot Od Dashboard */}
+        {/* Snapshot Of Dashboard */}
+        <div className="w-full p-4 md:p-0 flex flex-col items-center justify-center relative">
+          <div
+            className="w-full h-full absolute inset-0 pointer-events-none z-10"
+            style={{
+              background:
+                'linear-gradient(to bottom, transparent 0%, transparent 75%, rgba(5, 5, 18, 0.9) 85%, #050512 100%)',
+            }}
+          ></div>
+          <Image
+            src="/svg/landingImage1.svg"
+            alt="Dashboard Preview"
+            width={976}
+            height={507}
+            className="relative"
+          />
+        </div>
 
-        <main className="flex flex-col items-center justify-center">
-          <Image src={Land1} alt="Images" />
-        </main>
         {/* How it works */}
         <main className="flex flex-col items-center justify-center">
           <HowItWorks />
@@ -84,7 +97,6 @@ export default function Home() {
         </main>
 
         {/* Footer */}
-
         <Footer />
 
         {/* Login Modal */}

@@ -38,7 +38,7 @@ const whitepaperSections = [
 
 const Others = () => {
     return (
-        <section className="text-white py-20 px-6 md:px-16">
+        <section className="py-20 px-6 md:px-16">
             <h2 className="text-4xl font-bold text-center mb-12 text-white">Whitepaper Overview</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-6xl mx-auto">
