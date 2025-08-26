@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
-import ArrowCircleUpRight from '../../public/ArrowCircleUpRight.svg'
+import ArrowCircleUpRight from '../../public/ArrowCircleUpRight.svg';
 import Logo from '../../public/svg/Logo.svg';
 import Link from 'next/link';
 
@@ -15,11 +15,11 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="  text-white py-10 px-6 md:px-16 mt-5">
-      <div className="flex justify-between w-full">
+    <footer className="text-white py-10 px-6 md:px-16 mt-5">
+      <div className="flex md:flex-row flex-col md:gap-32 gap-6 items-center w-full">
         {/* Left Section */}
         <div>
-          <div className="text-white h-[37.34px] w-[150px] pr-4">
+          <div className="text-white w-[150px] pr-4">
             <Image
               src={Logo}
               width={50}
@@ -28,82 +28,88 @@ const Footer = () => {
               className="w-full h-full object-fill"
             />
           </div>
-          <p className="text-gray-400 text-sm mt-2 w-[300px]">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam doloribus voluptatibus ipsa debitis consequuntur iure!
+          <p className="text-gray-400 text-sm mt-2">
+            Sorem ipsum dolor sit amet, consectetur adipiscing elit. <br /> Nunc
+            vulputate libero et velit interdum, ac aliquet odio mattis. Class
+            aptent taciti sociosqu ad <br /> litora torquent per conubia nostra,
+            per inceptos himenaeos.
           </p>
         </div>
 
-        {/* Product Section */}
-        <div>
-          <h3 className="font-semibold text-md">PRODUCT</h3>
-          <ul className="mt-2 space-y-2 text-gray-400 text-sm">
-            {menuItems.map((item) => (
-              <li key={item.name}>
-                <Link
-                  href={item.path}
-                  className={`hover:text-white ${activePage === item.path ? 'text-blue-500' : ''
+        <div className="grid md:grid-cols-3 grid-cols-2 gap-4 md:gap-8 w-full justify-between py-2">
+          {/* Product Section */}
+          <div>
+            <h3 className="font-semibold text-[14px]">PRODUCT</h3>
+            <ul className="mt-2 space-y-2 text-gray-400 text-sm">
+              {menuItems.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.path}
+                    className={`hover:text-white ${
+                      activePage === item.path ? 'text-blue-500' : ''
                     }`}
-                  onClick={() => setActivePage(item.path)}
-                >
-                  {item.name}
-                </Link>
+                    onClick={() => setActivePage(item.path)}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company Section */}
+          <div>
+            <h3 className="font-semibold text-[14px]">COMPANY</h3>
+            <ul className="mt-2 space-y-2 text-gray-400 text-sm">
+              <li>
+                <a href="/career" className="hover:text-white">
+                  Career
+                </a>
               </li>
-            ))}
-          </ul>
-        </div>
+              <li>
+                <a href="/contact" className="hover:text-white">
+                  Contact Us
+                </a>
+              </li>
+              <li>
+                <a href="/address" className="hover:text-white">
+                  Address
+                </a>
+              </li>
+              <li>
+                <a href="/developers" className="hover:text-white">
+                  Developers
+                </a>
+              </li>
+            </ul>
+          </div>
 
-        {/* Company Section */}
-        <div>
-          <h3 className="font-semibold text-md">COMPANY</h3>
-          <ul className="mt-2 space-y-2 text-gray-400 text-sm">
-            <li>
-              <a href="/career" className="hover:text-white">
-                Career
-              </a>
-            </li>
-            <li>
-              <a href="/contact" className="hover:text-white">
-                Contact Us
-              </a>
-            </li>
-            <li>
-              <a href="/address" className="hover:text-white">
-                Address
-              </a>
-            </li>
-            <li>
-              <a href="/developers" className="hover:text-white">
-                Developers
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        {/* Socials Section */}
-        <div>
-          <h3 className="font-semibold text-md">SOCIALS</h3>
-          <ul className="mt-2 space-y-2 text-gray-400 text-sm">
-            <li>
-              <a href="https://telegram.com" className="hover:text-white">
-                Telegram
-              </a>
-            </li>
-            <li>
-              <a href="https://twitter.com" className="hover:text-white">
-                Twitter
-              </a>
-            </li>
-            <li>
-              <a href="https://discord.com" className="hover:text-white">
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com" className="hover:text-white">
-                Github
-              </a>
-            </li>
-          </ul>
+          {/* Socials Section */}
+          <div>
+            <h3 className="font-semibold text-[14px]">SOCIALS</h3>
+            <ul className="mt-2 space-y-2 text-gray-400 text-sm">
+              <li>
+                <a href="https://telegram.com" className="hover:text-white">
+                  Telegram
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com" className="hover:text-white">
+                  Twitter
+                </a>
+              </li>
+              <li>
+                <a href="https://discord.com" className="hover:text-white">
+                  Discord
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com" className="hover:text-white">
+                  Github
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div className="text-[12px] mt-10">

@@ -1,9 +1,12 @@
 const CompanyMission = () => {
   return (
-    <section className="py-16 px-8 md:px-16 text-white text-center rounded-2xl w-[95%] mx-auto" 
-             style={{
-               background: 'linear-gradient(to right, #312e81 0%, #050512 30%, #050512 70%, #312e81 100%)'
-             }}>
+    <section
+      className="py-16 px-8 md:px-16 text-white text-center rounded-2xl w-[95%] mx-auto md:mt-24 mt-10"
+      style={{
+        background:
+          'linear-gradient(to right, #312e81 0%, #050512 30%, #050512 70%, #312e81 100%)',
+      }}
+    >
       <h3 className="text-4xl font-semibold mb-2 text-white">
         Company Mission
       </h3>

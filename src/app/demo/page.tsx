@@ -146,15 +146,15 @@ export default function Demo() {
   };
 
   return (
-    <div className="bg-[#050512] min-h-screen text-white">
+    <div className="bg-[#050512] mt-32 min-h-screen text-white">
       <Navbar />
 
       {/* Demo Features */}
       <section id="demo-features" className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-12 text-center">
+          <h1 className="md:text-[64px] text-[30px] font-bold mb-4 bg-gradient-to-r from-[#c4c4cf] via-[#9493cf] to-[#5B54FF] bg-clip-text text-transparent text-center">
             Interactive Demo Features
-          </h2>
+          </h1>
 
           <Tabs
             defaultValue="dashboard"
