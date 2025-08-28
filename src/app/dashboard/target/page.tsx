@@ -6,15 +6,15 @@ import Records from '../records/page';
 
 const Target: NextPage = () => {
   const [showRecords, setShowRecords] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  // const [selectedProject, setSelectedProject] = useState<number | null>(null);
 
   const handleCardClick = (index: number) => {
     if (index === 0) {
       setShowRecords(true);
-      setSelectedProject(0);
+      // setSelectedProject(0);
     } else {
       setShowRecords(false);
-      setSelectedProject(null);
+      // setSelectedProject(null);
     }
   };
 
@@ -52,13 +52,12 @@ const Target: NextPage = () => {
   const projectsToRender = defaultProjects;
 
   return (
-    <main className="flex mb-6 bg-[#171720] text-[#FFFFFF]">
-
-      <div className="bg-[#171720] px-4 w-full">
+    <main className="min-h-screen bg-[#171720] text-[#FFFFFF] p-4 sm:p-6">
+      <div className="bg-[#171720] w-full">
         {showRecords ? (
           <Records />
         ) : (
-          <div className="flex justify-between flex-wrap gap-y-6 mt-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {projectsToRender.map((project, index) => (
               <div
                 key={index}
@@ -76,11 +75,12 @@ const Target: NextPage = () => {
                   border={project.border}
                 />
               </div>
-            ))}          </div>
+            ))}
+          </div>
         )}
       </div>
     </main>
   );
-
 };
+
 export default Target;

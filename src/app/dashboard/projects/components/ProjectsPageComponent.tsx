@@ -63,6 +63,7 @@ export default function ProjectsPageComponent() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [filterBy, setFilterBy] = useState("Date Added");
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+  const [expandedProject, setExpandedProject] = useState<number | null>(null);
 
   // Form fields state
   const [formData, setFormData] = useState({
@@ -197,59 +198,50 @@ export default function ProjectsPageComponent() {
     }
   };
 
+  const toggleProjectExpansion = (id: number) => {
+    setExpandedProject(expandedProject === id ? null : id);
+  };
+
   return (
-    <div className="bg-[#171720] min-h-screen text-white w-full p-4">
+    <div className="bg-[#171720] min-h-screen text-white w-full p-3 sm:p-4 lg:p-6">
       {/* Banner Card */}
-      <div className="w-full mb-5 border border-gray-700 bg-gradient-to-r from-[#171720] from-[60%] to-[#894DBD] to-[120%] rounded-lg p-6 flex justify-between items-center">
+      <div className="w-full mb-4 sm:mb-5 border border-gray-700 bg-gradient-to-r from-[#171720] from-[60%] to-[#894DBD] to-[120%] rounded-lg p-4 sm:p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 sm:gap-0">
         {/* Left section with transaction info */}
-        <div className="flex flex-col">
-          <div className="flex items-center space-x-2 text-gray-300 text-sm mb-2">
+        <div className="flex flex-col w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2 text-gray-300 text-xs sm:text-sm mb-2 sm:mb-3">
             <span>Total Transactions</span>
-            <div className="flex items-center text-xs bg-gray-800 rounded px-2 py-0.5">
+            <div className="flex items-center text-xs bg-gray-800 rounded px-2 py-1 w-fit">
               <span className="mr-1">STRK</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
+              <ChevronDown size={12} />
             </div>
           </div>
 
-          <div className="text-4xl font-bold text-white mb-4">75</div>
+          <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">75</div>
 
-          <button className="flex items-center text-sm text-gray-300 border border-gray-700 hover:bg-gray-800 rounded-md px-4 py-2 transition-colors">
-            <Download size={16} className="mr-2" />
-            Download Records
+          <button className="flex items-center text-xs sm:text-sm text-gray-300 border border-gray-700 hover:bg-gray-800 rounded-md px-3 sm:px-4 py-2 transition-colors w-full sm:w-auto justify-center sm:justify-start">
+            <Download size={14} className="mr-2" />
+            <span className="hidden sm:inline">Download Records</span>
+            <span className="sm:hidden">Download</span>
           </button>
         </div>
 
-        <div className="">
-          <div>
-            <Image src={CoinImage} alt='coin-image' />
-          </div>
+        <div className="flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 self-center sm:self-start">
+          <Image src={CoinImage} alt='coin-image' className="w-full h-full object-contain" />
         </div>
       </div>
       
       {/* Tab Navigation */}
-      <div className="flex border-b border-gray-700 mb-6">
+      <div className="flex border-b border-gray-700 mb-4 sm:mb-6 overflow-x-auto">
         <button
           onClick={() => setActiveTab('dashboard')}
-          className={`py-4 px-6 text-sm font-medium relative ${activeTab === 'dashboard' ? 'text-white' : 'text-gray-400'}`}
+          className={`py-3 sm:py-4 px-4 sm:px-6 text-xs sm:text-sm font-medium relative whitespace-nowrap ${activeTab === 'dashboard' ? 'text-white' : 'text-gray-400'}`}
         >
           Records
           {activeTab === 'dashboard' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></div>}
         </button>
         <button
           onClick={() => setActiveTab('register')}
-          className={`py-4 px-6 text-sm font-medium relative ${activeTab === 'register' ? 'text-white' : 'text-gray-400'}`}
+          className={`py-3 sm:py-4 px-4 sm:px-6 text-xs sm:text-sm font-medium relative whitespace-nowrap ${activeTab === 'register' ? 'text-white' : 'text-gray-400'}`}
         >
           Add New Project
           {activeTab === 'register' && <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></div>}
@@ -257,7 +249,7 @@ export default function ProjectsPageComponent() {
       </div>
 
       {/* Header */}
-      <div className="flex w-full justify-between items-center mb-6">
+      <div className="flex flex-col sm:flex-row w-full justify-between items-start sm:items-center mb-4 sm:mb-6 gap-4 sm:gap-0">
         <div className="flex items-center">
           {(activeTab !== "dashboard" || selectedProject) && (
             <button 
@@ -270,28 +262,28 @@ export default function ProjectsPageComponent() {
                 }
               }}
             >
-              <ArrowLeft size={20} />
+              <ArrowLeft size={18} className="sm:w-5 sm:h-5" />
             </button>
           )}
           {activeTab === "dashboard" && !selectedProject && (
-            <h1 className="text-xl font-medium ml-2">All Projects</h1>
+            <h1 className="text-lg sm:text-xl font-medium ml-2">All Projects</h1>
           )}
           {selectedProject && (
-            <h1 className="text-xl font-medium ml-2">{selectedProject.name} Project</h1>
+            <h1 className="text-lg sm:text-xl font-medium ml-2">{selectedProject.name} Project</h1>
           )}
         </div>
         
         {activeTab === "dashboard" && !selectedProject && (
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center text-sm">
-              <span className="mr-2">Filter by:</span>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
+            <div className="flex flex-col sm:flex-row sm:items-center text-xs sm:text-sm gap-2 sm:gap-0">
+              <span className="sm:mr-2">Filter by:</span>
               <div className="relative">
                 <button 
-                  className="flex items-center space-x-1 bg-transparent border border-gray-700 px-3 py-1.5 rounded-md"
+                  className="flex items-center space-x-1 bg-transparent border border-gray-700 px-3 py-2 rounded-md text-xs sm:text-sm w-full sm:w-auto justify-between sm:justify-center min-w-[120px]"
                   onClick={() => setShowFilterDropdown(!showFilterDropdown)}
                 >
                   <span>{filterBy}</span>
-                  <ChevronDown size={16} />
+                  <ChevronDown size={14} />
                 </button>
                 
                 {showFilterDropdown && (
@@ -312,17 +304,17 @@ export default function ProjectsPageComponent() {
             
             <button 
               onClick={() => setActiveTab("register")} 
-              className="flex justify-between items-center bg-[#4F4AE6] hover:bg-blue-700 text-white px-4 h-[40px] py-2 rounded-md text-sm"
+              className="flex justify-center items-center bg-[#4F4AE6] hover:bg-blue-700 text-white px-4 py-2 rounded-md text-xs sm:text-sm w-full sm:w-auto"
             >
-              <Plus size={16} className="mr-2" />
+              <Plus size={14} className="mr-2" />
               Add Project
             </button>
           </div>
         )}
         
         {activeTab === "dashboard" && selectedProject && (
-          <button className="flex justify-between items-center bg-[#4F4AE6] hover:bg-blue-700 text-white px-4 h-[40px] py-2 rounded-md text-sm">
-            <Plus size={16} className="mr-2" />
+          <button className="flex justify-center items-center bg-[#4F4AE6] hover:bg-blue-700 text-white px-4 py-2 rounded-md text-xs sm:text-sm w-full sm:w-auto">
+            <Plus size={14} className="mr-2" />
             Add Transaction
           </button>
         )}
@@ -330,52 +322,131 @@ export default function ProjectsPageComponent() {
 
       {/* Dashboard Content */}
       {activeTab === "dashboard" && !selectedProject && (
-        <div className="overflow-x-auto rounded-lg bg-[#171720] border border-[#EBEBEB40]">
-          <table className="min-w-full bg-[#171720] text-white text-sm">
-            <thead>
-              <tr className="bg-[#1c1c26] text-left">
-                <th className="p-4">S/N</th>
-                <th className="p-4">Project</th>
-                <th className="p-4">Address</th>
-                <th className="p-4">Amount Requested</th>
-                <th className="p-4">Start Date</th>
-                <th className="p-4">Time Left</th>
-                <th className="p-4">Status</th>
-                <th className="p-4">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {projects.map((project) => (
-                <tr 
-                  key={project.id} 
-                  className="border-b border-gray-700 hover:bg-gray-800 cursor-pointer"
-                  onClick={() => handleProjectClick(project)}
-                >
-                  <td className="p-4">{project.id}.</td>
-                  <td className="p-4">{project.name}</td>
-                  <td className="p-4">{project.address}</td>
-                  <td className="p-4">
-                    {project.amount}
-                    <div className="text-xs text-gray-400">{project.amountInUSD}</div>
-                  </td>
-                  <td className="p-4">{project.startDate}</td>
-                  <td className="p-4">{project.timeLeft}</td>
-                  <td className="p-4">
-                    <span className={`flex items-center ${getStatusClass(project.status)}`}>
-                      <span className="h-2 w-2 rounded-full bg-current mr-2"></span>
-                      {project.status}
-                    </span>
-                  </td>
-                  <td className="p-4">
-                    <button className="text-gray-400 hover:text-white">
-                      <MoreVertical size={18} />
-                    </button>
-                  </td>
+        <>
+          {/* Desktop Table View */}
+          <div className="hidden lg:block overflow-x-auto rounded-lg bg-[#171720] border border-[#EBEBEB40]">
+            <table className="min-w-full bg-[#171720] text-white text-sm">
+              <thead>
+                <tr className="bg-[#1c1c26] text-left">
+                  <th className="p-3 lg:p-4 text-xs lg:text-sm">S/N</th>
+                  <th className="p-3 lg:p-4 text-xs lg:text-sm">Project</th>
+                  <th className="p-3 lg:p-4 text-xs lg:text-sm">Address</th>
+                  <th className="p-3 lg:p-4 text-xs lg:text-sm">Amount</th>
+                  <th className="p-3 lg:p-4 text-xs lg:text-sm">Start Date</th>
+                  <th className="p-3 lg:p-4 text-xs lg:text-sm">Time Left</th>
+                  <th className="p-3 lg:p-4 text-xs lg:text-sm">Status</th>
+                  <th className="p-3 lg:p-4 text-xs lg:text-sm">Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {projects.map((project) => (
+                  <tr 
+                    key={project.id} 
+                    className="border-b border-gray-700 hover:bg-gray-800 cursor-pointer"
+                    onClick={() => handleProjectClick(project)}
+                  >
+                    <td className="p-3 lg:p-4 text-xs lg:text-sm">{project.id}.</td>
+                    <td className="p-3 lg:p-4 text-xs lg:text-sm font-medium">{project.name}</td>
+                    <td className="p-3 lg:p-4 text-xs lg:text-sm font-mono">{project.address}</td>
+                    <td className="p-3 lg:p-4 text-xs lg:text-sm">
+                      <div className="font-medium">{project.amount}</div>
+                      <div className="text-xs text-gray-400">{project.amountInUSD}</div>
+                    </td>
+                    <td className="p-3 lg:p-4 text-xs lg:text-sm">{project.startDate}</td>
+                    <td className="p-3 lg:p-4 text-xs lg:text-sm">{project.timeLeft}</td>
+                    <td className="p-3 lg:p-4 text-xs lg:text-sm">
+                      <span className={`flex items-center ${getStatusClass(project.status)}`}>
+                        <span className="h-2 w-2 rounded-full bg-current mr-2"></span>
+                        {project.status}
+                      </span>
+                    </td>
+                    <td className="p-3 lg:p-4">
+                      <button className="text-gray-400 hover:text-white">
+                        <MoreVertical size={16} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile Card View */}
+          <div className="lg:hidden space-y-3">
+            {projects.map((project) => (
+              <div
+                key={project.id}
+                className="bg-[#171720] border border-[#EBEBEB40] rounded-lg"
+              >
+                <div
+                  className="p-4 cursor-pointer"
+                  onClick={() => toggleProjectExpansion(project.id)}
+                >
+                  <div className="flex justify-between items-start mb-3">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-gray-400 text-sm">#{project.id}</span>
+                        <span className="text-white font-medium">{project.name}</span>
+                      </div>
+                      <div className="text-sm font-medium mb-1">{project.amount}</div>
+                      <div className="text-xs text-gray-400">{project.amountInUSD}</div>
+                    </div>
+                    <div className="flex flex-col items-end gap-2">
+                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold ${
+                        project.status === 'ACTIVE'
+                          ? 'text-green-400 bg-green-900/30'
+                          : project.status === 'ON-HOLD'
+                          ? 'text-gray-400 bg-gray-900/30'
+                          : project.status === 'COMPLETED'
+                          ? 'text-blue-400 bg-blue-900/30'
+                          : 'text-red-400 bg-red-900/30'
+                      }`}>
+                        <span className="w-2 h-2 rounded-full mr-1 bg-current"></span>
+                        {project.status}
+                      </span>
+                      <button 
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleProjectClick(project);
+                        }}
+                        className="text-xs text-blue-400 hover:text-blue-300"
+                      >
+                        View Details
+                      </button>
+                    </div>
+                  </div>
+                  
+                  {/* Expand/Collapse indicator */}
+                  <div className="flex justify-center border-t border-gray-700 pt-3">
+                    <span className="text-gray-400 text-xs flex items-center">
+                      {expandedProject === project.id ? 'Less Info ▲' : 'More Info ▼'}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Expanded content */}
+                {expandedProject === project.id && (
+                  <div className="px-4 pb-4 border-t border-gray-700 bg-[#1a1a24]">
+                    <div className="pt-3 space-y-2">
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-gray-400">Address:</span>
+                        <span className="text-white font-mono">{project.address}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-gray-400">Start Date:</span>
+                        <span className="text-white">{project.startDate}</span>
+                      </div>
+                      <div className="flex justify-between items-center text-sm">
+                        <span className="text-gray-400">Time Left:</span>
+                        <span className="text-white">{project.timeLeft}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </>
       )}
       
       {/* Selected Project Transactions */}
@@ -385,16 +456,16 @@ export default function ProjectsPageComponent() {
 
       {/* Add Project Form */}
       {activeTab === 'register' && (
-        <div className="bg-transparent border border-[#EBEBEB40] rounded-lg p-8 w-full">
+        <div className="bg-transparent border border-[#EBEBEB40] rounded-lg p-4 sm:p-6 lg:p-8 w-full">
           <form onSubmit={handleSubmit} className="w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 w-full">
               {/* Date and Time Fields */}
               <div className="space-y-2 w-full">
                 <label className="block text-[#4F4AE6] text-sm">Date</label>
                 <div className="flex items-center w-full">
                   <input
                     type="text"
-                    className="bg-[#28283A] rounded p-3 w-full text-[#848484]"
+                    className="bg-[#28283A] rounded p-3 w-full text-[#848484] text-sm"
                     placeholder="19/02/2027"
                     name="date"
                     value={formData.date}
@@ -410,7 +481,7 @@ export default function ProjectsPageComponent() {
                 <div className="flex items-center w-full">
                   <input
                     type="text"
-                    className="bg-[#28283A] rounded p-3 w-full text-[#848484]"
+                    className="bg-[#28283A] rounded p-3 w-full text-[#848484] text-sm"
                     placeholder="8:00 PM UTC"
                     name="time"
                     value={formData.time}
@@ -426,7 +497,7 @@ export default function ProjectsPageComponent() {
                 <label className="block text-[#4F4AE6] text-sm">Project</label>
                 <input
                   type="text"
-                  className={`bg-[#28283A] rounded p-3 w-full text-[#848484] ${formErrors.project ? 'border border-red-500' : ''}`}
+                  className={`bg-[#28283A] rounded p-3 w-full text-[#848484] text-sm ${formErrors.project ? 'border border-red-500' : ''}`}
                   placeholder="Name of Project"
                   name="project"
                   value={formData.project}
@@ -442,7 +513,7 @@ export default function ProjectsPageComponent() {
                 <div className="relative w-full text-[#848484]">
                   <input
                     type="text"
-                    className={`bg-[#28283A] rounded p-3 pr-2 w-full ${formErrors.amount ? 'border border-red-500' : ''}`}
+                    className={`bg-[#28283A] rounded p-3 pr-20 w-full text-sm ${formErrors.amount ? 'border border-red-500' : ''}`}
                     placeholder="$****"
                     name="amount"
                     value={formData.amount}
@@ -477,10 +548,10 @@ export default function ProjectsPageComponent() {
               </div>
 
               {/* Description/Note Field - Full Width */}
-              <div className="col-span-1 md:col-span-2 space-y-2 w-full">
+              <div className="col-span-1 lg:col-span-2 space-y-2 w-full">
                 <label className="block text-[#4F4AE6] text-sm mb-1">Description/Note</label>
                 <textarea
-                  className={`bg-[#28283A] rounded p-3 w-full h-48 text-[#848484] resize-none ${formErrors.description ? 'border border-red-500' : ''}`}
+                  className={`bg-[#28283A] rounded p-3 w-full h-32 sm:h-40 lg:h-48 text-[#848484] text-sm resize-none ${formErrors.description ? 'border border-red-500' : ''}`}
                   placeholder="Write Details of what you'll be using the funds for"
                   name="description"
                   value={formData.description}
@@ -492,11 +563,11 @@ export default function ProjectsPageComponent() {
               </div>
 
               {/* Submit Button */}
-              <div className="col-span-1 md:col-span-2 flex justify-start w-full">
+              <div className="col-span-1 lg:col-span-2 flex justify-start w-full">
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="bg-[#4F4AE6] h-[40px] hover:bg-blue-700 text-white text-sm w-full max-w-[302px] rounded-md font-medium transition-colors flex items-center justify-center"
+                  className="bg-[#4F4AE6] hover:bg-blue-700 text-white text-sm w-full sm:w-auto sm:min-w-[302px] px-6 py-3 rounded-md font-medium transition-colors flex items-center justify-center"
                 >
                   {isLoading ? (
                     <>
@@ -515,7 +586,7 @@ export default function ProjectsPageComponent() {
 
           {/* Success Message */}
           {isSubmitted && (
-            <div className="mt-4 bg-green-700 bg-opacity-20 border border-green-500 rounded-md p-4 text-green-400">
+            <div className="mt-4 bg-green-700 bg-opacity-20 border border-green-500 rounded-md p-4 text-green-400 text-sm">
               Your project request has been submitted successfully. You will be notified when it&apos;s approved.
             </div>
           )}

@@ -29,10 +29,10 @@ export function TransactionTable({
 }: TransactionTableProps) {
   if (loading) {
     return (
-      <div className="py-4 px-5">
+      <div className="py-4 px-4 sm:px-5">
         <div className="overflow-x-auto rounded-lg border border-[#747479]">
-          <table className="min-w-full bg-gray-900 rounded-lg text-white text-sm border border-[#747479]">
-            <thead>
+          <table className="min-w-full bg-gray-900 rounded-lg text-white text-sm">
+            <thead className="hidden sm:table-header-group">
               <tr className="bg-[#2B2B46] text-left">
                 <th className="p-4">S/N</th>
                 <th className="p-4">Projects</th>
@@ -46,29 +46,29 @@ export function TransactionTable({
             </thead>
             <tbody className="rounded-lg bg-[#171720]">
               {[...Array(10)].map((_, i) => (
-                <tr key={i} className="border-b border-[#747479]">
-                  <td className="p-4">
+                <tr key={i} className="border-b border-[#747479] sm:table-row flex flex-col sm:table-row p-4 sm:p-0">
+                  <td className="p-2 sm:p-4">
                     <Skeleton className="h-4 w-6 sm:w-8 bg-[#2A2A3A]" />
                   </td>
-                  <td className="p-4">
+                  <td className="p-2 sm:p-4">
                     <Skeleton className="h-4 w-12 sm:w-16 md:w-20 bg-[#2A2A3A]" />
                   </td>
-                  <td className="p-4">
+                  <td className="p-2 sm:p-4">
                     <Skeleton className="h-4 w-10 sm:w-12 md:w-16 bg-[#2A2A3A]" />
                   </td>
-                  <td className="p-4">
+                  <td className="p-2 sm:p-4">
                     <Skeleton className="h-4 w-14 sm:w-18 md:w-24 bg-[#2A2A3A]" />
                   </td>
-                  <td className="p-4">
+                  <td className="p-2 sm:p-4">
                     <Skeleton className="h-4 w-16 sm:w-24 md:w-32 bg-[#2A2A3A]" />
                   </td>
-                  <td className="p-4">
+                  <td className="p-2 sm:p-4">
                     <Skeleton className="h-4 w-16 sm:w-24 md:w-40 bg-[#2A2A3A]" />
                   </td>
-                  <td className="p-4">
+                  <td className="p-2 sm:p-4">
                     <Skeleton className="h-4 w-12 sm:w-16 md:w-20 bg-[#2A2A3A]" />
                   </td>
-                  <td className="p-4">
+                  <td className="p-2 sm:p-4">
                     <Skeleton className="h-4 w-12 sm:w-16 md:w-20 bg-[#2A2A3A]" />
                   </td>
                 </tr>
@@ -82,7 +82,7 @@ export function TransactionTable({
 
   if (error) {
     return (
-      <div className="py-4 px-5">
+      <div className="py-4 px-4 sm:px-5">
         <Alert className="bg-red-900/20 border-red-800">
           <AlertDescription className="text-red-300">{error}</AlertDescription>
         </Alert>
@@ -91,7 +91,7 @@ export function TransactionTable({
   }
 
   return (
-    <div className="py-4 px-5">
+    <div className="py-4 px-4 sm:px-5 relative">
       {isProcessing && (
         <div className="absolute top-4 right-4 z-10">
           <div className="bg-[#2B2B46] rounded-full p-2 shadow-lg flex items-center gap-2">
@@ -101,8 +101,9 @@ export function TransactionTable({
         </div>
       )}
 
-      <div className="overflow-x-auto rounded-lg border border-[#747479]">
-        <table className="min-w-full bg-gray-900 rounded-lg text-white text-sm border border-[#747479]">
+      {/* Table for larger screens */}
+      <div className="hidden sm:block overflow-x-auto rounded-lg border border-[#747479]">
+        <table className="min-w-full bg-gray-900 rounded-lg text-white text-sm">
           <thead>
             <tr className="bg-[#2B2B46] text-left">
               <th className="p-4">S/N</th>
@@ -115,7 +116,6 @@ export function TransactionTable({
               <th className="p-4">Status</th>
             </tr>
           </thead>
-
           <tbody className="rounded-lg bg-[#171720]">
             {transactions.length > 0 ? (
               transactions.map((transaction) => (
@@ -125,15 +125,11 @@ export function TransactionTable({
                 >
                   <td className="p-4">{transaction.sn}</td>
                   <td className="p-4">{transaction.project}</td>
-                  <td className="p-4 truncate max-w-[120px]">
-                    {transaction.currency}
-                  </td>
+                  <td className="p-4">{transaction.currency}</td>
                   <td className="p-4">{transaction.amount}</td>
-                  <td className="p-4">{transaction.address}</td>
+                  <td className="p-4 break-all">{transaction.address}</td>
                   <td className="p-4">{transaction.note}</td>
-                  <td className="p-4">
-                    <div>{transaction.dateTime}</div>
-                  </td>
+                  <td className="p-4">{transaction.dateTime}</td>
                   <td className="p-4">
                     <span
                       className={`px-2 py-1 rounded-md text-xs font-semibold ${
@@ -164,6 +160,67 @@ export function TransactionTable({
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* Card layout for mobile */}
+      <div className="sm:hidden space-y-4">
+        {transactions.length > 0 ? (
+          transactions.map((transaction) => (
+            <div
+              key={transaction.id}
+              className="bg-[#171720] border border-[#747479] rounded-lg p-4 hover:bg-[#747479]"
+            >
+              <div className="flex justify-between items-center mb-2">
+                <span className="font-semibold text-gray-300">S/N: {transaction.sn}</span>
+                <span
+                  className={`px-2 py-1 rounded-md text-xs font-semibold ${
+                    transaction.status === 'successful'
+                      ? 'text-green-500'
+                      : 'text-red-500'
+                  }`}
+                >
+                  ● {transaction.status.toUpperCase()}
+                </span>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-sm">
+                <div>
+                  <span className="text-gray-400">Project:</span>
+                  <p>{transaction.project}</p>
+                </div>
+                <div>
+                  <span className="text-gray-400">Currency:</span>
+                  <p>{transaction.currency}</p>
+                </div>
+                <div>
+                  <span className="text-gray-400">Amount:</span>
+                  <p>{transaction.amount}</p>
+                </div>
+                <div>
+                  <span className="text-gray-400">Date:</span>
+                  <p>{transaction.dateTime}</p>
+                </div>
+                <div className="col-span-2">
+                  <span className="text-gray-400">Address:</span>
+                  <p className="break-all">{transaction.address}</p>
+                </div>
+                <div className="col-span-2">
+                  <span className="text-gray-400">Note:</span>
+                  <p>{transaction.note}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="flex flex-col items-center justify-center py-10 bg-[#171720] border border-[#747479] rounded-lg">
+            <FileX className="h-16 w-16 text-gray-500 mb-4" />
+            <h3 className="text-lg font-medium text-gray-300">
+              No transactions found
+            </h3>
+            <p className="text-gray-400 mt-2">
+              Try adjusting your filters or search criteria
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

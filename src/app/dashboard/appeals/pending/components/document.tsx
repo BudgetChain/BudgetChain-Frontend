@@ -1,7 +1,10 @@
-import ProjectDashboard from '../components/appealsDocument'
+// document.tsx
+'use client';
+
+import ProjectDashboard from '../components/appealsDocument';
 
 interface SetActiveTabProps {
-    setActiveTabOne: (tab: string) => void;
+  setActiveTabOne: (tab: string) => void;
 }
 
 const PendingDocument: React.FC<SetActiveTabProps> = ({ setActiveTabOne }) => {
@@ -31,6 +34,6 @@ const PendingDocument: React.FC<SetActiveTabProps> = ({ setActiveTabOne }) => {
   };
 
   return <ProjectDashboard {...projectData} setActiveTabOne={setActiveTabOne} />;
-}
+};
 
 export default PendingDocument;
