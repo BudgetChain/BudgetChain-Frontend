@@ -9,8 +9,13 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
-import AppealAllocation from './AppealAllocation';
-import TransactionTable from './TransactionTable';
+import dynamic from 'next/dynamic';
+const AppealAllocation = dynamic(() => import('./AppealAllocation'), {
+  ssr: false,
+});
+const TransactionTable = dynamic(() => import('./TransactionTable'), {
+  ssr: false,
+});
 
 const lineChartData = [
   { day: 2, value1: 1000, value2: 500 },
@@ -26,7 +31,7 @@ const lineChartData = [
 export default function Dashboard() {
   return (
     <div>
-      <div className="grid gap-6 p-6 md:grid-cols-3 w-full h-full">
+      <div className="grid gap-4 p-4 sm:p-6 md:grid-cols-3 w-full h-full ">
         {[
           'Total Money Available',
           'Total Money Received',
@@ -34,57 +39,118 @@ export default function Dashboard() {
         ].map((title, index) => (
           <Card
             key={index}
-            className="px-6 py-10 bg-gradient-to-b from-[#894DBD] to-[#5E5EFF] text-white"
+            className="px-3 py-4 sm:px-6 sm:py-8 lg:py-10 bg-gradient-to-b from-[#894DBD] to-[#5E5EFF] text-white w-full min-h-[140px] sm:min-h-[160px] flex flex-col justify-between"
           >
-            <div className="flex justify-between items-center">
-              <h3 className="text-lg font-semibold text-[#E6E6E6]">{title}</h3>
-              <div className="relative mr-4">
-                <span className="pr-1 text-sm">STRK</span>{' '}
-                <span className="mb-5 pb-5 absolute -bottom-[38px] text-2xl">
-                  ⌄
+            {/* Header Section */}
+            <div className="flex justify-between items-start mb-3 sm:mb-4">
+              <h3 className="text-xs sm:text-base lg:text-lg font-semibold text-[#E6E6E6] leading-tight pr-1 flex-1 min-w-0">
+                <span className="block sm:hidden text-xs leading-4">
+                  {title.split(' ').slice(0, 2).join(' ')}
+                  <br />
+                  {title.split(' ').slice(2).join(' ')}
                 </span>
+                <span className="hidden sm:block">{title}</span>
+              </h3>
+              <div className="flex-shrink-0 text-right">
+                <span className="text-xs sm:text-sm text-[#E6E6E6]">STRK</span>
+                <div className="text-lg sm:text-xl text-[#E6E6E6] opacity-70 leading-none">
+                  ⌄
+                </div>
               </div>
             </div>
-            <p className="text-2xl font-bold mt-4">$203,500.568</p>
-            <p className="text-sm mt-3">
-              {title === 'Total Money Available' ? 'NATIVE MINTED $5.5K' : ''}
-            </p>
+
+            {/* Amount Section */}
+            <div className="flex-1 flex flex-col justify-end">
+              <p className="text-lg sm:text-2xl lg:text-3xl font-bold leading-tight mb-1 sm:mb-2 break-all sm:break-normal">
+                $203,500.568
+              </p>
+              {title === 'Total Money Available' && (
+                <p className="text-xs sm:text-sm opacity-80 leading-tight">
+                  NATIVE MINTED $5.5K
+                </p>
+              )}
+            </div>
           </Card>
         ))}
 
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] md:flex-row items-center w-full gap-4 md:col-span-3">
-          <Card className="p-4 border border-[#EBEBEB40] bg-[#171720]">
-            <h3 className="text-white py-5 px-8">A.I Analysis</h3>
-            <ResponsiveContainer
-              className={'bg-[#171720]'}
-              width="100%"
-              height={500}
-            >
-              <LineChart data={lineChartData}>
-                <XAxis dataKey="day" tick={{ fill: 'white' }} />
-                <YAxis tick={{ fill: 'white' }} />
-                <Tooltip
-                  wrapperStyle={{ backgroundColor: '#1E1E2E', color: 'white' }}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="value1"
-                  stroke="#6366F1"
-                  strokeWidth={2}
-                  dot={false}
-                />
-                <Line
-                  type="monotone"
-                  dataKey="value2"
-                  stroke="#B1BBE4"
-                  strokeWidth={2}
-                  dot={false}
-                />
-              </LineChart>
-            </ResponsiveContainer>
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr] md:flex-row items-stretch w-full gap-4 md:col-span-3">
+          
+          <Card className="p-3 sm:p-4 md:p-6 border border-[#EBEBEB40] bg-[#171720] w-full">
+            <h3 className="text-white py-2 sm:py-3 md:py-5 px-2 sm:px-4 md:px-8 text-sm sm:text-base md:text-lg font-semibold">
+              A.I Analysis
+            </h3>
+            <div className="h-[200px] sm:h-[280px] md:h-[350px] lg:h-[400px] xl:h-[450px] px-1 sm:px-2">
+              <ResponsiveContainer
+                className={'bg-[#171720]'}
+                width="100%"
+                height="100%"
+              >
+                <LineChart
+                  data={lineChartData}
+                  margin={{
+                    top: 10,
+                    right: 10,
+                    left: 5,
+                    bottom: 10,
+                  }}
+                >
+                  <XAxis
+                    dataKey="day"
+                    tick={{
+                      fill: 'white',
+                      fontSize: window.innerWidth < 640 ? 10 : 12,
+                    }}
+                    axisLine={{ stroke: '#374151' }}
+                    tickLine={{ stroke: '#374151' }}
+                    tickMargin={8}
+                  />
+                  <YAxis
+                    tick={{
+                      fill: 'white',
+                      fontSize: window.innerWidth < 640 ? 10 : 12,
+                    }}
+                    axisLine={{ stroke: '#374151' }}
+                    tickLine={{ stroke: '#374151' }}
+                    tickMargin={5}
+                    width={window.innerWidth < 640 ? 35 : 45}
+                  />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: '#1E1E2E',
+                      color: 'white',
+                      border: '1px solid #374151',
+                      borderRadius: '8px',
+                      fontSize: window.innerWidth < 640 ? '12px' : '14px',
+                    }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="value1"
+                    stroke="#6366F1"
+                    strokeWidth={window.innerWidth < 640 ? 2 : 3}
+                    dot={false}
+                    activeDot={{
+                      r: window.innerWidth < 640 ? 3 : 4,
+                      fill: '#6366F1',
+                    }}
+                  />
+                  <Line
+                    type="monotone"
+                    dataKey="value2"
+                    stroke="#B1BBE4"
+                    strokeWidth={window.innerWidth < 640 ? 2 : 3}
+                    dot={false}
+                    activeDot={{
+                      r: window.innerWidth < 640 ? 3 : 4,
+                      fill: '#B1BBE4',
+                    }}
+                  />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </Card>
 
-          <div className="flex-1">
+          <div className="w-full">
             <AppealAllocation />
           </div>
         </div>

@@ -47,13 +47,13 @@ export function TransactionPagination({
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex items-center justify-center space-x-2 mt-6">
+    <div className="flex items-center justify-center space-x-2 md:space-x-3 mt-6">
       <Button
         variant="outline"
         size="sm"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1 || isLoading}
-        className="bg-[#1E1E2A] border-[#2A2A3A] text-white hover:bg-[#2A2A3A] h-9 px-3"
+        className="bg-[#1E1E2A] border-[#2A2A3A] text-white hover:bg-[#2A2A3A] h-11 w-11 md:h-9 md:w-auto px-0 md:px-3"
       >
         <ChevronLeft className="h-4 w-4" />
       </Button>
@@ -67,8 +67,8 @@ export function TransactionPagination({
           disabled={page === '...' || isLoading}
           className={
             page === currentPage
-              ? 'bg-[#6C5DD3] hover:bg-[#6C5DD3]/90 text-white border-none h-9 px-4'
-              : 'bg-[#1E1E2A] border-[#2A2A3A] text-white hover:bg-[#2A2A3A] h-9 px-4'
+              ? 'bg-[#6C5DD3] hover:bg-[#6C5DD3]/90 text-white border-none h-11 w-11 md:h-9 md:w-auto px-0 md:px-4'
+              : 'bg-[#1E1E2A] border-[#2A2A3A] text-white hover:bg-[#2A2A3A] h-11 w-11 md:h-9 md:w-auto px-0 md:px-4'
           }
         >
           {isLoading && page === currentPage ? (
@@ -84,7 +84,7 @@ export function TransactionPagination({
         size="sm"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages || isLoading}
-        className="bg-[#1E1E2A] border-[#2A2A3A] text-white hover:bg-[#2A2A3A] h-9 px-3"
+        className="bg-[#1E1E2A] border-[#2A2A3A] text-white hover:bg-[#2A2A3A] h-11 w-11 md:h-9 md:w-auto px-0 md:px-3"
       >
         <ChevronRight className="h-4 w-4" />
       </Button>

@@ -60,7 +60,7 @@ export default function AppealAllocation() {
           Projects Funds Allocation
         </h2>
 
-        <div className="flex justify-between w-full">
+        <div className="flex justify-between items-center w-full flex-col md:flex-row md:items-start">
           <div className="relative  justify-center">
             <div className="w-48 h-48">
               <PieChart width={192} height={192}>
@@ -80,10 +80,10 @@ export default function AppealAllocation() {
               </PieChart>
             </div>
           </div>
-          <div className=" flex flex-col justify-end items-center space-x-3 m-4">
+          <div className=" flex md:flex-col justify-end items-center space-x-3 m-4 flex-row">
             {pieChartData.map((entry, index) => (
               <div key={index} className="">
-                <div className="flex items-center justify-center space-y-4">
+                <div className="flex items-center flex-col justify-center space-y-4">
                   <div
                     className="w-3 h-3 mt-3.5 rounded-full mr-2"
                     style={{ backgroundColor: entry.color }}
